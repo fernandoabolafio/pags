@@ -27,7 +27,9 @@ export default class PanelLayout extends React.Component {
     return (
       <Box>
         <Header activeUser={this.props.activeUser} logout={this.props.logout}/>
-        {this.props.children}
+        <Box style={{minHeight: '100vh', height: '100%', width: '100%'}} pad='medium'>
+          {this.props.children}
+        </Box>
         <Footer small={small} />
       </Box>
     );
