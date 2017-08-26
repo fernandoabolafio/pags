@@ -10,6 +10,8 @@ import Columns from 'grommet/components/Columns';
 import Card from 'grommet/components/Card';
 import Anchor from 'grommet/components/Anchor';
 import FormNextLink from 'grommet/components/icons/base/FormNextLink';
+import FormPreviousLink from 'grommet/components/icons/base/FormPreviousLink';
+import Search from 'grommet/components/icons/base/Search';
 import SearchInput from 'grommet/components/SearchInput';
 import Spinning from 'grommet/components/icons/Spinning';
 
@@ -32,8 +34,22 @@ const Fundo = {
 
 export default class Fundos extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      searching: false
+    }
+  }
+
   componentDidMount() {
     this.props.fetchFundosRecomendados();
+  }
+
+  handleToggleSearchMode = () => {
+    const {searching} = this.state;
+    this.setState({
+      searching: !searching
+    })
   }
 
   renderFundo(fundo) {
@@ -45,7 +61,7 @@ export default class Fundos extends React.Component {
         textSize="small"
         contentPad="small"
         heading={fundo.nome_comercial}
-        description={`Valor mínimo R$${fundo.valor_recomendado_aplicacao}`}
+        description={`Valor recomendado R$${fundo.valor_recomendado_aplicacao}`}
         link={<Anchor primary icon={<FormNextLink />} label="Aplicar"/>}
       />
     </Box>);
@@ -59,17 +75,27 @@ export default class Fundos extends React.Component {
   }
 
   render() {
+    const notSearchingContent = [
+      <Anchor primary onClick={this.handleToggleSearchMode} icon={<Search />} label="Buscar Investimento" />,
+      <Heading tag="h2">Investimentos Recomendados</Heading>,
+        (this.props.fundosRecomendados && !this.state.searching ?
+        this.renderFundos()
+        :
+        <Spinning size="large" />)
+    ];
+    const searchingContent = [
+      <Anchor primary onClick={this.handleToggleSearchMode} icon={<FormPreviousLink />} label="Recomendados" />,
+      <Heading tag="h2" >Buscar Investimentos</Heading>,
+      <SearchInput />
+    ]
     return (
       <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
-        <Heading tag="h2">Investimentos Recomendados</Heading>
         {
-          this.props.fundosRecomendados ?
-          this.renderFundos()
-          :
-          <Spinning size="large" />
+          this.state.searching ?
+            searchingContent
+            :
+            notSearchingContent
         }
-        <Heading tag="h2" >Buscar Investimentos</Heading>
-        <SearchInput />
       </Section>
     );
   }
