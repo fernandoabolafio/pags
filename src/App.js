@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import App from 'grommet/components/App'
-import Button from 'grommet/components/Button';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Router } from 'react-router';
 import { Provider } from 'react-redux';

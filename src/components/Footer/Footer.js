@@ -56,7 +56,6 @@ export const MyFooter = ({small}) =>
           </Box>
         </Form>
         <Box direction="row" margin={{top: 'medium', bottom: 'small'}} responsive={false}>
-          <SocialShare type="email" />
           <SocialShare type="twitter" />
           <SocialShare type="facebook" />
           <SocialShare type="linkedin" />
