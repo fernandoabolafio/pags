@@ -12,8 +12,27 @@ import Split from 'grommet/components/Split';
 import Paragraph from 'grommet/components/Paragraph';
 import Sidebar from 'grommet/components/Sidebar';
 import Quote from 'grommet/components/Quote';
+import BankSync from '../../containers/BankSync';
 
 export default class Home extends React.Component {
+  componentDidMount() {
+    this.getFacebookButton();
+  }
+  getFacebookButton() {
+    (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.10&appId=112725816063664";
+    fjs.parentNode.insertBefore(js, fjs);
+  } (document, 'script', 'facebook-jssdk'));
+  }
+
+  handleFbLogin(e) {
+    e.preventDefault();
+    console.log('facebook Login');
+  }
+
   render() {
     return (
       <Split flex='left' separator={true}>
@@ -34,10 +53,7 @@ export default class Home extends React.Component {
         </Article>
 
         <Sidebar justify='between' align='center' pad='none' size='large'>
-          <Box>
-            <Title>Acesse</Title>
-          </Box>
-          <Button href="#" label={'wowo'} />
+          <BankSync />
           <Footer
             direction='row'
             size='small'

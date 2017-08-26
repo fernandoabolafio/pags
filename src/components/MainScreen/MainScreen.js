@@ -28,7 +28,7 @@ export default class MainScreen extends React.Component {
     const {small} = this.state
     return (
       <Box>
-        <Header />
+        <Header activeUser={this.props.activeUser} logout={this.props.logout}/>
         <Section>
           Oi
         </Section>
