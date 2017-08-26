@@ -7,9 +7,7 @@ export default class AppLayout extends React.Component {
   render() {
     return (
       <Grommet>
-        <App>
           {this.props.children}
-        </App>
       </Grommet>
     );
   }
