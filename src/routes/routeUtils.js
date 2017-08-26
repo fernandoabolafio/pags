@@ -3,7 +3,7 @@ import utils from '../support/localStorageUtils';
 export function checkSession(nextState, replace, callback) {
   if (utils.get('activeUser')) {
     console.log('got active user');
-    replace('app/panel');
+    replace('/');
   }
   callback();
 }

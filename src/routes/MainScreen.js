@@ -1,7 +1,7 @@
-import { checkSession } from './routeUtils';
+import { requireAuth } from './routeUtils';
 
 const mainScreenRoute = {
-  onEnter: checkSession,
+  onEnter: requireAuth,
   path: 'main',
   getComponent: (location, cb) => {
     require.ensure([], (require) => {
