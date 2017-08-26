@@ -1,14 +1,12 @@
 import React from 'react';
-import Grommet from 'grommet/components/Grommet';
-import App from 'grommet/components/App'
-
+import GrommetApp from 'grommet/components/Grommet';
 
 export default class AppLayout extends React.Component {
   render() {
     return (
-      <Grommet>
+      <GrommetApp centered={false}>
           {this.props.children}
-      </Grommet>
+      </GrommetApp>
     );
   }
 }
