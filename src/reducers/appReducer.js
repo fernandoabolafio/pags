@@ -13,7 +13,13 @@ const ACTION_HANDLER = {
         activeUser: action.user
     }
   ),
-  [actions.LOGOUT]: () => initialState
+  [actions.LOGOUT]: () => initialState,
+  [actions.SET_FUNDOS_RECOMENDADOS]: (state, action) => updateObject(
+    state,
+    {
+      fundosRecomendados: action.fundos
+    }
+  )
 };
 
 

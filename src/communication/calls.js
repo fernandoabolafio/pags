@@ -9,7 +9,8 @@ const API_CONFIG = {
 };
 
 const OPERATIONS_PATHS = {
-  get_cdbs: '/investimentos/v1/cdbs'
+  get_cdbs: '/investimentos/v1/cdbs',
+  get_fundos_recomendados: (id_investidor) => `/investimentos/v1/investidores/${id_investidor}/ofertas_produtos`
 };
 
 export function getCDBS() {
@@ -17,6 +18,24 @@ export function getCDBS() {
   const { get_cdbs: getCdbs } = OPERATIONS_PATHS;
   return new Promise((resolve, reject) => {
     request.get(basePath + getCdbs)
+    .set(apiAuth.header_name, apiAuth.key)
+    .end((err, res) => {
+      if (res) {
+        resolve(res.body.data);
+      }
+      if (err) {
+        reject(err);
+      }
+    });
+  });
+}
+
+export function getFundosRecomendados(idInvestidor) {
+  console.log('ID DO INVEST', parseInt(idInvestidor));
+  const { base_path: basePath, api_auth: apiAuth } = API_CONFIG;
+  const { get_fundos_recomendados: getFundosRecomendados } = OPERATIONS_PATHS;
+  return new Promise((resolve, reject) => {
+    request.get(basePath + getFundosRecomendados(idInvestidor))
     .set(apiAuth.header_name, apiAuth.key)
     .end((err, res) => {
       if (res) {
