@@ -6,7 +6,7 @@ import Menu from 'grommet/components/Menu';
 import Box from 'grommet/components/Box';
 import DownIcon from 'grommet/components/icons/base/Down';
 
-export const MyHeader = () =>
+export const MyHeader = ({logout, activeUser}) =>
 <Header justify="center" colorIndex="neutral-1">
    <Box direction="row"
      responsive={false} justify="start" align="center"
@@ -27,13 +27,13 @@ export const MyHeader = () =>
          }}
          responsive
          icon={<DownIcon />}
-         label='Marcela'
+         label={activeUser.first_name}
          direction='column'
          closeOnClick
          >
          <Anchor>Editar Perfil</Anchor>
          <Anchor>Responder Questionário</Anchor>
-         <Anchor>Sair</Anchor>
+         <Anchor onClick={() => logout()}>Sair</Anchor>
        </Menu>
      </Box>
    </Box>

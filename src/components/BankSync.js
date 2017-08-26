@@ -33,7 +33,7 @@ export default class Login extends React.Component {
     this.setState({
       step: 3
     })
-    setTimeout( () => this.props.login(user), 5000);
+    setTimeout( () => this.props.login(user), 3000);
   }
 
   getStepContent() {

@@ -15,7 +15,7 @@ export default class MainScreen extends React.Component {
     console.log('oi')
     return (
       <Box>
-        <Header />
+        <Header activeUser={this.props.activeUser} logout={this.props.logout}/>
         <Section>
           Oi
         </Section>

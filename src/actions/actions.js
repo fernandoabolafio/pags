@@ -2,7 +2,8 @@ import lsUtils from '../support/localStorageUtils';
 import {push} from 'react-router-redux';
 
 export const actions = {
-  LOGIN: 'LOGIN'
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT'
 };
 
 export function loginSync(user) {
@@ -14,9 +15,25 @@ export function loginSync(user) {
   }
 }
 
-export function login(user) {
+export function login(user, redirect=true) {
   return (dispatch) => {
     dispatch(loginSync(user));
-    dispatch(push('/main'));
+    if(redirect) {
+      dispatch(push('/main'));
+    }
+  }
+}
+
+export function logoutSync() {
+  lsUtils.setActiveUser(false);
+  return {
+    type: actions.LOGOUT
+  }
+}
+
+export function logout() {
+  return (dispatch) => {
+    dispatch(logoutSync());
+    dispatch(push('/'));
   }
 }
