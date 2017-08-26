@@ -33,7 +33,7 @@ export const MyHeader = ({logout, activeUser}) =>
          >
          <Anchor>Editar Perfil</Anchor>
          <Anchor>Responder Questionário</Anchor>
-         <Anchor onClick={() => logout()}>Sair</Anchor>
+         <Anchor onClick={logout}>Sair</Anchor>
        </Menu>
      </Box>
    </Box>
