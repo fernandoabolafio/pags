@@ -7,6 +7,7 @@ import FormField from 'grommet/components/FormField';
 import Button from 'grommet/components/Button';
 import SocialShare from 'grommet/components/SocialShare';
 import Form from 'grommet/components/Form';
+import Anchor from 'grommet/components/Anchor';
 import GrommetIcon from 'grommet/components/icons/base/BrandGrommetOutline';
 
 export const MyFooter = ({small}) =>
@@ -24,17 +25,17 @@ export const MyFooter = ({small}) =>
         </Box>
         <Box basis='1/2' direction='row' justify='center' margin={{vertical: 'small'}} responsive={false}>
           <div style={{display: 'flex', flexDirection: 'column', marginRight: small ? '25px' : '10px'}}>
-            <Label size={small ? 'medium' : 'small'} className='oi' uppercase>Empresa</Label>
-            <Label size={small ? 'medium' : 'small'}>Sobre nós</Label>
-            <Label size={small ? 'medium' : 'small'}>Blog</Label>
-            <Label size={small ? 'medium' : 'small'}>Guias</Label>
+            <Label size={small ? 'medium' : 'small'} uppercase>Empresa</Label>
+            <Anchor label={<Label size={small ? 'medium' : 'small'}>Sobre nós</Label>}></Anchor>
+            <Anchor label={<Label size={small ? 'medium' : 'small'}>Blog</Label>}></Anchor>
+            <Anchor label={<Label size={small ? 'medium' : 'small'}>Guias</Label>}></Anchor>
           </div>
           <div style={{display: 'flex', flexDirection: 'column'}}>
             <Label size={small ? 'medium' : 'small'} uppercase>Produto</Label>
-            <Label size={small ? 'medium' : 'small'}>Por que ToRyca?</Label>
-            <Label size={small ? 'medium' : 'small'}>Depoimentos</Label>
-            <Label size={small ? 'medium' : 'small'}>Segurança</Label>
-            <Label size={small ? 'medium' : 'small'}>Educacional</Label>
+            <Anchor label={<Label size={small ? 'medium' : 'small'}>Por que ToRyca?</Label>}></Anchor>
+            <Anchor label={<Label size={small ? 'medium' : 'small'}>Depoimentos</Label>}></Anchor>
+            <Anchor label={<Label size={small ? 'medium' : 'small'}>Segurança</Label>}></Anchor>
+            <Anchor label={<Label size={small ? 'medium' : 'small'}>Educacional</Label>}></Anchor>
           </div>
         </Box>
       </Box>

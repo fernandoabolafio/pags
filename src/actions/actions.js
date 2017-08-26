@@ -19,7 +19,7 @@ export function login(user, redirect=true) {
   return (dispatch) => {
     dispatch(loginSync(user));
     if(redirect) {
-      dispatch(push('/main'));
+      dispatch(push('/app/main'));
     }
   }
 }

@@ -1,5 +1,6 @@
 import { requireAuth, isAuthenticated } from './routeUtils';
 import lsUtils from '../support/localStorageUtils';
+import Panel from '../containers/Panel';
 import { login } from  '../actions/actions';
 import store from '../store/store';
 
@@ -18,14 +19,18 @@ const mainScreenRoute = {
     }
     callback();
   },
-  path: 'main',
-  getComponent: (location, cb) => {
-    require.ensure([], (require) => {
-      const MainScreen = require('../containers/MainScreen').default;
+  component: Panel,
+  path: 'app',
+  childRoutes: [{
+    path: 'main',
+    getComponent: (location, cb) => {
+      require.ensure([], (require) => {
+        const MainScreen = require('../containers/MainScreen').default;
 
-      cb(null, MainScreen);
-    }, 'MainScreen');
-  }
+        cb(null, MainScreen);
+      }, 'MainScreen');
+    }
+  }]
 };
 
 export default mainScreenRoute;
