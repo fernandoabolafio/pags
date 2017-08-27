@@ -132,10 +132,10 @@ export default class Fundos extends React.Component {
     <Box margin="small" >
       <Card
       style={{backgroundColor: 'white'}}
-        headingStrong={false}
+        label={fundo.grau_risco}
         textSize="small"
         contentPad="small"
-        heading={fundo.nome_comercial}
+        heading={<Heading strong={true} tag="h3">{fundo.nome_comercial}</Heading>}
         description={description}
         link={<Anchor primary icon={<FormNextLink />} label="Aplicar"/>}
       />
