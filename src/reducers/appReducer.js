@@ -19,6 +19,18 @@ const ACTION_HANDLER = {
     {
       fundosRecomendados: action.fundos
     }
+  ),
+  [actions.SET_CARTEIRA_RECOMENDADA]: (state, action) => updateObject(
+    state,
+    {
+      carteiraRecomendada: action.carteira
+    }
+  ),
+  [actions.CLEAR_CARTEIRA_RECOMENDADA]: (state, actions) => updateObject(
+    state,
+    {
+      carteiraRecomendada: false
+    }
   )
 };
 

@@ -1,11 +1,13 @@
 import lsUtils from '../support/localStorageUtils';
-import { getFundosRecomendados } from '../communication/calls';
+import { getFundosRecomendados, getCarteiraRecomendada } from '../communication/calls';
 import {push} from 'react-router-redux';
 
 export const actions = {
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
-  SET_FUNDOS_RECOMENDADOS: 'SET_FUNDOS_RECOMENDADOS'
+  SET_FUNDOS_RECOMENDADOS: 'SET_FUNDOS_RECOMENDADOS',
+  SET_CARTEIRA_RECOMENDADA: 'SET_CARTEIRA_RECOMENDADA',
+  CLEAR_CARTEIRA_RECOMENDADA: 'CLEAR_CARTEIRA_RECOMENDADA'
 };
 
 export function loginSync(user) {
@@ -47,6 +49,19 @@ export function setFundosRecomendados(fundos) {
   }
 }
 
+export function setCarteiraRecomendada(carteira) {
+  return {
+    type: actions.SET_CARTEIRA_RECOMENDADA,
+    carteira
+  }
+}
+
+export function clearCarteiraRecomendada() {
+  return {
+    type: actions.CLEAR_CARTEIRA_RECOMENDADA
+  }
+}
+
 export function fetchFundosRecomendados(){
   return (dispatch, getState) => {
     const {activeUser} = getState().app;
@@ -63,4 +78,22 @@ export function fetchFundosRecomendados(){
       }
     )
   };
+}
+
+export function fetchCarteiraRecomendada(valor, prazo) {
+  return (dispatch, getState) => {
+    const {activeUser} = getState().app;
+      getCarteiraRecomendada(activeUser.id, valor, prazo).then(
+        (result) => {
+          console.log('result carteira recomendada');
+          console.log(result.data);
+          dispatch(setCarteiraRecomendada(result.data));
+        }
+      ).catch(
+        (error) => {
+          console.log('error');
+          console.log(error);
+        }
+      )
+  }
 }

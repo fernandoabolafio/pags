@@ -10,7 +10,8 @@ const API_CONFIG = {
 
 const OPERATIONS_PATHS = {
   get_cdbs: '/investimentos/v1/cdbs',
-  get_fundos_recomendados: (id_investidor) => `/investimentos/v1/investidores/${id_investidor}/ofertas_produtos`
+  get_fundos_recomendados: (id_investidor) => `/investimentos/v1/investidores/${id_investidor}/ofertas_produtos`,
+  get_carteira_recomendada: (id_investidor, valor, prazo) => `/investimentos/v1/investidores/${id_investidor}/recomendacoes?valor_aplicacao=${valor}&prazo_aplicacao=${prazo}`
 };
 
 export function getCDBS() {
@@ -40,6 +41,23 @@ export function getFundosRecomendados(idInvestidor) {
     .end((err, res) => {
       if (res) {
         resolve(res.body);
+      }
+      if (err) {
+        reject(err);
+      }
+    });
+  });
+}
+
+export function getCarteiraRecomendada(idInvestidor, valor, prazo) {
+  const { base_path: basePath, api_auth: apiAuth } = API_CONFIG;
+  const { get_carteira_recomendada: getCarteiraRecomendada } = OPERATIONS_PATHS;
+  return new Promise((resolve, reject) => {
+    request.get(basePath + getCarteiraRecomendada(idInvestidor, valor, prazo))
+    .set(apiAuth.header_name, apiAuth.key)
+    .end((err, res) => {
+      if (res) {
+        resolve(res.body.data);
       }
       if (err) {
         reject(err);
