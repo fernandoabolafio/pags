@@ -76,6 +76,10 @@ export default class Fundos extends React.Component {
   componentDidMount() {
     this.props.fetchFundosRecomendados();
     this.props.fetchInvestimentos('cdbs');
+    this.props.fetchInvestimentos('coes');
+    this.props.fetchInvestimentos('fundos');
+    this.props.fetchInvestimentos('previdencias');
+    this.props.fetchInvestimentos('poupancas');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -247,7 +251,7 @@ export default class Fundos extends React.Component {
           <Button onClick={this.handleSearchCarteira} style={{marginTop: '10px'}} label="Buscar" />
         </Box>,
         (
-          this.state.loadingCarteira ? <Spinning size="large" /> : null
+          this.state.loadingCarteira ? <Spinning size="large" style={{marginTop: '20px'}} /> : null
         ),
         (
           this.props.carteiraRecomendada && !this.state.loadingCarteira ? this.renderCarteiraRecomendada() : null
