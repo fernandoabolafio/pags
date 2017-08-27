@@ -23,12 +23,17 @@ export default class PanelLayout extends React.Component {
     this.setState({ small });
   }
   render() {
-    const {small} = this.state
+    const {small} = this.state;
+    const childrenWithProps = React.Children.map(this.props.children,
+     (child) => React.cloneElement(child, {
+       small
+     })
+    );
     return (
       <Box>
         <Header activeUser={this.props.activeUser} logout={this.props.logout}/>
         <Box style={{minHeight: '100vh', height: '100%', width: '100%', backgroundColor: '#f5f5f5'}}>
-          {this.props.children}
+          {childrenWithProps}
         </Box>
         <Footer small={small} />
       </Box>
