@@ -89,7 +89,7 @@ export default class Fundos extends React.Component {
       <SearchInput />
     ]
     return (
-      <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
+      <Section align="center">
         {
           this.state.searching ?
             searchingContent
