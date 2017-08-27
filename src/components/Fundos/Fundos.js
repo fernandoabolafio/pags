@@ -192,7 +192,7 @@ export default class Fundos extends React.Component {
     );
     // return <Distribution series={series} size="large" units={'%'} />
     // return <SunBurst size="large" onActive={this.handleHoverPiece}  data={series}/>
-    return <List style={{width: "80%"}}>{items}</List>
+    return <Box size="large"><List style={{backgroundColor: 'white', marginTop: '20px', width:'100%'}}>{items}</List></Box>
   }
 
   getSearchResults = () => {
@@ -239,7 +239,7 @@ export default class Fundos extends React.Component {
       [sections.CARTEIRA]: [
         this.renderAnchorBackToRecomendations(),
         this.renderHeading('Carteira de Investimentos'),
-        <Box align="center">
+        <Box align="center" style={{backgroundColor:"white"}} pad="medium">
           <Label>Valor da aplicação (em reais)</Label>
           <NumberInput  min={10}  onChange={(e) => this.setValue(e.target.value, 'carteira', 'valor')} step={100} defaultValue={100} />
           <Label>Prazo de Investimento (em meses)</Label>
