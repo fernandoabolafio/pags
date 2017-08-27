@@ -45,9 +45,9 @@ export default class Home extends React.Component {
             justify='center'
             align='center'
           >
-            <Heading tag='h1' strong={true}>Insights</Heading>
+            <Heading tag='h1' strong={true}>Pag$</Heading>
             <Paragraph align='center' size='large'>
-              Raparua é doce mas não é mole não
+              Essa chola ta dubai
             </Paragraph>
           </Section>
         </Article>

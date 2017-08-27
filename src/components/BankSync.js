@@ -81,6 +81,7 @@ export default class Login extends React.Component {
       <App>
         <Article>
           <Section align="center">
+            <Image size="small" src="img/pags_marca.png" />
             <Box pad={{horizontal: 'small'}}>
               {step === 3 ? loadingHeadings : defaultHeadings}
             </Box>

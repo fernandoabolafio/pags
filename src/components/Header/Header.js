@@ -7,7 +7,7 @@ import Box from 'grommet/components/Box';
 import DownIcon from 'grommet/components/icons/base/Down';
 
 export const MyHeader = ({logout, activeUser}) =>
-<Header justify="center" colorIndex="neutral-1">
+<Header justify="center" colorIndex="brand">
    <Box direction="row"
      responsive={false} justify="start" align="center"
      pad={{horizontal: 'medium'}} flex="grow">
@@ -17,7 +17,7 @@ export const MyHeader = ({logout, activeUser}) =>
        path={{ path: 'app/main', index: true }}
        label={
        <Title>
-         Toryca
+         Pag$
        </Title>
      }
      />

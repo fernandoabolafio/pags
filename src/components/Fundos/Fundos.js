@@ -132,10 +132,10 @@ export default class Fundos extends React.Component {
     <Box margin="small" >
       <Card
       style={{backgroundColor: 'white'}}
-        headingStrong={false}
+        label={fundo.grau_risco}
         textSize="small"
         contentPad="small"
-        heading={fundo.nome_comercial}
+        heading={<Heading strong={true} tag="h3">{fundo.nome_comercial}</Heading>}
         description={description}
         link={<Anchor primary icon={<FormNextLink />} label="Aplicar"/>}
       />
@@ -192,7 +192,7 @@ export default class Fundos extends React.Component {
     );
     // return <Distribution series={series} size="large" units={'%'} />
     // return <SunBurst size="large" onActive={this.handleHoverPiece}  data={series}/>
-    return <List style={{width: "80%"}}>{items}</List>
+    return <Box size="large"><List style={{backgroundColor: 'white', marginTop: '20px', width:'100%'}}>{items}</List></Box>
   }
 
   getSearchResults = () => {
@@ -227,7 +227,7 @@ export default class Fundos extends React.Component {
       [sections.SEARCH]: [
         this.renderAnchorBackToRecomendations(),
         this.renderHeading('Buscar Investimentos'),
-        <Tabs onActive={this.handleTabChange} activeIndex={this.state.tab}>
+        <Tabs onActive={this.handleTabChange} responsive={false} activeIndex={this.state.tab}>
           <Tab title="CDB" />
           <Tab title="COE" />
           <Tab title="Fundos" />
@@ -239,7 +239,7 @@ export default class Fundos extends React.Component {
       [sections.CARTEIRA]: [
         this.renderAnchorBackToRecomendations(),
         this.renderHeading('Carteira de Investimentos'),
-        <Box align="center">
+        <Box align="center" style={{backgroundColor:"white"}} pad="medium">
           <Label>Valor da aplicação (em reais)</Label>
           <NumberInput  min={10}  onChange={(e) => this.setValue(e.target.value, 'carteira', 'valor')} step={100} defaultValue={100} />
           <Label>Prazo de Investimento (em meses)</Label>
