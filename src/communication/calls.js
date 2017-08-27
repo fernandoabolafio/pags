@@ -11,7 +11,7 @@ const API_CONFIG = {
 const OPERATIONS_PATHS = {
   get_cdbs: '/investimentos/v1/cdbs',
   get_coes: '/investimentos/v1/coes',
-  get_fundos: '/investimentos/v1/fundos',
+  get_fundos: '/investimentos/v1/fundos?expand=rentabilidades',
   get_poupancas: '/investimentos/v1/poupancas',
   get_previdencias: '/investimentos/v1/previdencias',
   get_fundos_recomendados: (id_investidor) => `/investimentos/v1/investidores/${id_investidor}/ofertas_produtos`,
