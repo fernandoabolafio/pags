@@ -1,7 +1,13 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Fundos from '../components/Fundos';
-import {fetchFundosRecomendados, fetchCarteiraRecomendada, clearCarteiraRecomendada, fetchInvestimentos} from '../actions/actions';
+import {
+  fetchFundosRecomendados,
+  fetchCarteiraRecomendada,
+  clearCarteiraRecomendada,
+  fetchInvestimentos,
+  seeMoreInvestimento
+  } from '../actions/actions';
 
 const mapStateToProps = state => ({
   fundosRecomendados: state.app.fundosRecomendados,
@@ -13,7 +19,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchFundosRecomendados,
   fetchCarteiraRecomendada,
   fetchInvestimentos,
-  clearCarteiraRecomendada
+  clearCarteiraRecomendada,
+  seeMoreInvestimento
 }, dispatch);
 
 const FundosContainer = connect(mapStateToProps, mapDispatchToProps)(Fundos);

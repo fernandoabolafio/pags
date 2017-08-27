@@ -71,6 +71,12 @@ export function clearCarteiraRecomendada() {
   }
 }
 
+export function seeMoreInvestimento(id) {
+  return (dispatch) => {
+    dispatch(push(`/app/investimentos/${id}`));
+  }
+}
+
 export function fetchFundosRecomendados(){
   return (dispatch, getState) => {
     const {activeUser} = getState().app;
