@@ -30,7 +30,18 @@ const mainScreenRoute = {
         cb(null, MainScreen);
       }, 'MainScreen');
     }
-  }]
+  },
+  {
+    path: 'investimentos',
+    getComponent: (location, cb) => {
+      require.ensure([], (require) => {
+        const Fundos = require('../containers/Fundos').default;
+
+        cb(null, Fundos);
+      }, 'Fundos');
+    }
+  }
+]
 };
 
 export default mainScreenRoute;
