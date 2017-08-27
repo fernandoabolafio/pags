@@ -7,51 +7,46 @@ import Article from 'grommet/components/Article';
 import Section from 'grommet/components/Section';
 import Heading from 'grommet/components/Heading';
 import Box from 'grommet/components/Box';
-import Meter from 'grommet/components/Meter';
-import Label from 'grommet/components/Label';
-import Value from 'grommet/components/Value';
 import Button from 'grommet/components/Button';
 
 export default class ViewObjetivoLayerContent extends React.Component {
   render() {
+    const {onClose} = this.props;
     return (
       <Article pad={{vertical: 'small', between: 'small'}} >
       <Heading tag="h2" margin="none">Adicionar Objetivo</Heading>
-      <Section>
+      <Section style={{minHeight: '480px', minWidth: '548px'}}>
         <Box direction='column'>
-          <Label margin='small'>
-            Adicionado em: <Timestamp value='2017-08-27T15:20:10.514Z' fields='date' />
-          </Label>
-          <Label margin='small'>
-            Previsão de término: <Timestamp value='2017-10-27T15:20:10.514Z' fields='date' />
-          </Label>
-          <Box direction='row' pad={{between: 'medium'}} margin={{top: 'medium', bottom: 'none'}} responsive={false}>
-            <Meter value='50'/>
-            <Value value={'50'}
-              units='%'
-              align='end'
-              size='small'
-            />
-          </Box>
-          <Box direction='row'>
-            <Label size='small'>R$ 100.000,00 de R$200.000,00</Label>
-          </Box>
-        </Box>
-        <Form pad={{vertical: 'large'}} >
-          <Box pad={{between: 'medium'}}>
-            <FormField
-              label='Descrição'
-            >
-              <textarea
-                type="text"
-              />
-            </FormField>
-            <Box pad={{between: 'small'}} direction='row' justify='end' responsive={false}>
-              <Button primary onClick={() => console.log('iha')} label='Adicionar' />
-              <Button secondary onClick={() => console.log('iha')} label='Sair' />
+          <Form pad={{vertical: 'medium'}} >
+            <Box pad={{between: 'medium'}}>
+              <FormField
+                label='Nome'
+              >
+                <TextInput />
+              </FormField>
+              <FormField
+                label='Descrição'
+              >
+                <textarea
+                  type='text'
+                />
+              </FormField>
+              <FormField
+                label='Valor'
+              >
+                <TextInput />
+              </FormField>
+              <FormField
+                label='Previsão de término'
+              >
+                <TextInput />
+              </FormField>
+              <Box direction='row' justify='end' responsive={false}>
+                <Button primary onClick={onClose} label='Adicionar' />
+              </Box>
             </Box>
-          </Box>
-        </Form>
+          </Form>
+        </Box>
       </Section>
      </Article>
     )
