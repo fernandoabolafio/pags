@@ -24,6 +24,7 @@ import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
 import Meter from 'grommet/components/Meter';
 import Value from 'grommet/components/Value';
+import {numberWithCommas} from '../../support/objectUtils';
 
 const Fundo = {
         "id_cdb": "1019",
@@ -126,7 +127,7 @@ export default class Fundos extends React.Component {
   }
 
   renderFundo(fundo) {
-    const description = fundo.valor_recomendado_aplicacao ? `Valor recomendado R$${fundo.valor_recomendado_aplicacao}` : `Valor mínimo R$${fundo.valor_minimo_aplicacao}`;
+    const description = fundo.valor_recomendado_aplicacao ? `Valor recomendado R$${numberWithCommas(fundo.valor_recomendado_aplicacao)}` : `Valor mínimo R$${numberWithCommas(fundo.valor_minimo_aplicacao)}`;
     return (
     <Box margin="small" >
       <Card
