@@ -227,7 +227,7 @@ export default class Fundos extends React.Component {
       [sections.SEARCH]: [
         this.renderAnchorBackToRecomendations(),
         this.renderHeading('Buscar Investimentos'),
-        <Tabs onActive={this.handleTabChange} activeIndex={this.state.tab}>
+        <Tabs onActive={this.handleTabChange} responsive={false} activeIndex={this.state.tab}>
           <Tab title="CDB" />
           <Tab title="COE" />
           <Tab title="Fundos" />
