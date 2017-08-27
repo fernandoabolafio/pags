@@ -3,6 +3,12 @@ export function copyObject(obj){
   return  JSON.parse(JSON.stringify(obj));
 }
 
+export function numberWithCommas(x) {
+    var parts = x.toString().split(",");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parts.join(",");
+}
+
 export function updateObject(oldObject,newValues) {
   return Object.assign({},oldObject, newValues);
 }

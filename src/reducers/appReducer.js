@@ -3,7 +3,8 @@ import { actions } from '../actions/actions';
 
 
 const initialState = {
-  activeUser: false
+  activeUser: false,
+  opcoesDeInvestimento: {}
 };
 
 const ACTION_HANDLER = {
@@ -19,7 +20,34 @@ const ACTION_HANDLER = {
     {
       fundosRecomendados: action.fundos
     }
-  )
+  ),
+  [actions.SET_CARTEIRA_RECOMENDADA]: (state, action) => updateObject(
+    state,
+    {
+      carteiraRecomendada: action.carteira
+    }
+  ),
+  [actions.CLEAR_CARTEIRA_RECOMENDADA]: (state, actions) => updateObject(
+    state,
+    {
+      carteiraRecomendada: false
+    }
+  ),
+  [actions.SET_OPCOES_DE_INVESTIMENTO]: (state, action) =>{
+    const {opcoesDeInvestimento} = state;
+    opcoesDeInvestimento[action.optionsType] = action.options;
+    return updateObject(
+      state,
+      {
+        opcoesDeInvestimento: updateObject(
+          state.opcoesDeInvestimento,
+          {
+            [action.optionsType]: action.options
+          }
+        )
+      }
+    );
+  }
 };
 
 
