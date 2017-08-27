@@ -11,9 +11,26 @@ export const MyHeader = ({logout, activeUser}) =>
    <Box direction="row"
      responsive={false} justify="start" align="center"
      pad={{horizontal: 'medium'}} flex="grow">
-     <Title>
-       Toryca
-     </Title>
+     <Anchor
+       style={{ textDecoration: 'none' }}
+       a11yTitle='Toryca página principal'
+       path={{ path: 'app/main', index: true }}
+       label={
+       <Title>
+         Toryca
+       </Title>
+     }
+     />
+
+     <Box pad='small'/>
+     <Menu
+       inline
+       direction='row'
+       style={{border: '3px solid transparent'}}
+      >
+        <Anchor path={{ path: 'app/investimentos', index: true }}>Investimentos</Anchor>
+        <Anchor>Minhas Badges</Anchor>
+     </Menu>
      <Box
        justify='end'
        direction='row'
@@ -30,7 +47,7 @@ export const MyHeader = ({logout, activeUser}) =>
          label={activeUser.first_name}
          direction='column'
          closeOnClick
-         >
+        >
          <Anchor>Editar Perfil</Anchor>
          <Anchor>Responder Questionário</Anchor>
          <Anchor onClick={logout}>Sair</Anchor>
