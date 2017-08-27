@@ -7,7 +7,7 @@ export default class MyLayer extends React.Component {
     const {onClose} = this.props;
     const childrenWithProps = React.Children.map(this.props.children,
       (child) => React.cloneElement(child, {
-        props: this.props
+        onClose
       })
     );
     return (
