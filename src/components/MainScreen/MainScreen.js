@@ -77,27 +77,13 @@ export default class MainScreen extends React.Component {
               <Card
                 style={{width:'100%'}}
                 heading={
-                    <Heading tag='h2'>
-                      Seus Investimentos
-                    </Heading>
-                  }
-              >
-                <Box align='center'>
-                  <AnnotatedMeter type="circle" legend={true} units="R$"
-                    size={small ? 'medium' : 'medium'}  series={cpuData} />
-                </Box>
-              </Card>
-            </Box>
-          </Box>
-          <Box direction='row'>
-            <Box direction='row' style={{backgroundColor: 'white', width: small ? '' : '75%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small'}}>
-              <Card
-                style={{width:'100%'}}
-                heading={
                   <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <Heading tag='h2'>
-                      Seus Objetivos
-                    </Heading>
+                    <Box margin={{bottom: 'small'}}>
+                      <Heading tag='h2' margin='none'>
+                        Seus Objetivos
+                      </Heading>
+                      <Label size='small'>Ordene seus objetivos, defina prioridades</Label>
+                    </Box>
                     <Button onClick={this.onClickAddObjetivo}  icon={<AddIcon />} />
                   </div>
 
@@ -143,7 +129,24 @@ export default class MainScreen extends React.Component {
                 </List>
               </Card>
             </Box>
-            <Box direction='row' style={{backgroundColor: 'white', width: small ? '' : '25%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}}>
+          </Box>
+          <Box direction='row'>
+            <Box direction='row' style={{backgroundColor: 'white', width: small ? '' : '65%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small'}}>
+              <Card
+                style={{width:'100%'}}
+                heading={
+                    <Heading tag='h2'>
+                      Seus Investimentos
+                    </Heading>
+                  }
+              >
+                <Box align='center'>
+                  <AnnotatedMeter type="circle" legend={true} units="R$"
+                    size={small ? 'medium' : 'medium'}  series={cpuData} />
+                </Box>
+              </Card>
+            </Box>
+            <Box direction='row' style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}}>
               <Card
               >
                   Informaçao
