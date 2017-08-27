@@ -51,7 +51,15 @@ export default class Fundos extends React.Component {
 
   constructor(props) {
     super(props);
+    const mapTabToInvestimento = {
+      [0]: 'cdbs',
+      [1]: 'coes',
+      [2]: 'fundos',
+      [3]: 'previdencias',
+      [4]: 'poupancas'
+    }
     this.state = {
+      mapTabToInvestimento,
       section: sections.RECOMENDADOS,
       tab: 0,
       loadingCarteira: false,
@@ -66,6 +74,7 @@ export default class Fundos extends React.Component {
 
   componentDidMount() {
     this.props.fetchFundosRecomendados();
+    this.props.fetchInvestimentos('cdbs');
   }
 
   componentWillReceiveProps(nextProps) {
@@ -96,9 +105,18 @@ export default class Fundos extends React.Component {
   }
 
   handleTabChange = (tab) => {
+
+    const {mapTabToInvestimento}  = this.state;
+
     this.setState({
       tab: tab
     })
+
+    const type = mapTabToInvestimento[tab];
+
+    if(!this.props.opcoesDeInvestimento[type]) {
+      this.props.fetchInvestimentos(type);
+    }
   }
 
   handleSetSection = (section) => {
@@ -108,6 +126,7 @@ export default class Fundos extends React.Component {
   }
 
   renderFundo(fundo) {
+    const description = fundo.valor_recomendado_aplicacao ? `Valor recomendado R$${fundo.valor_recomendado_aplicacao}` : `Valor mínimo R$${fundo.valor_minimo_aplicacao}`;
     return (
     <Box margin="small" >
       <Card
@@ -116,17 +135,17 @@ export default class Fundos extends React.Component {
         textSize="small"
         contentPad="small"
         heading={fundo.nome_comercial}
-        description={`Valor recomendado R$${fundo.valor_recomendado_aplicacao}`}
+        description={description}
         link={<Anchor primary icon={<FormNextLink />} label="Aplicar"/>}
       />
     </Box>);
   }
 
-  renderFundos = () => {
-    const fundos = this.props.fundosRecomendados.map( fundo => this.renderFundo(fundo));
+  renderFundos = (fundos) => {
+    const fundosComponents = fundos.map( fundo => this.renderFundo(fundo));
     return <Columns size="small" justify="center">
-            {fundos}
-          </Columns>
+            {fundosComponents}
+          </Columns>;
   }
 
   renderAnchorBackToRecomendations = () => {
@@ -140,7 +159,6 @@ export default class Fundos extends React.Component {
   }
 
   handleSearchCarteira = () => {
-    console.log('search Carteira');
     const {valor, prazo} = this.state.inputs.carteira;
     this.setState({
       loadingCarteira: true
@@ -176,6 +194,20 @@ export default class Fundos extends React.Component {
     return <List style={{width: "80%"}}>{items}</List>
   }
 
+  getSearchResults = () => {
+    const {opcoesDeInvestimento} = this.props;
+    const {mapTabToInvestimento, tab} = this.state;
+    const type = mapTabToInvestimento[tab];
+    const fundos = this.props.opcoesDeInvestimento[type];
+    return (
+      fundos ?
+      this.renderFundos(fundos)
+      :
+      <Spinning size="large" />
+    )
+
+  }
+
   getContent = () => {
     const {section} = this.state;
     const mapSectionToContent = {
@@ -187,21 +219,21 @@ export default class Fundos extends React.Component {
         </Box>,
         this.renderHeading('Investimentos Recomendados'),
           (this.props.fundosRecomendados && !this.state.searching ?
-          this.renderFundos()
+          this.renderFundos(this.props.fundosRecomendados)
           :
           <Spinning size="large" />)
       ],
       [sections.SEARCH]: [
         this.renderAnchorBackToRecomendations(),
         this.renderHeading('Buscar Investimentos'),
-        <SearchInput />,
         <Tabs onActive={this.handleTabChange} activeIndex={this.state.tab}>
           <Tab title="CDB" />
           <Tab title="COE" />
           <Tab title="Fundos" />
           <Tab title="Previdência" />
           <Tab title="Poupança" />
-        </Tabs>
+        </Tabs>,
+        this.getSearchResults()
       ],
       [sections.CARTEIRA]: [
         this.renderAnchorBackToRecomendations(),

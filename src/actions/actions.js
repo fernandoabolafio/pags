@@ -1,5 +1,13 @@
 import lsUtils from '../support/localStorageUtils';
-import { getFundosRecomendados, getCarteiraRecomendada } from '../communication/calls';
+import {
+  getFundosRecomendados,
+  getCarteiraRecomendada,
+  getCDBS,
+  getCOES,
+  getFundos,
+  getPoupancas,
+  getPrevidencias
+ } from '../communication/calls';
 import {push} from 'react-router-redux';
 
 export const actions = {
@@ -7,7 +15,8 @@ export const actions = {
   LOGOUT: 'LOGOUT',
   SET_FUNDOS_RECOMENDADOS: 'SET_FUNDOS_RECOMENDADOS',
   SET_CARTEIRA_RECOMENDADA: 'SET_CARTEIRA_RECOMENDADA',
-  CLEAR_CARTEIRA_RECOMENDADA: 'CLEAR_CARTEIRA_RECOMENDADA'
+  CLEAR_CARTEIRA_RECOMENDADA: 'CLEAR_CARTEIRA_RECOMENDADA',
+  SET_OPCOES_DE_INVESTIMENTO: 'SET_OPCOES_DE_INVESTIMENTO'
 };
 
 export function loginSync(user) {
@@ -67,8 +76,6 @@ export function fetchFundosRecomendados(){
     const {activeUser} = getState().app;
     getFundosRecomendados(activeUser.id).then(
       (result) => {
-        console.log('result');
-        console.log(result.data);
         dispatch(setFundosRecomendados(result.data.data));
       }
     ).catch(
@@ -85,8 +92,6 @@ export function fetchCarteiraRecomendada(valor, prazo) {
     const {activeUser} = getState().app;
       getCarteiraRecomendada(activeUser.id, valor, prazo).then(
         (result) => {
-          console.log('result carteira recomendada');
-          console.log(result.data);
           dispatch(setCarteiraRecomendada(result.data));
         }
       ).catch(
@@ -95,5 +100,35 @@ export function fetchCarteiraRecomendada(valor, prazo) {
           console.log(error);
         }
       )
+  }
+}
+
+export function setOpcoesDeInvestimento(optionsType, options) {
+  return {
+    type: actions.SET_OPCOES_DE_INVESTIMENTO,
+    optionsType,
+    options
+  }
+}
+
+export function fetchInvestimentos(type) {
+  return (dispatch) => {
+    const mapTypeTopCall = {
+      ['cdbs']: getCDBS,
+      ['coes']: getCOES,
+      ['fundos']: getFundos,
+      ['previdencias']: getPrevidencias,
+      ['poupancas']: getPoupancas
+    };
+    const call = mapTypeTopCall[type];
+    call().then(
+      (result) => {
+        dispatch(setOpcoesDeInvestimento(type, result.data));
+      }
+    ).catch(
+      (error) => {
+        console.log('got error');
+      }
+    )
   }
 }
