@@ -12,7 +12,8 @@ import {
   postCDB,
   postCOE,
   postPoupanca,
-  postPrevidencia
+  postPrevidencia,
+  getInvestidor
  } from '../communication/calls';
 import {push} from 'react-router-redux';
 
@@ -24,7 +25,8 @@ export const actions = {
   CLEAR_CARTEIRA_RECOMENDADA: 'CLEAR_CARTEIRA_RECOMENDADA',
   SET_OPCOES_DE_INVESTIMENTO: 'SET_OPCOES_DE_INVESTIMENTO',
   RECEIVE_APPLY_OK: 'RECEIVE_APPLY_OK',
-  CLEAR_APPLY_OK: 'CLEAR_APPLY_OK'
+  CLEAR_APPLY_OK: 'CLEAR_APPLY_OK',
+  SET_INVESTIDOR_INFO: 'SET_INVESTIDOR_INFO'
 };
 
 export function goToLogin() {
@@ -198,6 +200,28 @@ export function applyInvestimento(id_investimento, data, type){
     ).catch(
       (error) => {
         console.log('got error');
+        console.log(error);
+      }
+    )
+  }
+}
+
+export function setInvestidorInfo(info) {
+  return {
+    type: actions.SET_INVESTIDOR_INFO,
+    info
+  }
+}
+
+export function fetchInvestidorInfo() {
+  return (dispatch, getState) => {
+    const id = getState().app.activeUser.id;
+    getInvestidor(id).then(
+      (result) => {
+        dispatch(setInvestidorInfo(result.data[0]));
+      }
+    ).catch(
+      (error) => {
         console.log(error);
       }
     )

@@ -63,6 +63,14 @@ const ACTION_HANDLER = {
         lastApplyOk: false
       }
     )
+  },
+  [actions.SET_INVESTIDOR_INFO]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        investidorInfo: action.info
+      }
+    )
   }
 };
 

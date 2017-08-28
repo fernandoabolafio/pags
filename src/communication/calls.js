@@ -20,7 +20,8 @@ const OPERATIONS_PATHS = {
   post_coe: (id_investidor, id_coe) => `/investimentos/v1/investidores/${id_investidor}/coes/${id_coe}/movimentacoes`,
   post_fundo: (id_investidor, id_fundo) => `/investimentos/v1/investidores/${id_investidor}/fundos/${id_fundo}/movimentacoes`,
   post_poupanca: (id_investidor, id_poupanca) => `/investimentos/v1/investidores/${id_investidor}/poupancas/${id_poupanca}/movimentacoes`,
-  post_previdencia: (id_investidor, id_previdencia) => `/investimentos/v1/investidores/${id_investidor}/previdencias/${id_previdencia}/movimentacoes`
+  post_previdencia: (id_investidor, id_previdencia) => `/investimentos/v1/investidores/${id_investidor}/previdencias/${id_previdencia}/movimentacoes`,
+  get_investidor: (id_investidor) => `/investimentos/v1/investidores/${id_investidor}`
 };
 
 export function getCDBS() {
@@ -263,6 +264,24 @@ export function postPrevidencia(id_investidor, id_fundo, params) {
     .set(apiAuth.header_name, apiAuth.key)
     .send(body)
     .end((err,res) => {
+      if (res) {
+        resolve(res.body.data);
+      }
+      if (err) {
+        reject(err);
+      }
+    })
+  });
+}
+
+export function getInvestidor(id_investidor) {
+  const { base_path: basePath, api_auth: apiAuth } = API_CONFIG;
+  const { get_investidor: getInvestidor } = OPERATIONS_PATHS;
+
+  return new Promise(function(resolve, reject) {
+    request.get(basePath + getInvestidor(id_investidor))
+    .set(apiAuth.header_name, apiAuth.key)
+    .end((err, res) => {
       if (res) {
         resolve(res.body.data);
       }
