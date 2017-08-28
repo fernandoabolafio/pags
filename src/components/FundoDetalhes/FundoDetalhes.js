@@ -193,6 +193,8 @@ export default class FundoDetalhes extends React.Component {
 
   onApply = (data) => {
     console.log('got data', data);
+    const {id, type} = this.state;
+    this.props.applyInvestimento(id, data, type);
   }
 
   getMainContent = () => {

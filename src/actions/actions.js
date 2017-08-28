@@ -1,3 +1,4 @@
+
 import lsUtils from '../support/localStorageUtils';
 import {
   getFundosRecomendados,
@@ -6,7 +7,12 @@ import {
   getCOES,
   getFundos,
   getPoupancas,
-  getPrevidencias
+  getPrevidencias,
+  postFundo,
+  postCDB,
+  postCOE,
+  postPoupanca,
+  postPrevidencia
  } from '../communication/calls';
 import {push} from 'react-router-redux';
 
@@ -146,6 +152,31 @@ export function fetchInvestimentos(type) {
     ).catch(
       (error) => {
         console.log('got error');
+      }
+    )
+  }
+}
+
+export function applyInvestimento(id_investimento, data, type){
+  return (dispatch, getState) => {
+    const userId = getState().app.activeUser.id;
+    const mapTypeTopCall = {
+      ['cdbs']: postCDB,
+      ['coes']: postCOE,
+      ['fundos']: postFundo,
+      ['previdencias']: postPrevidencia,
+      ['poupancas']: postPoupanca
+    };
+    const call = mapTypeTopCall[type];
+    call(userId, id_investimento, data).then(
+      (result) => {
+          console.log('got result');
+          console.log(result);
+      }
+    ).catch(
+      (error) => {
+        console.log('got error');
+        console.log(error);
       }
     )
   }
