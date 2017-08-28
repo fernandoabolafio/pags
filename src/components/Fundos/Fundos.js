@@ -59,8 +59,16 @@ export default class Fundos extends React.Component {
       [3]: 'previdencias',
       [4]: 'poupancas'
     }
+    const mapTypeToIdKey = {
+      cdbs: 'id_cdb',
+      coes: 'id_coe',
+      fundos: 'id_fundo',
+      previdencias: 'id_previdencia',
+      poupancas: 'id_poupanca'
+    };
     this.state = {
       mapTabToInvestimento,
+      mapTypeToIdKey,
       section: sections.RECOMENDADOS,
       tab: 0,
       loadingCarteira: false,
@@ -130,7 +138,7 @@ export default class Fundos extends React.Component {
     })
   }
 
-  renderFundo(fundo) {
+  renderFundo(fundo, idkey) {
     const description = fundo.valor_recomendado_aplicacao ? `Valor recomendado R$${numberWithCommas(fundo.valor_recomendado_aplicacao)}` : `Valor mínimo R$${numberWithCommas(fundo.valor_minimo_aplicacao)}`;
     return (
     <Box margin="small" >
@@ -141,13 +149,13 @@ export default class Fundos extends React.Component {
         contentPad="small"
         heading={<Heading strong={true} tag="h3">{fundo.nome_comercial}</Heading>}
         description={description}
-        link={<Anchor primary icon={<FormNextLink />} label="Aplicar"/>}
+        link={<Anchor primary icon={<FormNextLink />} onClick={() => this.props.seeMoreInvestimento(fundo[idkey])} label="Aplicar"/>}
       />
     </Box>);
   }
 
-  renderFundos = (fundos) => {
-    const fundosComponents = fundos.map( fundo => this.renderFundo(fundo));
+  renderFundos = (fundos, idkey) => {
+    const fundosComponents = fundos.map( fundo => this.renderFundo(fundo, idkey));
     return <Columns size="small" justify="center">
             {fundosComponents}
           </Columns>;
@@ -201,12 +209,13 @@ export default class Fundos extends React.Component {
 
   getSearchResults = () => {
     const {opcoesDeInvestimento} = this.props;
-    const {mapTabToInvestimento, tab} = this.state;
+    const {mapTabToInvestimento, tab, mapTypeToIdKey} = this.state;
     const type = mapTabToInvestimento[tab];
     const fundos = this.props.opcoesDeInvestimento[type];
+    const idKey = mapTypeToIdKey[type];
     return (
       fundos ?
-      this.renderFundos(fundos)
+      this.renderFundos(fundos, idKey)
       :
       <Spinning size="large" />
     )
@@ -224,7 +233,7 @@ export default class Fundos extends React.Component {
         </Box>,
         this.renderHeading('Investimentos Recomendados'),
           (this.props.fundosRecomendados && !this.state.searching ?
-          this.renderFundos(this.props.fundosRecomendados)
+          this.renderFundos(this.props.fundosRecomendados, 'codigo_produto')
           :
           <Spinning size="large" />)
       ],

@@ -14,7 +14,7 @@ export default class FundoDetalhes extends React.Component {
     }
   }
 
-  getInfo() {
+  getInfo(id, type) {
     const mapTypeToIdKey = {
       cdbs: 'id_cdb',
       coes: 'id_coe',
@@ -22,7 +22,6 @@ export default class FundoDetalhes extends React.Component {
       previdencias: 'id_previdencia',
       poupancas: 'id_poupanca'
     };
-    const {id, type} = this.state;
     const produtos = this.props.opcoesDeInvestimento[type];
     const key = mapTypeToIdKey[type];
     const investimento = produtos.filter( produto => parseInt(produto[key]) === parseInt(id))[0];
@@ -43,9 +42,9 @@ export default class FundoDetalhes extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      const {type} = this.state;
-      if(type && !this.state.investInfo && nextProps.opcoesDeInvestimento[type]) {
-        this.getInfo();
+      const {type, id} = this.state;
+      if(type && id && !this.state.investInfo && nextProps.opcoesDeInvestimento[type]) {
+        this.getInfo(id, type);
       }
   }
 
@@ -61,7 +60,7 @@ export default class FundoDetalhes extends React.Component {
     });
 
     if(this.props.opcoesDeInvestimento[type]){
-      this.getInfo();
+      this.getInfo(id, type);
     }else {
       this.props.fetchInvestimentos(type);
     }
@@ -73,12 +72,13 @@ export default class FundoDetalhes extends React.Component {
   }
 
   renderContent = () => {
+    const {investInfo} = this.state;
     return (
         <Box pad="medium" style={{backgroundColor: 'white'}}>
-          <Heading uppercase={true} align="center" tag="h3">{'Personalite Motherfucker'}</Heading>
-          <Heading  align="center" tag="h4">{'Familia: Ações'}</Heading>
+          <Heading uppercase={true} align="center" tag="h3">{investInfo.nome_comercial}</Heading>
+          <Heading  align="center" tag="h4">{investInfo.nome_familia}</Heading>
           <Box>
-            <Label>Risco: Alto</Label>
+            <Label>Risco: {investInfo.grau_risco}</Label>
             <Label>Valor mínimo da aplicação: R$10,00</Label>
           </Box>
         </Box>
