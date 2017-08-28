@@ -19,6 +19,12 @@ export const actions = {
   SET_OPCOES_DE_INVESTIMENTO: 'SET_OPCOES_DE_INVESTIMENTO'
 };
 
+export function goToLogin() {
+  return (dispatch) => {
+    dispatch(push('/banksync'));
+  }
+}
+
 export function loginSync(user) {
   lsUtils.setActiveUser(user);
   lsUtils.updateUser(user);

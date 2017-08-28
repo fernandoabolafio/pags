@@ -11,11 +11,11 @@ import Anchor from 'grommet/components/Anchor';
 import GrommetIcon from 'grommet/components/icons/base/BrandGrommetOutline';
 
 export const MyFooter = ({small}) =>
-  <Footer>
+  <Footer >
     <Section
       align="center"
       pad="medium"
-      colorIndex="neutral-1"
+      style={{backgroundColor: '#102027'}}
       full="horizontal"
       direction="row"
     >
