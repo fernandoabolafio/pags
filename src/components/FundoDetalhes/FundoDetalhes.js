@@ -11,6 +11,22 @@ import AplicarWizard from './AplicarWizard';
 
 import {numberWithCommas} from '../../support/objectUtils';
 
+/*renderSuccessStep = () => {
+  const {tipo_movimentacao, valor, data} = this.state.inputs;
+  const {investInfo} = this.props;
+  const {formatValue} = this;
+  const mapTipoToMessage = {
+    H:(<Box align="center">
+        <Heading align="center" tag="h3">{`Parabens!`}</Heading>
+        <Heading align="center" tag="h4">{`Você investiu ${formatValue(valor)} em ${investInfo.nome_comercial}`}</Heading>
+      </Box>),
+    M: <Heading align="center" tag="h4">{`Parabens! Seu investimento mensal de ${formatValue(valor)} foi cadastrado.`}</Heading>,
+    G: <Heading align="center" tag="h4">{`Parabens! Seu investimento de ${formatValue(valor)} será efetuado em ${data}`}</Heading>
+  };
+  const message = mapTipoToMessage[tipo_movimentacao];
+  return <Box align="center">{message}</Box>
+}*/
+
 export default class FundoDetalhes extends React.Component {
 
   constructor(props){
@@ -175,13 +191,17 @@ export default class FundoDetalhes extends React.Component {
 
   }
 
+  onApply = (data) => {
+    console.log('got data', data);
+  }
+
   getMainContent = () => {
     return this.state.investInfo ? this.renderContent() : <Spinning />;
   }
 
   renderAplicarWizard = () => {
     return <Box pad="small" style={{backgroundColor: 'white'}} size="medium">
-      <AplicarWizard investInfo={this.state.investInfo} onCancel={() => this.toggleInvestir(false)} />
+      <AplicarWizard onApply={this.onApply} investInfo={this.state.investInfo} onCancel={() => this.toggleInvestir(false)} />
     </Box>;
   }
 

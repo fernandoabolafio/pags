@@ -10,6 +10,8 @@ import FormNextLink from 'grommet/components/icons/base/FormNextLink';
 import Button from 'grommet/components/Button';
 import NumberInput from 'grommet/components/NumberInput';
 import DateTime from 'grommet/components/DateTime';
+import Heading from 'grommet/components/Heading';
+import {numberWithCommas} from '../../support/objectUtils'
 
 export default class AplicarWizard extends React.Component {
   constructor(props) {
@@ -72,6 +74,11 @@ export default class AplicarWizard extends React.Component {
 
   handleCancel = () => {
     this.props.onCancel();
+  }
+
+  handleSubmit = () => {
+    const {inputs} = this.state;
+    this.props.onApply(inputs);
   }
 
   renderAppMensal = () => {
@@ -142,7 +149,7 @@ export default class AplicarWizard extends React.Component {
           <Box flex="grow" align="start">{this.renderAnchor('', false,() => this.goToPreviousStep() )}</Box>
         </Box>
         {content}
-        <Box pad="medium"><Button primary label="Aplicar" href="#"/></Box>
+        <Box pad="medium"><Button primary label="Aplicar" onClick={() => this.handleSubmit()}/></Box>
     </Box>
   }
 
@@ -170,6 +177,11 @@ export default class AplicarWizard extends React.Component {
       </FormField>
     </Box>
   }
+
+  formatValue = (value) => {
+    return `R$${numberWithCommas(value)}`;
+  }
+
 
   renderMainContent = () => {
     const {step} = this.state;

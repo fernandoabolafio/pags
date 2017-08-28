@@ -15,7 +15,12 @@ const OPERATIONS_PATHS = {
   get_poupancas: '/investimentos/v1/poupancas',
   get_previdencias: '/investimentos/v1/previdencias',
   get_fundos_recomendados: (id_investidor) => `/investimentos/v1/investidores/${id_investidor}/ofertas_produtos`,
-  get_carteira_recomendada: (id_investidor, valor, prazo) => `/investimentos/v1/investidores/${id_investidor}/recomendacoes?valor_aplicacao=${valor}&prazo_aplicacao=${prazo}`
+  get_carteira_recomendada: (id_investidor, valor, prazo) => `/investimentos/v1/investidores/${id_investidor}/recomendacoes?valor_aplicacao=${valor}&prazo_aplicacao=${prazo}`,
+  post_cdb: (id_investidor, id_cdb) => `/investimentos/v1/investidores/${id_investidor}/cdbs/${id_cdb}/movimentacoes`,
+  post_coe: (id_investidor, id_coe) => `/investimentos/v1/investidores/${id_investidor}/coes/${id_coe}/movimentacoes`,
+  post_fundo: (id_investidor, id_fundo) => `POST /investimentos/v1/investidores/${id_investidor}/fundos/${id_fundo}/movimentacoes`,
+  post_poupanca: (id_investidor, id_poupanca) => `/investimentos/v1/investidores/${id_investidor}/poupancas/${id_poupanca}/movimentacoes`,
+  post_previdencia: (id_investidor, id_previdencia) => `POST /investimentos/v1/investidores/${id_investidor}/previdencias/${id_previdencia}/movimentacoes`
 };
 
 export function getCDBS() {
@@ -135,4 +140,8 @@ export function getCarteiraRecomendada(idInvestidor, valor, prazo) {
       }
     });
   });
+}
+
+export function postFundo(id_investidor, id_fundo, data) {
+  
 }
