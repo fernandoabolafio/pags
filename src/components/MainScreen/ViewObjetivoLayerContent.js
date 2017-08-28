@@ -32,7 +32,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
   }
   render() {
     const { section } = this.state;
-    const { onClose } = this.props;
+    const { onClose, objetivo } = this.props;
     const layerContent = {
       motivo: () => {
         return (
@@ -105,21 +105,29 @@ export default class ViewObjetivoLayerContent extends React.Component {
           <Section style={{minHeight: '480px', minWidth: '548px'}}>
             <Box direction='column'>
               <Label margin='small'>
-                Adicionado em: <Timestamp value='2017-08-27T15:20:10.514Z' fields='date' />
+                Adicionado em: {objetivo.criado}
               </Label>
               <Label margin='small'>
-                Previsão de término: <Timestamp value='2017-10-27T15:20:10.514Z' fields='date' />
+                Previsão de término: {objetivo.conclusaoEstimada}
               </Label>
-              <Box direction='row' pad={{between: 'medium'}} margin={{top: 'medium', bottom: 'none'}} responsive={false}>
-                <Meter value='50'/>
-                <Value value={'50'}
-                  units='%'
-                  align='end'
-                  size='small'
-                />
-              </Box>
-              <Box direction='row'>
-                <Label size='small'><span style={{color: '#865cd6'}}>R$ 100.000,00</span> de R$200.000,00</Label>
+            </Box>
+            <Box direction='column' style={{maxWidth: '193px'}} margin={{top: 'medium', bottom: 'none'}}>
+              <Value value={`${objetivo.acumulado*100}`}
+                units='%'
+                align='start'
+                size='small'
+              />
+              <Meter value={`${objetivo.acumulado*100}`}/>
+              <Box direction='row'
+                justify='between'
+                pad={{"between": "small"}}
+                responsive={false}>
+                <Label size='small'>
+                  R$ {`${objetivo.valor*objetivo.acumulado}`}
+                </Label>
+                <Label size='small'>
+                  R$ {`${objetivo.valor}`}
+                </Label>
               </Box>
             </Box>
             <Form pad={{vertical: 'large'}} plain>
@@ -129,6 +137,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
                 >
                   <textarea
                     type="text"
+                    value={objetivo.descricao}
                   />
                 </FormField>
               </Box>
