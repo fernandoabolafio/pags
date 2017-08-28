@@ -110,16 +110,24 @@ export default class ViewObjetivoLayerContent extends React.Component {
               <Label margin='small'>
                 Previsão de término: {objetivo.conclusaoEstimada}
               </Label>
-              <Box direction='row' pad={{between: 'medium'}} margin={{top: 'medium', bottom: 'none'}} responsive={false}>
-                <Meter value={`${objetivo.acumulado*100}`}/>
-                <Value value={`${objetivo.acumulado*100}`}
-                  units='%'
-                  align='end'
-                  size='small'
-                />
-              </Box>
-              <Box direction='row'>
-                <Label size='small'><span style={{color: '#865cd6'}}>R$ {`${objetivo.valor*objetivo.acumulado}`}</span> de R$ {`${objetivo.valor}`}</Label>
+            </Box>
+            <Box direction='column' style={{maxWidth: '193px'}} margin={{top: 'medium', bottom: 'none'}}>
+              <Value value={`${objetivo.acumulado*100}`}
+                units='%'
+                align='start'
+                size='small'
+              />
+              <Meter value={`${objetivo.acumulado*100}`}/>
+              <Box direction='row'
+                justify='between'
+                pad={{"between": "small"}}
+                responsive={false}>
+                <Label size='small'>
+                  R$ {`${objetivo.valor*objetivo.acumulado}`}
+                </Label>
+                <Label size='small'>
+                  R$ {`${objetivo.valor}`}
+                </Label>
               </Box>
             </Box>
             <Form pad={{vertical: 'large'}} plain>

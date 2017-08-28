@@ -6,8 +6,8 @@
   content: '';
   position: absolute;
   right: calc(50% - 12px);
-  top: 20px;
-  border-top: 20px solid black;
+  top: -2px;
+  border-top: 20px solid #333;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
 }

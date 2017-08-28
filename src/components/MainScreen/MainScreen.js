@@ -10,6 +10,8 @@ import Label from 'grommet/components/Label';
 import Value from 'grommet/components/Value';
 import Image from 'grommet/components/Image';
 import Button from 'grommet/components/Button';
+import Paragraph from 'grommet/components/Paragraph';
+import Anchor from 'grommet/components/Anchor';
 import AnnotatedMeter from 'grommet-addons/components/AnnotatedMeter';
 import AddIcon from 'grommet/components/icons/base/Add';
 import Layer from '../Layer';
@@ -123,15 +125,43 @@ export default class MainScreen extends React.Component {
             <Box style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {left: 'medium', right: 'small'}}>
               <Card
                 align='center'
+                full='horizontal'
               >
-                <Box style={{backgroundColor: 'black', borderRadius: '10px', color: '#F5FAF6'}} pad='medium'>
-                  ABCDEF
-                  evwv
-                  console.warn(v
-                  console.warnvefefefefefefefefef
-                  efefefefefefefefefefef
-                  <div className='caret' />
+                <Box
+                  style={{borderRadius: '10px', width: '100%'}}
+                  direction='row'
+                  responsive={false}
+                  pad={small ? 'medium' : 'small'}
+                  colorIndex="grey-2"
+                >
+                  <Box pad={{horizontal: 'small'}}>
+                    <Meter size='small'
+                      colorIndex='warning'
+                      type='circle'
+                      label={<Value colorIndex='warning' value={35}
+                      units='%'
+                      size='small' />}
+                      value={35}
+                    />
+                  </Box>
+                  <Box>
+                    <Label
+                      size='small'>
+                      Nivel 2
+                    </Label>
+                    <Heading
+                      tag='h3'
+                      style={{color: '#ffd602'}}
+                    >
+                      Entusiasta
+                    </Heading>
+                    <Box wrap>
+                      <Anchor label={<Label size='medium'>Recomendações de Investimento</Label>} />
+                      <Anchor label={<Label size='medium'>Aprender</Label>} />
+                    </Box>
+                  </Box>
                 </Box>
+                <div className='caret' />
                 <Box align='center'>
                   <Image id='pags' size='small' src={pagsWelcome} />
                 </Box>
