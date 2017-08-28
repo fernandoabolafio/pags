@@ -1,3 +1,4 @@
+
 import lsUtils from '../support/localStorageUtils';
 import {
   getFundosRecomendados,
@@ -6,7 +7,13 @@ import {
   getCOES,
   getFundos,
   getPoupancas,
-  getPrevidencias
+  getPrevidencias,
+  postFundo,
+  postCDB,
+  postCOE,
+  postPoupanca,
+  postPrevidencia,
+  getInvestidor
  } from '../communication/calls';
 import {push} from 'react-router-redux';
 
@@ -16,12 +23,27 @@ export const actions = {
   SET_FUNDOS_RECOMENDADOS: 'SET_FUNDOS_RECOMENDADOS',
   SET_CARTEIRA_RECOMENDADA: 'SET_CARTEIRA_RECOMENDADA',
   CLEAR_CARTEIRA_RECOMENDADA: 'CLEAR_CARTEIRA_RECOMENDADA',
-  SET_OPCOES_DE_INVESTIMENTO: 'SET_OPCOES_DE_INVESTIMENTO'
+  SET_OPCOES_DE_INVESTIMENTO: 'SET_OPCOES_DE_INVESTIMENTO',
+  RECEIVE_APPLY_OK: 'RECEIVE_APPLY_OK',
+  CLEAR_APPLY_OK: 'CLEAR_APPLY_OK',
+  SET_INVESTIDOR_INFO: 'SET_INVESTIDOR_INFO'
 };
 
 export function goToLogin() {
   return (dispatch) => {
     dispatch(push('/banksync'));
+  }
+}
+
+export function goToInvestimentos() {
+  return (dispatch) => {
+    dispatch(push('/app/investimentos'));
+  }
+}
+
+export function goToMain() {
+  return(dispatch) => {
+    dispatch(push('/app/main'));
   }
 }
 
@@ -140,6 +162,67 @@ export function fetchInvestimentos(type) {
     ).catch(
       (error) => {
         console.log('got error');
+      }
+    )
+  }
+}
+
+export function receiveApplyOk(info) {
+  return {
+    type: actions.RECEIVE_APPLY_OK,
+    info
+  }
+}
+
+export function clearApplyOk() {
+  return {
+    type: actions.CLEAR_APPLY_OK
+  }
+}
+
+export function applyInvestimento(id_investimento, data, type){
+  return (dispatch, getState) => {
+    const userId = getState().app.activeUser.id;
+    const mapTypeTopCall = {
+      ['cdbs']: postCDB,
+      ['coes']: postCOE,
+      ['fundos']: postFundo,
+      ['previdencias']: postPrevidencia,
+      ['poupancas']: postPoupanca
+    };
+    const call = mapTypeTopCall[type];
+    call(userId, id_investimento, data).then(
+      (result) => {
+          console.log('got result');
+          console.log(result);
+          dispatch(receiveApplyOk(result.data));
+      }
+    ).catch(
+      (error) => {
+        console.log('got error');
+        console.log(error);
+      }
+    )
+  }
+}
+
+export function setInvestidorInfo(info) {
+  return {
+    type: actions.SET_INVESTIDOR_INFO,
+    info
+  }
+}
+
+export function fetchInvestidorInfo() {
+  return (dispatch, getState) => {
+    const id = getState().app.activeUser.id;
+    getInvestidor(id).then(
+      (result) => {
+        dispatch(setInvestidorInfo(result.data[0]));
+      }
+    ).catch(
+      (error) => {
+        console.log(error);
       }
     )
   }

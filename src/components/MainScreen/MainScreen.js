@@ -63,6 +63,18 @@ export default class MainScreen extends React.Component {
       }
     ]
   };
+  componentWillReceiveProps(nextProps) {
+    // if(!this.props.activeUser && nextProps.activeUser) {
+    //   this.props.fetchInvestidorInfo();
+    // }
+  }
+
+  componentDidMount() {
+    if(!this.props.investidorInfo) {
+      this.props.fetchInvestidorInfo();
+    }
+  }
+
   onSelectObjetivo = (selection) => {
     this.setState({selection});
   }

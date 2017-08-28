@@ -47,6 +47,30 @@ const ACTION_HANDLER = {
         )
       }
     );
+  },
+  [actions.RECEIVE_APPLY_OK]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        lastApplyOk: action.info
+      }
+    )
+  },
+  [actions.CLEAR_APPLY_OK]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        lastApplyOk: false
+      }
+    )
+  },
+  [actions.SET_INVESTIDOR_INFO]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        investidorInfo: action.info
+      }
+    )
   }
 };
 

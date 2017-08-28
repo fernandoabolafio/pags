@@ -1,14 +1,16 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MainScreen from '../components/MainScreen';
-import {logout} from '../actions/actions';
+import {logout, fetchInvestidorInfo} from '../actions/actions';
 
 const mapStateToProps = state => ({
-  activeUser: state.app.activeUser
+  activeUser: state.app.activeUser,
+  investidorInfo: state.app.investidorInfo
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  logout
+  logout,
+  fetchInvestidorInfo
 }, dispatch);
 
 const MainScreenContainer = connect(mapStateToProps, mapDispatchToProps)(MainScreen);
