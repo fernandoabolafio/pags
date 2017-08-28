@@ -47,6 +47,22 @@ const ACTION_HANDLER = {
         )
       }
     );
+  },
+  [actions.RECEIVE_APPLY_OK]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        lastApplyOk: action.info
+      }
+    )
+  },
+  [actions.CLEAR_APPLY_OK]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        lastApplyOk: false
+      }
+    )
   }
 };
 

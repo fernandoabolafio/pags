@@ -8,6 +8,8 @@ import Anchor from 'grommet/components/Anchor';
 import Button from 'grommet/components/Button';
 import FormPreviousLink from 'grommet/components/icons/base/FormPreviousLink';
 import AplicarWizard from './AplicarWizard';
+import Status from 'grommet/components/icons/Status';
+
 
 import {numberWithCommas} from '../../support/objectUtils';
 
@@ -68,6 +70,14 @@ export default class FundoDetalhes extends React.Component {
       const {type, id} = this.state;
       if(type && id && !this.state.investInfo && nextProps.opcoesDeInvestimento[type]) {
         this.getInfo(id, type);
+      }
+
+      if(this.state.applying && nextProps.lastApplyOk){
+        this.setState({
+          applying: false,
+          applied: nextProps.lastApplyOk[0]
+        })
+        this.props.clearApplyOk();
       }
   }
 
@@ -195,6 +205,10 @@ export default class FundoDetalhes extends React.Component {
     console.log('got data', data);
     const {id, type} = this.state;
     this.props.applyInvestimento(id, data, type);
+    this.setState({
+      applying: true,
+      wizardData: data
+    });
   }
 
   getMainContent = () => {
@@ -215,15 +229,56 @@ export default class FundoDetalhes extends React.Component {
     ] : null;
   }
 
+  formatValue = (value) => {
+    return `R$${numberWithCommas(value)}`;
+  }
+
+  renderSuccessStep = () => {
+    const {tipo_movimentacao, valor, data} = this.state.wizardData;
+    const {investInfo} = this.state;
+    const {formatValue} = this;
+    const mapTipoToMessage = {
+      H:(<Box align="center">
+          <Heading align="center" tag="h3">{`Parabens!`}</Heading>
+          <Heading align="center" tag="h4">{`Você investiu ${formatValue(valor)} em ${investInfo.nome_comercial}`}</Heading>
+        </Box>),
+      M: <Heading align="center" tag="h4">{`Parabens! Seu investimento mensal de ${formatValue(valor)} foi cadastrado.`}</Heading>,
+      G: <Heading align="center" tag="h4">{`Parabens! Seu investimento de ${formatValue(valor)} será efetuado em ${data}`}</Heading>
+    };
+    const message = mapTipoToMessage[tipo_movimentacao];
+    return <Box align="center">
+      {message}
+      <Status value='ok' />
+      <Anchor style={{marginTop:"20px"}} primary onClick={() => this.props.goToMain()}  label="Ver meus investimentos" />
+    </Box>;
+  }
 
   render() {
     return (
       <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
-        <Box align="center">
-          <Anchor primary onClick={() => this.props.goToInvestimentos()} icon={<FormPreviousLink />} label="Voltar" />
-          {this.renderHeadings()}
-          {this.state.wizard ? this.renderAplicarWizard() : this.getMainContent()}
-        </Box>
+        {
+          !this.state.applying ?
+          <Box align="center">
+            {
+              !this.state.applied ?
+              [
+                <Anchor primary onClick={() => this.props.goToInvestimentos()} icon={<FormPreviousLink />} label="Voltar" />,
+                this.renderHeadings(),
+                this.state.wizard ? this.renderAplicarWizard() : this.getMainContent()
+              ]
+              :
+              <Box pad="medium" style={{backgroundColor: 'white'}} size="medium">
+                {this.renderSuccessStep()}
+              </Box>
+            }
+          </Box>
+          :
+          <Box align="center" size="large" justify="center" margin="large">
+            <Spinning size="large" />
+            <Label align="center">Processando Investimento, aguarde um instante.</Label>
+          </Box>
+        }
+
       </Section>
     );
   }

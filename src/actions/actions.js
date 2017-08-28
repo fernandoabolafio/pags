@@ -22,7 +22,9 @@ export const actions = {
   SET_FUNDOS_RECOMENDADOS: 'SET_FUNDOS_RECOMENDADOS',
   SET_CARTEIRA_RECOMENDADA: 'SET_CARTEIRA_RECOMENDADA',
   CLEAR_CARTEIRA_RECOMENDADA: 'CLEAR_CARTEIRA_RECOMENDADA',
-  SET_OPCOES_DE_INVESTIMENTO: 'SET_OPCOES_DE_INVESTIMENTO'
+  SET_OPCOES_DE_INVESTIMENTO: 'SET_OPCOES_DE_INVESTIMENTO',
+  RECEIVE_APPLY_OK: 'RECEIVE_APPLY_OK',
+  CLEAR_APPLY_OK: 'CLEAR_APPLY_OK'
 };
 
 export function goToLogin() {
@@ -34,6 +36,12 @@ export function goToLogin() {
 export function goToInvestimentos() {
   return (dispatch) => {
     dispatch(push('/app/investimentos'));
+  }
+}
+
+export function goToMain() {
+  return(dispatch) => {
+    dispatch(push('/app/main'));
   }
 }
 
@@ -157,6 +165,19 @@ export function fetchInvestimentos(type) {
   }
 }
 
+export function receiveApplyOk(info) {
+  return {
+    type: actions.RECEIVE_APPLY_OK,
+    info
+  }
+}
+
+export function clearApplyOk() {
+  return {
+    type: actions.CLEAR_APPLY_OK
+  }
+}
+
 export function applyInvestimento(id_investimento, data, type){
   return (dispatch, getState) => {
     const userId = getState().app.activeUser.id;
@@ -172,6 +193,7 @@ export function applyInvestimento(id_investimento, data, type){
       (result) => {
           console.log('got result');
           console.log(result);
+          dispatch(receiveApplyOk(result.data));
       }
     ).catch(
       (error) => {
