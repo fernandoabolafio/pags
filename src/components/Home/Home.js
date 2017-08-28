@@ -18,9 +18,17 @@ import Anchor from 'grommet/components/Anchor';
 import Footer from '../Footer';
 
 export default class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chapter: 0
+    }
+  }
+
   componentDidMount() {
     this.getFacebookButton();
   }
+
   getFacebookButton() {
     (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
@@ -36,19 +44,25 @@ export default class Home extends React.Component {
     console.log('facebook Login');
   }
 
+  setChapter = (chapter) => {
+    this.setState({
+      chapter
+    })
+  }
+
   render() {
     return (
-      <Article scrollStep={true}>
-          <Header style={{backgroundColor: '#102027', paddingLeft: "40px", paddingRight: "40px"}}>
+      <Article scrollStep={true} selected={this.state.chapter} onSelect={(chapter) => this.setChapter(chapter)}>
+          <Header  style={{backgroundColor: '#102027', paddingLeft: "40px", paddingRight: "40px"}}>
             <Image style={{width:'45.8px', height: '42.1px'}} src="img/logo.png" />
             <Menu
               inline
               direction='row'
               style={{border: '3px solid transparent'}}
              >
-               <Anchor style={{color: 'white'}}>Como funciona</Anchor>
-               <Anchor style={{color: 'white'}}>Vantagens</Anchor>
-               <Anchor style={{color: 'white'}}>Contato</Anchor>
+               <Anchor onClick={() => this.setChapter(2)} style={{color: 'white'}}>Como funciona</Anchor>
+               <Anchor onClick={() => this.setChapter(3)} style={{color: 'white'}}>Vantagens</Anchor>
+               <Anchor onClick={() => this.setChapter(4)} style={{color: 'white'}}>Contato</Anchor>
             </Menu>
             <Box flex="grow" justify="end" direction="row">
               <Button onClick={this.props.goToLogin}  style={{backgroundColor:'#FFAB00', color: 'black', borderColor: '#FFAB00'}} primary label="Entrar" />

@@ -5,9 +5,10 @@ import Anchor from 'grommet/components/Anchor';
 import Menu from 'grommet/components/Menu';
 import Box from 'grommet/components/Box';
 import DownIcon from 'grommet/components/icons/base/Down';
+import Image from 'grommet/components/Image';
 
 export const MyHeader = ({logout, activeUser}) =>
-<Header justify="center" colorIndex="brand">
+<Header justify="center" colorIndex="brand" style={{backgroundColor: '#102027'}}>
    <Box direction="row"
      responsive={false} justify="start" align="center"
      pad={{horizontal: 'medium'}} flex="grow">
@@ -16,9 +17,7 @@ export const MyHeader = ({logout, activeUser}) =>
        a11yTitle='Toryca página principal'
        path={{ path: 'app/main', index: true }}
        label={
-       <Title>
-         Pag$
-       </Title>
+       <Image style={{width:'45.8px', height: '42.1px'}} src="img/logo.png" />
      }
      />
 

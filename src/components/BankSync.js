@@ -78,17 +78,17 @@ export default class Login extends React.Component {
       <Heading tag="h4" align="center">Estamos processando suas informações bancárias</Heading>
     ];
     return (
-      <App>
         <Article>
-          <Section align="center">
-            <Image size="small" src="img/pags_marca.png" />
-            <Box pad={{horizontal: 'small'}}>
-              {step === 3 ? loadingHeadings : defaultHeadings}
+          <Section full={true} align="center" style={{backgroundColor: '#f5f5f5'}}>
+            <Box style={{backgroundColor:'white'}} pad="medium" align="center" flex="grow">
+              <Image size="small" src="img/pags_marca.png" />
+              <Box pad={{horizontal: 'small'}}>
+                {step === 3 ? loadingHeadings : defaultHeadings}
+              </Box>
+              {this.getStepContent()}
             </Box>
-            {this.getStepContent()}
           </Section>
         </Article>
-      </App>
     );
   }
 }
