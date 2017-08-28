@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import FundoDetalhes from '../components/FundoDetalhes';
-import { fetchInvestimentos } from '../actions/actions';
+import { fetchInvestimentos, goToInvestimentos } from '../actions/actions';
 
 const mapStateToProps = state => ({
   pathname: state.routing.locationBeforeTransitions.pathname,
@@ -9,7 +9,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchInvestimentos
+  fetchInvestimentos,
+  goToInvestimentos
 }, dispatch);
 
 const FundoDetalhesContainer = connect(mapStateToProps, mapDispatchToProps)(FundoDetalhes);

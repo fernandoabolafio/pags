@@ -25,6 +25,12 @@ export function goToLogin() {
   }
 }
 
+export function goToInvestimentos() {
+  return (dispatch) => {
+    dispatch(push('/app/investimentos'));
+  }
+}
+
 export function loginSync(user) {
   lsUtils.setActiveUser(user);
   lsUtils.updateUser(user);
