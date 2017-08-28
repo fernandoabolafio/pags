@@ -156,8 +156,11 @@ export default class MainScreen extends React.Component {
                       Entusiasta
                     </Heading>
                     <Box wrap>
-                      <Anchor label={<Label size='medium'>Recomendações de Investimento</Label>} />
-                      <Anchor label={<Label size='medium'>Aprender</Label>} />
+                      <ul style={{margin: '0 0 0 10px', padding: '0 0 0 10px'}}>
+                        <li><Anchor label={<Label size='medium' path={{path: 'app/investimentos', index: true}}>Recomendações de Investimento</Label>} /></li>
+                        <li><Anchor label={<Label size='medium'>Ver minhas recompensas</Label>} /></li>
+                        <li><Anchor label={<Label size='medium'>Aprender</Label>} /></li>
+                      </ul>
                     </Box>
                   </Box>
                 </Box>
@@ -204,8 +207,15 @@ export default class MainScreen extends React.Component {
             </Box>
             <Box direction='row' style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}}>
               <Card
+                heading={
+                    <Heading tag='h2'>
+                      Educacional
+                    </Heading>
+                  }
               >
-                  Informaçao
+              <Box>
+
+              </Box>
               </Card>
             </Box>
           </Box>
