@@ -25,13 +25,6 @@ export default class ViewObjetivoLayerContent extends React.Component {
                 <TextInput />
               </FormField>
               <FormField
-                label='Descrição'
-              >
-                <textarea
-                  type='text'
-                />
-              </FormField>
-              <FormField
                 label='Valor'
               >
                 <TextInput />
@@ -40,6 +33,13 @@ export default class ViewObjetivoLayerContent extends React.Component {
                 label='Previsão de término'
               >
                 <TextInput />
+              </FormField>
+              <FormField
+                label='Descrição'
+              >
+                <textarea
+                  type='text'
+                />
               </FormField>
               <Box direction='row' justify='end' responsive={false}>
                 <Button primary onClick={onClose} label='Adicionar' />
