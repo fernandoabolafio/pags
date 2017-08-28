@@ -37,6 +37,17 @@ const InvestimentosRoute = {
   }
 };
 
+const InventarioRoute = {
+  path: 'inventario',
+  getComponent: (location, cb) => {
+    require.ensure([], (require) => {
+      const Inventario = require('../containers/Inventario').default;
+
+      cb(null, Inventario);
+    }, 'Inventario');
+  }
+};
+
 const AppRoute = {
   onEnter: (nextState, replace, callback) => {
     let user = null;
@@ -57,7 +68,8 @@ const AppRoute = {
   childRoutes: [
     MainScreenRoute,
     InvestimentosRoute,
-    InvestimentoDetalhesRoute
+    InvestimentoDetalhesRoute,
+    InventarioRoute
   ]
 };
 
