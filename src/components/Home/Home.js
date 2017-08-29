@@ -16,6 +16,9 @@ import BankSync from '../../containers/BankSync';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
 import Footer from '../Footer';
+import BannerHome from './BannerHome';
+
+import { sectionStyle, colors } from '../../constants/styles';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -68,23 +71,11 @@ export default class Home extends React.Component {
               <Button onClick={this.props.goToLogin}  style={{backgroundColor:'#FFAB00', color: 'black', borderColor: '#FFAB00'}} primary label="Entrar" />
             </Box>
           </Header>
+          <BannerHome />
           <Section
-            colorIndex='brand'
-            style={{backgroundColor:'#102027'}}
-            direction="row"
-            justify='center'
+            style={{ ...sectionStyle, backgroundColor: colors.lightGray }}
+            direction="column"
           >
-          <Box  justify="center" direction="column" pad="small" align="center">
-            <Heading uppercase={true} strong={true} align="center">CONHEÇA PAG$</Heading>
-            <Heading tag="h3" align="center">Seu assitente pessoal de investimentos</Heading>
-            <Label align="center" >Aprenda a investir na prática de modo seguro,
-              passo a passo e de forma divertida.</Label>
-          </Box>
-          <Box align="center">
-            <Image size="medium" src="img/landing-img1.png"/>
-          </Box>
-          </Section>
-          <Section justify="center" style={{backgroundColor:'#E1E2E1'}} direction="column">
             <Box align="center">
               <Heading tag="h3" uppercase={true} strong={true}>Como funciona</Heading>
             </Box>
@@ -114,7 +105,11 @@ export default class Home extends React.Component {
               <Image size="large" src={'img/landing-section2-img5.png'} />
             </Box>
           </Section>
-          <Section pad="large" justify="center" style={{backgroundColor:'#102027'}} direction="column">
+          <Section
+            pad="large"
+            style={{ ...sectionStyle, backgroundColor: colors.darkBlue }}
+            direction="column"
+          >
             <Box align="center">
               <Heading tag="h3" uppercase={true} strong={true} style={{color: 'white'}}>Vantagens</Heading>
             </Box>
@@ -133,7 +128,12 @@ export default class Home extends React.Component {
               </Box>
             </Box>
           </Section>
-          <Section justify="center" direction="row" align="center" style={{backgroundColor:'#E1E2E1'}}>
+          <Section
+            justify="center"
+            direction="row"
+            align="center"
+            style={{ ...sectionStyle, backgroundColor: colors.lightGray }}
+          >
               <Box>
                 <Image size="small" src={'img/landing-section4-img1.png'} />
               </Box>
