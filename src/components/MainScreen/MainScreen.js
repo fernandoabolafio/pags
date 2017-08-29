@@ -15,7 +15,6 @@ import Layer from '../Layer';
 import ViewObjetivoLayerContent from './ViewObjetivoLayerContent';
 import AddObjetivoLayerContent from './AddObjetivoLayerContent';
 import Objetivos from './Objetivos';
-import {arrayMove} from 'react-sortable-hoc';
 import Pags from '../Pags';
 import TipBubble from '../TipBubble';
 import acessorio00 from '../../assets/acessorio00.png';
@@ -46,47 +45,6 @@ const acessoriosSrc = {
 
 export default class MainScreen extends React.Component {
   state = {
-    objetivos: [
-      {
-        nome: 'Comprar casa',
-        criado: '10/10/2016',
-        conclusaoEstimada: '10/10/2017',
-        valor: 200000,
-        acumulado: 0.3,
-        descricao: 'Comprar casa afim de dar mais estabilidade para minha familia',
-      },
-      {
-        nome: 'Comprar carro',
-        criado: '10/10/2016',
-        conclusaoEstimada: '05/09/2017',
-        valor: 20000,
-        acumulado: 0.5,
-        descricao: 'Comprar carro para ir trabalhar',
-      },
-      {
-        nome: 'Aposentadoria',
-        criado: '10/10/2016',
-        conclusaoEstimada: '10/10/2051',
-        valor: 2000000,
-        acumulado: 0.05,
-        descricao: 'Juntar 2 milhoes para aposentar',
-      },
-      {
-        nome: 'Viajar',
-        criado: '30/07/2017',
-        conclusaoEstimada: '30/11/2017',
-        valor: 5000,
-        acumulado: 0,
-        descricao: 'Tour pela Europa',
-      },
-      {
-        nome: 'Tunnar o carro',
-        criado: '30/07/2017',
-        conclusaoEstimada: '30/09/2017',
-        acumulado: 1,
-        valor: 10000
-      }
-    ],
     hasInvestidorInfo: false
   };
 
@@ -114,20 +72,19 @@ export default class MainScreen extends React.Component {
   onClickAddObjetivo = () => {
     this.setState({addObj: true})
   }
-  onSortEnd = ({oldIndex, newIndex}) => {
-    this.setState({
-      objetivos: arrayMove(this.state.objetivos, oldIndex, newIndex),
-    });
-  };
+
   render() {
-    const {small, addObjetivo, editObjetivo, removeObjetivo, pagsAcessorios} = this.props;
+    const {small, addObjetivo, editObjetivo, removeObjetivo, pagsAcessorios, rawObjetivos, orderObjetivos} = this.props;
     const activeAcessorio = pagsAcessorios.filter(acessorio => acessorio.selected)[0].id;
-    const {selection, addObj, objetivos, hasInvestidorInfo} = this.state;
+    const {selection, addObj, hasInvestidorInfo} = this.state;
+
     let investidorInfo;
     let investimentos;
     let investimentosData;
+    let total;
     if (this.props.investidorInfo && hasInvestidorInfo) {
       investidorInfo = this.props.investidorInfo;
+      total = investidorInfo.posicao_consolidada.saldo_total_investido;
       investimentos = investidorInfo.posicao_consolidada.investimentos;
       investimentosData = investimentos.map((investimento, index) => {
         return (
@@ -140,6 +97,18 @@ export default class MainScreen extends React.Component {
         );
       })
     }
+
+    const objetivos = rawObjetivos.map(objetivo => {
+      if(total >= objetivo.valor) {
+        total-= objetivo.valor;
+        objetivo.acumulado = 1;
+      }
+      else {
+        objetivo.acumulado = total/objetivo.valor;
+        total=0;
+      }
+      return objetivo;
+    })
 
     let layer;
 
@@ -229,7 +198,7 @@ export default class MainScreen extends React.Component {
                   </div>
                   }
               >
-                <Objetivos onSelectObjetivo={this.onSelectObjetivo} small={small} onSortEnd={this.onSortEnd} objetivos={objetivos} />
+                <Objetivos onSelectObjetivo={this.onSelectObjetivo} small={small} onSortEnd={orderObjetivos} objetivos={objetivos} />
               </Card>
             </Box>
           </Box>

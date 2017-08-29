@@ -33,11 +33,16 @@ export const actions = {
   SET_OBJETIVOS: 'SET_OBJETIVOS',
   EDIT_OBJETIVO: 'EDIT_OBJETIVO',
   CHANGE_ACESSORIO: 'CHANGE_ACESSORIO',
-  CONQUER_ACESSORIO: 'CONQUER_ACESSORIO'
+  CONQUER_ACESSORIO: 'CONQUER_ACESSORIO',
+  ORDER_OBJETIVO: 'ORDER_OBJETIVO'
 };
 
+const getDate = () => {
+  return new Date();
+}
+
 const generateId = () => {
-  const timestamp = new Date().getUTCMilliseconds();
+  const timestamp = getDate().getUTCMilliseconds();
   return timestamp;
 }
 
@@ -52,6 +57,7 @@ export function setObjetivos(objetivos) {
 export function addObjetivo(data) {
   const id = generateId();
   data.id = id;
+  data.criado = getDate().toLocaleDateString('en-GB')
   return {
     type: actions.ADD_OBJETIVO,
     data
@@ -268,6 +274,14 @@ export function fetchInvestidorInfo() {
         console.log(error);
       }
     )
+  }
+}
+
+export function orderObjetivos(index, event) {
+  return {
+    type: actions.ORDER_OBJETIVO,
+    index,
+    event
   }
 }
 

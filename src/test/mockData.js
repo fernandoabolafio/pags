@@ -22,14 +22,12 @@ const itauUsers = [
         criado: '10/10/2016',
         conclusaoEstimada: '10/10/2017',
         valor: 5000,
-        acumulado: 1,
         descricao: 'Dinherio sempre disponível em caso de emergência',
       },
       {
         nome: 'Cirurgia',
         criado: '10/6/2017/',
         valor: 30000,
-        acumulado: 0.76,
         conclusaoEstimada: '10/6/2020',
         descricao: 'Cirurgia de joelho da mamis'
       },
@@ -37,7 +35,6 @@ const itauUsers = [
         nome: 'Novos Móveis',
         criado: '10/5/2017',
         valor: 20000,
-        acumulado: 0,
         conclusaoEstimada: '10/10/2019',
         descricao: 'Moveis sob encomenda para o novo AP'
       }
@@ -73,26 +70,23 @@ const itauUsers = [
     objetivos: [
       {
         nome: 'Planos futuros',
-        criado: '10/8/2016/',
+        criado: '10/8/2016',
         conclusaoEstimada: '10/8/2017',
         valor: 18000,
-        acumulado: 1,
         descricao: 'Talvez viajar, talvez comprar um carro. O tempo dirá.'
       },
       {
         nome: 'Bicileta',
-        criado: '10/6/2016/',
+        criado: '10/6/2016',
         conclusaoEstimada: '10/6/2017',
         valor: 2000,
-        acumulado: 1,
         descricao: 'Bike para trilha'
       },
       {
         nome: 'Computador',
-        criado: '10/6/2016/',
+        criado: '10/6/2016',
         conclusaoEstimada: '10/6/2017',
         valor: 5000,
-        acumulado: 1,
         descricao: 'Notebook Asus 73765 viper *-*'
       },
       {
@@ -100,7 +94,6 @@ const itauUsers = [
         criado: '10/8/2017',
         conclusaoEstimada: '10/8/2021',
         valor: 100000,
-        acumulado: 0.21,
         descricao: 'Casa com varanda em Minas Gerais'
       }
     ],
@@ -138,7 +131,6 @@ const itauUsers = [
         criado: '10/8/2017',
         conclusaoEstimada: '_sempre_',
         valor: 20000,
-        acumulado: 1,
         descricao: 'Dinheiro sempre disponivel para emergências'
       },
       {
@@ -146,7 +138,6 @@ const itauUsers = [
         criado: '10/8/2017',
         conclusaoEstimada: '10/8/2018',
         valor: 5000,
-        acumulado: 1,
         descricao: 'Notebook Dell Rolanga Ross 73xWow'
       },
       {
@@ -154,7 +145,6 @@ const itauUsers = [
         criado: '10/8/2017',
         conclusaoEstimada: '10/08/2019',
         valor: 20000,
-        acumulado: 1,
         descricao: 'Dinheiro sempre disponivel para emergências'
       },
       {
@@ -162,7 +152,6 @@ const itauUsers = [
         criado: '10/8/2017',
         conclusaoEstimada: '10/08/2020',
         valor: 60000,
-        acumulado: 0,
         descricao: 'Carro 4x4 off Road que eu tanto quero'
       },
       {
@@ -170,7 +159,6 @@ const itauUsers = [
         criado: '10/08/2017',
         conclusaoEstimada: '10/08/2021',
         valor: 30000,
-        acumulado: 0,
         descricao: 'Casamento na praia (Maresias) com minha amada'
       }
     ],
@@ -212,7 +200,6 @@ const itauUsers = [
         criado: '10/8/2017',
         conclusaoEstimada: '_sempre_',
         valor: 3000,
-        acumulado: 1,
         descricao: 'Dinheiro sempre disponível'
       },
       {
@@ -220,7 +207,6 @@ const itauUsers = [
         criado: '10/8/2017',
         conclusaoEstimada: '10/08/2021',
         valor: 40000,
-        acumulado: 1,
         descricao: 'Faculdade de Ciências Sociais na Unip'
       },
       {
@@ -228,7 +214,6 @@ const itauUsers = [
         criado: '10/08/2017',
         conclusaoEstimada: '10/08/2019',
         valor: 5000,
-        acumulado: 1,
         descricao: 'Comprar roupas e acessorios novos'
       },
       {
@@ -236,7 +221,6 @@ const itauUsers = [
         criado: '10/8/2017',
         conclusaoEstimada: '10/8/2018',
         valor: 600,
-        acumulado: 1,
         descricao: 'Limpeza de pele, clareamento de dente e botox no queixo'
       }
     ],

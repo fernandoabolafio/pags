@@ -12,6 +12,7 @@ import {SortableContainer, SortableElement, SortableHandle} from 'react-sortable
 
 const DragHandle = SortableHandle(() => <DragIcon />);
 
+const round = (num) => Math.round(num * 100) / 100
 
 const SortableItem = SortableElement(({objetivo, index, onSelectObjetivo, num, small}) =>
   <ListItem justify="start" responsive={false}>
@@ -19,10 +20,10 @@ const SortableItem = SortableElement(({objetivo, index, onSelectObjetivo, num, s
     <Label style={{marginLeft: '10px'}} truncate>{objetivo.nome}</Label>
     <Box justify='end' direction='row' responsive={false} flex='grow'>
       <Box margin={{left: 'small'}}>
-        <Value value={`${objetivo.acumulado*100}`}
+        <Value value={`${round(objetivo.acumulado*100)}`}
           units='%'
           align='start' />
-        {small ? null : <Meter value={`${objetivo.acumulado*100}`}/>}
+        {small ? null : <Meter value={`${round(objetivo.acumulado*100)}`}/>}
       </Box>
       <Box margin={{left: 'small'}} justify='center'>
         <Anchor onClick={() => onSelectObjetivo(num)} icon={<EditIcon />} />

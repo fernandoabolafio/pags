@@ -17,6 +17,8 @@ import Button from 'grommet/components/Button';
 import TrashIcon from 'grommet/components/icons/base/Trash';
 import FormPreviousLink from 'grommet/components/icons/base/FormPreviousLink';
 
+const round = (num) => Math.round(num * 100) / 100;
+
 export default class ViewObjetivoLayerContent extends React.Component {
   constructor(props) {
     super(props);
@@ -138,12 +140,12 @@ export default class ViewObjetivoLayerContent extends React.Component {
               </Label>
             </Box>
             <Box direction='column' style={{maxWidth: '193px'}} margin={{top: 'medium', bottom: 'none'}}>
-              <Value value={`${objetivo.acumulado*100}`}
+              <Value value={`${round(objetivo.acumulado*100)}`}
                 units='%'
                 align='start'
                 size='small'
               />
-              <Meter value={`${objetivo.acumulado*100}`}/>
+              <Meter value={`${round(objetivo.acumulado*100)}`}/>
               <Box direction='row'
                 justify='between'
                 pad={{"between": "small"}}

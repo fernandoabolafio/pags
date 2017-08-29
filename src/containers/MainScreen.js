@@ -1,12 +1,13 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MainScreen from '../components/MainScreen';
-import {logout, fetchInvestidorInfo, addObjetivo, removeObjetivo, editObjetivo} from '../actions/actions';
+import {logout, fetchInvestidorInfo, addObjetivo, removeObjetivo, editObjetivo, orderObjetivos} from '../actions/actions';
 
 const mapStateToProps = state => ({
   activeUser: state.app.activeUser,
   investidorInfo: state.app.investidorInfo,
-  pagsAcessorios: state.app.activeUser.pagsAcessorios
+  pagsAcessorios: state.app.activeUser.pagsAcessorios,
+  rawObjetivos: state.app.activeUser.objetivos
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -14,7 +15,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchInvestidorInfo,
   addObjetivo,
   removeObjetivo,
-  editObjetivo
+  editObjetivo,
+  orderObjetivos
 }, dispatch);
 
 const MainScreenContainer = connect(mapStateToProps, mapDispatchToProps)(MainScreen);

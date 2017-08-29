@@ -1,7 +1,7 @@
 import { updateObject, updateItemInArrayById } from '../support/objectUtils';
 import lsUtils from '../support/localStorageUtils';
 import { actions } from '../actions/actions';
-
+import {arrayMove} from 'react-sortable-hoc';
 
 const initialState = {
   activeUser: {
@@ -124,7 +124,6 @@ const ACTION_HANDLER = {
     )
   },
   [actions.CHANGE_ACESSORIO]: (state, action) => {
-    console.log(state.activeUser.pagsAcessorios);
     const newPagsAcessorio = state.activeUser.pagsAcessorios.map((acessorio, index) => {
       return {
         ...acessorio,
@@ -165,6 +164,20 @@ const ACTION_HANDLER = {
         )
       }
     );
+  },
+
+  [actions.ORDER_OBJETIVO]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        activeUser: updateObject(
+          state.activeUser,
+          {
+            objetivos: arrayMove(state.activeUser.objetivos, action.index.oldIndex, action.index.newIndex)
+          }
+        )
+      }
+    )
   },
 };
 
