@@ -1,4 +1,5 @@
-import { updateObject } from '../support/objectUtils';
+import { updateObject, updateItemInArrayById } from '../support/objectUtils';
+import lsUtils from '../support/localStorageUtils';
 import { actions } from '../actions/actions';
 
 
@@ -69,6 +70,54 @@ const ACTION_HANDLER = {
       state,
       {
         investidorInfo: action.info
+      }
+    )
+  },
+  [actions.ADD_OBJETIVO]: (state, action) => {
+    const {objetivos} = state.activeUser;
+    const newObjetivos = objetivos && objetivos.length > 0 ? objetivos.push(action.data) : [action.data];
+    return updateObject(
+      state,
+      {
+        activeUser: updateObject(
+          state.activeUser,
+          {
+            objetivos: newObjetivos
+          }
+        )
+      }
+    )
+  },
+  [actions.REMOVE_OBJETIVO]: (state, action) => {
+    const {objetivos} = state.activeUser;
+    const filteredObjetivos = objetivos.filter( obj => obj.id !== action.id);
+    return updateObject(
+      state,
+      {
+        activeUser: updateObject(
+          state.activeUser,
+          {
+            objetivos: filteredObjetivos
+          }
+        )
+      }
+    )
+  },
+  [actions.EDIT_OBJETIVO]: (state, action) => {
+    const {objetivos} = state.activeUser;
+    return updateObject(
+      state,
+      {
+        activeUser: updateObject(
+          state.activeUser,
+          {
+            objetivos: updateItemInArrayById(
+              state.activeUser.objetivos,
+              action.objetivo.id,
+              (obj) => updateObject(obj, action.objetivo)
+            )
+          }
+        )
       }
     )
   }

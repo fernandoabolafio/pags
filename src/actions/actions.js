@@ -26,8 +26,50 @@ export const actions = {
   SET_OPCOES_DE_INVESTIMENTO: 'SET_OPCOES_DE_INVESTIMENTO',
   RECEIVE_APPLY_OK: 'RECEIVE_APPLY_OK',
   CLEAR_APPLY_OK: 'CLEAR_APPLY_OK',
-  SET_INVESTIDOR_INFO: 'SET_INVESTIDOR_INFO'
+  SET_INVESTIDOR_INFO: 'SET_INVESTIDOR_INFO',
+  ADD_OBJETIVO: 'ADD_OBJETIVO',
+  REMOVE_OBJETIVO: 'REMOVE_OBJETIVO',
+  UPDATE_OBJETIVO: 'EDIT_OBJETIVO',
+  SET_OBJETIVOS: 'SET_OBJETIVOS',
+  REMOVE_OBJETIVO: 'REMOVE_OBJETIVO',
+  EDIT_OBJETIVO: 'EDIT_OBJETIVO'
 };
+
+const generateId = () => {
+  const timestamp = new Date().getUTCMilliseconds();
+  return timestamp;
+}
+
+export function setObjetivos(objetivos) {
+  return {
+    type: actions.SET_OBJETIVOS,
+    objetivos
+  }
+}
+
+
+export function addObjetivo(data) {
+  const id = generateId();
+  data.id = id;
+  return {
+    type: actions.ADD_OBJETIVO,
+    data
+  }
+}
+
+export function removeObjetivo(id) {
+  return {
+    type: actions.REMOVE_OBJETIVO,
+    id
+  }
+}
+
+export function editObjetivo(objetivo) {
+  return {
+    type: actions.EDIT_OBJETIVO,
+    objetivo
+  }
+}
 
 export function goToLogin() {
   return (dispatch) => {

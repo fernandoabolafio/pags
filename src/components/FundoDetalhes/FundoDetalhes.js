@@ -148,7 +148,7 @@ export default class FundoDetalhes extends React.Component {
   renderContent = () => {
     const {investInfo} = this.state;
     return (
-          <Box pad="medium" style={{backgroundColor: 'white'}} size="medium">
+          <Box pad="medium" style={{backgroundColor: 'white', width: "100%"}} >
             {this.renderInfo('Valor mínimo', <Label margin="none">{`R$${numberWithCommas(investInfo.valor_minimo_aplicacao)}`}</Label> )}
             {
               investInfo.rentabilidades ?
@@ -193,7 +193,7 @@ export default class FundoDetalhes extends React.Component {
             )
           }
           {this.renderInfo('Risco', <Label margin="none">{investInfo.grau_risco}</Label>, false)}
-            <Box pad="medium">
+            <Box pad="medium" align="center">
               <Button label="Investir" onClick={() => this.toggleInvestir(true)}></Button>
             </Box>
           </Box>
@@ -216,7 +216,7 @@ export default class FundoDetalhes extends React.Component {
   }
 
   renderAplicarWizard = () => {
-    return <Box pad="small" style={{backgroundColor: 'white'}} size="medium">
+    return <Box pad="small" style={{backgroundColor: 'white', width: "100%"}}>
       <AplicarWizard onApply={this.onApply} investInfo={this.state.investInfo} onCancel={() => this.toggleInvestir(false)} />
     </Box>;
   }
@@ -258,7 +258,7 @@ export default class FundoDetalhes extends React.Component {
       <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
         {
           !this.state.applying ?
-          <Box align="center">
+          <Box align="center" size="medium">
             {
               !this.state.applied ?
               [
@@ -267,13 +267,13 @@ export default class FundoDetalhes extends React.Component {
                 this.state.wizard ? this.renderAplicarWizard() : this.getMainContent()
               ]
               :
-              <Box pad="medium" style={{backgroundColor: 'white'}} size="medium">
+              <Box pad="medium" style={{backgroundColor: 'white', width: "100%"}}>
                 {this.renderSuccessStep()}
               </Box>
             }
           </Box>
           :
-          <Box align="center" size="large" justify="center" margin="large">
+          <Box align="center" style={{width: "100%"}} justify="center">
             <Spinning size="large" />
             <Label align="center">Processando Investimento, aguarde um instante.</Label>
           </Box>
