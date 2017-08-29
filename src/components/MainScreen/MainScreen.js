@@ -95,7 +95,7 @@ export default class MainScreen extends React.Component {
             label: investimento.nome,
             value: investimento.saldo,
             colorIndex: `graph-${index}`,
-            onClick: () => console.log(investimento.nome)
+            onClick: () => this.props.seeMoreMeuInvestimento(investimento.codigo)
           }
         );
       })

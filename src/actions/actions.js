@@ -51,6 +51,12 @@ const generateId = () => {
   return timestamp;
 }
 
+export function seeMoreMeuInvestimento(investimento_id) {
+  return (dispatch) => {
+    dispatch(push(`/app/meusinvestimentos/${investimento_id}`))
+  }
+}
+
 export function setObjetivos(objetivos) {
   return {
     type: actions.SET_OBJETIVOS,
