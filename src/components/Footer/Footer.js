@@ -21,8 +21,8 @@ export const MyFooter = ({small}) =>
     >
       <Box basis="1/2" pad={{horizontal: 'large', vertical: 'large'}} wrap direction='row' justify='center'>
         <Box basis='1/2' align='center'  margin={{vertical: 'small'}}>
-          <Label margin="none" style={{marginBottom: "10px"}} >Parceiros</Label>
-          <Image size="small" src={'https://seeklogo.com/images/I/Itau-logo-082730CE51-seeklogo.com.png'}/>
+          <Label size={small ? 'medium' : 'small'} uppercase>Parceiros</Label>
+          <Image style={{width: '120px', height: '120px'}} src={'https://seeklogo.com/images/I/Itau-logo-082730CE51-seeklogo.com.png'}/>
         </Box>
         <Box basis='1/2' direction='row' justify='center' margin={{vertical: 'small'}} responsive={false}>
           <div style={{display: 'flex', flexDirection: 'column', marginRight: small ? '25px' : '10px'}}>
