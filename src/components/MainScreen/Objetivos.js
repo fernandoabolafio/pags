@@ -41,7 +41,7 @@ const SortableList = SortableContainer(({objetivos, onSelectObjetivo, small}) =>
 );
 
 const Objetivos = ({onSelectObjetivo, objetivos, onSortEnd, small}) =>
-    <SortableList objetivos={objetivos} onSelectObjetivo={onSelectObjetivo} onSortEnd={onSortEnd} useDragHandle small={small} />
+    <SortableList lockAxis="y" objetivos={objetivos} onSelectObjetivo={onSelectObjetivo} onSortEnd={onSortEnd} useDragHandle small={small} />
 
 
 export default Objetivos;
