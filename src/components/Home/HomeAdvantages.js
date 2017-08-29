@@ -20,8 +20,7 @@ const HomeAdvantages = () => {
   };
 
   const advantageBoxStyles = {
-    width: '33%',
-    alignItems: 'center',
+    alignItems: 'center'
   }
 
   const imageStyles = {
@@ -49,7 +48,7 @@ const HomeAdvantages = () => {
           Vantagens
         </Heading>
       </Box>
-      <Box direction="row" justify="between">
+      <Box direction="row" justify="center">
         <Box pad="medium" style={ advantageBoxStyles }>
           <Image src="img/landing-section3-img1.png" style={ imageStyles } />
           <Title style={ titleStyles }>Versátil</Title>
