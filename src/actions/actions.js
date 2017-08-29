@@ -31,8 +31,9 @@ export const actions = {
   REMOVE_OBJETIVO: 'REMOVE_OBJETIVO',
   UPDATE_OBJETIVO: 'EDIT_OBJETIVO',
   SET_OBJETIVOS: 'SET_OBJETIVOS',
-  REMOVE_OBJETIVO: 'REMOVE_OBJETIVO',
-  EDIT_OBJETIVO: 'EDIT_OBJETIVO'
+  EDIT_OBJETIVO: 'EDIT_OBJETIVO',
+  CHANGE_ACESSORIO: 'CHANGE_ACESSORIO',
+  CONQUER_ACESSORIO: 'CONQUER_ACESSORIO'
 };
 
 const generateId = () => {
@@ -267,5 +268,19 @@ export function fetchInvestidorInfo() {
         console.log(error);
       }
     )
+  }
+}
+
+export function changeAcessorio(acessorioId) {
+  return {
+    type: actions.CHANGE_ACESSORIO,
+    acessorioId
+  }
+}
+
+export function conquerAcessorio(acessorioId) {
+  return {
+    type: actions.CHANGE_ACESSORIO,
+    acessorioId
   }
 }

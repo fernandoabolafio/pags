@@ -5,7 +5,8 @@ import {logout, fetchInvestidorInfo, addObjetivo, removeObjetivo, editObjetivo} 
 
 const mapStateToProps = state => ({
   activeUser: state.app.activeUser,
-  investidorInfo: state.app.investidorInfo
+  investidorInfo: state.app.investidorInfo,
+  pagsAcessorios: state.app.activeUser.pagsAcessorios
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

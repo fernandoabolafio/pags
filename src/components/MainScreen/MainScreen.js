@@ -6,7 +6,6 @@ import Box from 'grommet/components/Box';
 import Meter from 'grommet/components/Meter';
 import Label from 'grommet/components/Label';
 import Value from 'grommet/components/Value';
-import Image from 'grommet/components/Image';
 import Button from 'grommet/components/Button';
 import Spinning from 'grommet/components/icons/Spinning';
 import Anchor from 'grommet/components/Anchor';
@@ -19,6 +18,31 @@ import Objetivos from './Objetivos';
 import {arrayMove} from 'react-sortable-hoc';
 import Pags from '../Pags';
 import TipBubble from '../TipBubble';
+import acessorio00 from '../../assets/acessorio00.png';
+import acessorio01 from '../../assets/acessorio01.png';
+import acessorio02 from '../../assets/acessorio02.png';
+import acessorio03 from '../../assets/acessorio03.png';
+import acessorio04 from '../../assets/acessorio04.png';
+import acessorio05 from '../../assets/acessorio05.png';
+import acessorio06 from '../../assets/acessorio06.png';
+import acessorio07 from '../../assets/acessorio07.png';
+import acessorio08 from '../../assets/acessorio08.png';
+import acessorio09 from '../../assets/acessorio09.png';
+import acessorio10 from '../../assets/acessorio10.png';
+
+const acessoriosSrc = {
+  [0]: acessorio00,
+  [1]: acessorio01,
+  [2]: acessorio02,
+  [3]: acessorio03,
+  [4]: acessorio04,
+  [5]: acessorio05,
+  [6]: acessorio06,
+  [7]: acessorio07,
+  [8]: acessorio08,
+  [9]: acessorio09,
+  [10]: acessorio10
+}
 
 export default class MainScreen extends React.Component {
   state = {
@@ -96,7 +120,8 @@ export default class MainScreen extends React.Component {
     });
   };
   render() {
-    const {small, addObjetivo, editObjetivo, removeObjetivo} = this.props;
+    const {small, addObjetivo, editObjetivo, removeObjetivo, pagsAcessorios} = this.props;
+    const activeAcessorio = pagsAcessorios.filter(acessorio => acessorio.selected)[0].id;
     const {selection, addObj, objetivos, hasInvestidorInfo} = this.state;
     let investidorInfo;
     let investimentos;
@@ -186,7 +211,7 @@ export default class MainScreen extends React.Component {
                     </div>
                   }
                 />
-                <Pags size={small ? 'small' : 'medium'}/>
+                <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
               </Card>
             </Box>
             <Box style={{backgroundColor: 'white', width: small ? '' : '65%'}}  margin={small ? 'medium' : {left: 'small', right: 'medium'}}>
@@ -242,6 +267,6 @@ export default class MainScreen extends React.Component {
         {layer}
         }
       </div>
-    ) : <Spinning size='large' />
+    ) : <Spinning style={{position: 'absolute', top:'50%', left: '50%'}} size='large' />
   }
 }

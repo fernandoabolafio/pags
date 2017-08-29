@@ -120,7 +120,50 @@ const ACTION_HANDLER = {
         )
       }
     )
-  }
+  },
+  [actions.CHANGE_ACESSORIO]: (state, action) => {
+    console.log(state.activeUser.pagsAcessorios);
+    const newPagsAcessorio = state.activeUser.pagsAcessorios.map((acessorio, index) => {
+      return {
+        ...acessorio,
+        selected: acessorio.id === action.acessorioId ? true : false
+      };
+    })
+    return updateObject(
+      state,
+      {
+        activeUser: updateObject(
+          state.activeUser,
+          {
+            pagsAcessorios: newPagsAcessorio
+          }
+        )
+      }
+    );
+  },
+  [actions.CONQUER_ACESSORIO]: (state, action) => {
+    const newPagsAcessorio = state.activeUser.pagsAcessorios.map((acessorio, index) => {
+      let isConquered = acessorio.isConquered;
+      if (acessorio.id === action.acessorioId) {
+        isConquered = true;
+      }
+      return {
+        ...acessorio,
+        isConquered
+      };
+    });
+    return updateObject(
+      state,
+      {
+        activeUser: updateObject(
+          state.activeUser,
+          {
+            pagsAcessorios: newPagsAcessorio
+          }
+        )
+      }
+    );
+  },
 };
 
 
