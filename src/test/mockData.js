@@ -28,7 +28,7 @@ const itauUsers = [
       {
         id: 2,
         nome: 'Cirurgia',
-        criado: '10/6/2017/',
+        criado: '10/6/2017',
         valor: 30000,
         conclusaoEstimada: '10/6/2020',
         descricao: 'Cirurgia de joelho da mamis'
