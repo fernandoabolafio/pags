@@ -35,7 +35,6 @@ export default class PanelLayout extends React.Component {
         <Box style={{minHeight: '100vh', height: '100%', width: '100%', backgroundColor: '#f5f5f5'}}>
           {childrenWithProps}
         </Box>
-        <Footer small={small} />
       </Box>
     );
   }
