@@ -6,7 +6,8 @@ import { actions } from '../actions/actions';
 const initialState = {
   activeUser: {
     objetivos: []
-  }
+  },
+  opcoesDeInvestimento: {}
 };
 
 const ACTION_HANDLER = {
