@@ -209,7 +209,7 @@ const itauUsers = [
     objetivos: [
       {
         id: 1,
-        name: 'Cofrinho',
+        nome: 'Cofrinho',
         criado: '10/8/2017',
         conclusaoEstimada: '_sempre_',
         valor: 3000,
@@ -217,7 +217,7 @@ const itauUsers = [
       },
       {
         id: 2,
-        name: 'Faculdade',
+        nome: 'Faculdade',
         criado: '10/8/2017',
         conclusaoEstimada: '10/08/2021',
         valor: 40000,
@@ -225,7 +225,7 @@ const itauUsers = [
       },
       {
         id: 3,
-        name: 'Renovar roupas',
+        nome: 'Renovar roupas',
         criado: '10/08/2017',
         conclusaoEstimada: '10/08/2019',
         valor: 5000,
@@ -233,7 +233,7 @@ const itauUsers = [
       },
       {
         id: 4,
-        name: 'Beleza',
+        nome: 'Beleza',
         criado: '10/8/2017',
         conclusaoEstimada: '10/8/2018',
         valor: 600,
