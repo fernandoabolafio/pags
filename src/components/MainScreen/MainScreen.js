@@ -65,8 +65,9 @@ export default class MainScreen extends React.Component {
     ],
     hasInvestidorInfo: false
   };
+
   componentWillReceiveProps(nextProps) {
-    if(!this.props.investidorInfo && nextProps.investidorInfo) {
+    if(nextProps.investidorInfo) {
       this.setState({
         hasInvestidorInfo: true
       })
@@ -76,6 +77,7 @@ export default class MainScreen extends React.Component {
   componentDidMount() {
     if(!this.props.investidorInfo) {
       this.props.fetchInvestidorInfo();
+
     }
   }
 
@@ -94,7 +96,6 @@ export default class MainScreen extends React.Component {
     });
   };
   render() {
-    console.log(this.props)
     const {small, addObjetivo, editObjetivo, removeObjetivo} = this.props;
     const {selection, addObj, objetivos, hasInvestidorInfo} = this.state;
     let investidorInfo;
