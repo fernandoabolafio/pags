@@ -11,44 +11,42 @@ import Button from 'grommet/components/Button';
 
 export default class ViewObjetivoLayerContent extends React.Component {
   render() {
-    const {onClose} = this.props;
+    const {onClose, small} = this.props;
     return (
-      <Article pad={{vertical: 'small', between: 'small'}} >
-      <Heading tag="h2" margin="none">Adicionar Objetivo</Heading>
-      <Section style={{minHeight: '480px', minWidth: '548px'}}>
-        <Box direction='column'>
-          <Form pad={{vertical: 'medium'}} >
-            <Box pad={{between: 'medium'}}>
-              <FormField
-                label='Nome'
-              >
-                <TextInput />
-              </FormField>
-              <FormField
-                label='Valor'
-              >
-                <TextInput />
-              </FormField>
-              <FormField
-                label='Previsão de término'
-              >
-                <TextInput />
-              </FormField>
-              <FormField
-                label='Descrição'
-              >
-                <textarea
-                  type='text'
-                />
-              </FormField>
-              <Box direction='row' justify='end' responsive={false}>
-                <Button primary onClick={onClose} label='Adicionar' />
-              </Box>
+      <Section style={ small ? {} : {minHeight: '480px', minWidth: '548px'}}>
+      <Heading tag="h3" margin="none">Adicionar Objetivo</Heading>
+      <Box direction='column'>
+        <Form pad={{vertical: 'medium'}} >
+          <Box pad={{between: 'medium'}}>
+            <FormField
+              label='Nome'
+            >
+              <TextInput />
+            </FormField>
+            <FormField
+              label='Valor'
+            >
+              <TextInput />
+            </FormField>
+            <FormField
+              label='Previsão de término'
+            >
+              <TextInput />
+            </FormField>
+            <FormField
+              label='Descrição'
+            >
+              <textarea
+                type='text'
+              />
+            </FormField>
+            <Box direction='row' justify='end' responsive={false}>
+              <Button primary onClick={onClose} label='Adicionar' />
             </Box>
-          </Form>
-        </Box>
-      </Section>
-     </Article>
+          </Box>
+        </Form>
+      </Box>
+    </Section>
     )
   }
 }

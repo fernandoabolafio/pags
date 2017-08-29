@@ -3,7 +3,6 @@ import Section from 'grommet/components/Section';
 import Box from 'grommet/components/Box';
 import Card from 'grommet/components/Card';
 import Heading from 'grommet/components/Heading';
-import Columns from 'grommet/components/Columns';
 import Value from 'grommet/components/Value';
 import Label from 'grommet/components/Label';
 import Meter from 'grommet/components/Meter';
@@ -51,15 +50,15 @@ export default class Inventario extends React.Component {
           return (
             <Box
               align='center'
-              pad='small'
+              pad={{vertical: 'small', horizontal: 'medium'}}
               margin={small ? 'medium' : 'small'}
               onClick={acessorio.isConquered ? () => console.log('oi') : null}
               colorIndex={acessorio.isConquered ? 'light-1' : 'unknown'}
               style={acessorio.selected ? style.selected : style.notSelected[acessorio.isConquered ? 'conquered' : 'notConquered']}
             >
-              <Image id={`acessorio-${index}`} size='small' src={acessorio.src}
+              <Image id={`acessorio-${index}`} size='small' src={acessorio.src} style={{maxWidth: '165px', maxHeight: '240px'}}
               />
-              <Label align='center' style={acessorio.selected ? {color: '#865cd6'} : {}}>{acessorio.text}</Label>
+              <Label align='center' margin={{bottom: '0'}} style={acessorio.selected ? {color: '#865cd6'} : {}}>{acessorio.text}</Label>
             </Box>
           )
         })}
@@ -70,24 +69,24 @@ export default class Inventario extends React.Component {
     const completo = exp === 100 ? '1' : '2'
     const text = {
       '1': {
-        '1': 'Parabéns, você é um Investidor Junior! Agora já entende o básico sobre investimentos. Continue com o bom trabalho.',
-        '2': 'Ao completar esse nível, você entenderá o básico sobre investimentos e saberá como aplicá-los.'
+        '1': 'Parabéns, você é um Investidor Junior! Continue com o bom trabalho.',
+        '2': 'Ao completar esse nível você saberá o básico sobre investimentos e como aplicar.'
       },
       '2': {
-        '1': 'Parabéns, você é um Especialista em investimentos! Agora você já está mais experiente com investimentos. Vire um mestre!',
-        '2': 'Ao completar esse nível, você entenderá o bastante para gerenciar seus investimentos com sabedoria.'
+        '1': 'Parabéns, você é um Especialista em investimentos!',
+        '2': 'Ao completar esse nível você entenderá o bastante para gerenciar seus investimentos.'
       },
       '3': {
-        '1': 'Parabéns, você é um Mestre em investimentos! Agora você já está brincando de investir. Não é tão difícil assim, não é mesmo?',
-        '2': 'Ao completar esse nível, você terá um conhecimento profundo sobre investimentos e como eles podem ajudar o seu dinheiro a render mais.'
+        '1': 'Parabéns, você é um Mestre em investimentos!',
+        '2': 'Ao completar esse nível você terá uma boa noção de como fazer o seu dinheiro render.'
       },
       '4': {
-        '1': 'Parabéns, você é um verdadeiro Money Maker! Agora você já é um super investidor, capaz de multiplicar suas economias',
-        '2': 'Ao completar esse nível, você será um super investidor! Você entendará tudo sobre taxas, tipos de investimento e riscos'
+        '1': 'Parabéns, você é um verdadeiro Money Maker! Não é tão difícil assim investir, né?',
+        '2': 'Ao completar esse nível você entenderá tudo sobre investimentos.'
       }
     }
     return (
-      <div style={{height: '300px'}}>
+      <div style={ small ? {} : {height: '300px'}}>
         <div>
           <Label
             size='small'>
@@ -111,7 +110,7 @@ export default class Inventario extends React.Component {
           value={exp}
         />
         <Box wrap pad={{vertical: 'small'}}>
-          <Paragraph>
+          <Paragraph margin='none'>
             {text[nivel][completo]}
           </Paragraph>
         </Box>
@@ -148,7 +147,7 @@ export default class Inventario extends React.Component {
               Seu Pag$
             </Heading>
             <div style={{height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-              <Pags />
+              <Pags src={acessorio08} size={small ? 'small' : 'medium'} />
             </div>
           </Box>
           <Box style={{backgroundColor: 'white', width: small ? '' : '70%'}} margin={small ? 'medium' : {left: 'small', right: 'medium'}} pad='medium'>
@@ -158,20 +157,24 @@ export default class Inventario extends React.Component {
               <Box>
                 <Box direction='row' pad={{vertical: 'small', horizontal: 'small', between: 'small'}} justify='center'>
                   <TipBubble
+                    style={small ? {} : {width: '50%'}}
                     small={small}
                     rightContent={this.rightContent(small, 1, title['1'], 100)}
                    />
                    <TipBubble
+                     style={small ? {} : {width: '50%'}}
                      small={small}
                      rightContent={this.rightContent(small, 2, title['2'], 35)}
                     />
                 </Box>
                 <Box direction='row' pad={{vertical: 'none', horizontal: 'small', between: 'small'}} justify='center'>
                   <TipBubble
+                    style={small ? {} : {width: '50%'}}
                     small={small}
                     rightContent={this.rightContent(small, 3, title['3'], 0)}
                    />
                    <TipBubble
+                     style={small ? {} : {width: '50%'}}
                      small={small}
                      rightContent={this.rightContent(small, 4, title['4'], 0)}
                     />

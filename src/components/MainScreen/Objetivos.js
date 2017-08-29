@@ -13,7 +13,7 @@ import {SortableContainer, SortableElement, SortableHandle} from 'react-sortable
 const DragHandle = SortableHandle(() => <DragIcon />);
 
 
-const SortableItem = SortableElement(({objetivo, index, onSelectObjetivo, num}) =>
+const SortableItem = SortableElement(({objetivo, index, onSelectObjetivo, num, small}) =>
   <ListItem justify="start" responsive={false}>
     <DragHandle />
     <Label style={{marginLeft: '10px'}} truncate>{objetivo.nome}</Label>
@@ -22,7 +22,7 @@ const SortableItem = SortableElement(({objetivo, index, onSelectObjetivo, num}) 
         <Value value={`${objetivo.acumulado*100}`}
           units='%'
           align='start' />
-        <Meter value={`${objetivo.acumulado*100}`}/>
+        {small ? null : <Meter value={`${objetivo.acumulado*100}`}/>}
       </Box>
       <Box margin={{left: 'small'}} justify='center'>
         <Anchor onClick={() => onSelectObjetivo(num)} icon={<EditIcon />} />
@@ -31,16 +31,16 @@ const SortableItem = SortableElement(({objetivo, index, onSelectObjetivo, num}) 
   </ListItem>
 );
 
-const SortableList = SortableContainer(({objetivos, onSelectObjetivo}) =>
+const SortableList = SortableContainer(({objetivos, onSelectObjetivo, small}) =>
     <List>
       {objetivos.map((objetivo, index) => (
-        <SortableItem key={`objetivo-${index}`} index={index} num={index} onSelectObjetivo={onSelectObjetivo} objetivo={objetivo} />
+        <SortableItem key={`objetivo-${index}`} index={index} num={index} small={small} onSelectObjetivo={onSelectObjetivo} objetivo={objetivo} />
       ))}
     </List>
 );
 
-const Objetivos = ({onSelectObjetivo, objetivos, onSortEnd}) =>
-    <SortableList objetivos={objetivos} onSelectObjetivo={onSelectObjetivo} onSortEnd={onSortEnd} useDragHandle />
+const Objetivos = ({onSelectObjetivo, objetivos, onSortEnd, small}) =>
+    <SortableList objetivos={objetivos} onSelectObjetivo={onSelectObjetivo} onSortEnd={onSortEnd} useDragHandle small={small} />
 
 
 export default Objetivos;

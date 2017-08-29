@@ -2,8 +2,8 @@ import React from 'react';
 import Box from 'grommet/components/Box';
 import './TipBubble.css'
 
-const TipBubble = ({small, leftContent, rightContent, caret}) =>
-  <Box align='center' style={{zIndex: '2'}}>
+const TipBubble = ({small, leftContent, rightContent, caret, style}) =>
+  <Box align='center' style={{...style, zIndex: '2'}}>
     <Box
       style={{borderRadius: '10px', width: '100%'}}
       direction='row'

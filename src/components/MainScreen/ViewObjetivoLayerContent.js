@@ -32,11 +32,11 @@ export default class ViewObjetivoLayerContent extends React.Component {
   }
   render() {
     const { section } = this.state;
-    const { onClose, objetivo } = this.props;
+    const { onClose, objetivo, small } = this.props;
     const layerContent = {
       motivo: () => {
         return (
-          <Section style={{minHeight: '480px', minWidth: '548px'}}>
+          <Section style={ small ? {} : {minHeight: '480px', minWidth: '548px'}}>
             <Heading tag='h3' align='center'>
               Por que está excluindo esse objetivo?
             </Heading>
@@ -67,7 +67,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
             <Box flex='grow' justify='end'>
               <Box direction='row' justify='center' pad={{between: 'medium'}} responsive={false}>
                 <Button primary onClick={this.onBackClick} label='Mudei de ideia' />
-                <Button secondary onClick={onClose} label='Enviar e excluir' />
+                <Button secondary onClick={onClose} label='Excluir' />
               </Box>
             </Box>
           </Section>
@@ -75,7 +75,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
       },
       excluir: () => {
         return (
-          <Section style={{minHeight: '480px', minWidth: '548px'}}>
+          <Section style={ small ? {} : {minHeight: '480px', minWidth: '548px'}}>
             <Heading tag='h3' align='center'>
               Tem certeza que deseja excluir esse objetivo?
             </Heading>
@@ -102,7 +102,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
       },
       editar: () => {
         return (
-          <Section style={{minHeight: '480px', minWidth: '548px'}}>
+          <Section style={ small ? {} : {minHeight: '480px', minWidth: '548px'}}>
             <Box direction='column'>
               <Label margin='small'>
                 Adicionado em: {objetivo.criado}
@@ -154,7 +154,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
     }
     return (
       <Article pad={{vertical: 'small', between: 'small'}} >
-      <Heading tag="h2" margin="none">Nome Objetivo</Heading>
+      <Heading tag="h2" margin="none">{objetivo.nome}</Heading>
       {layerContent[section]()}
      </Article>
     )

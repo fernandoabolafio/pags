@@ -110,7 +110,7 @@ export default class MainScreen extends React.Component {
           onClose={this.onDeselectObjetivo}
           a11yTitle='Detalhes do objetivo'
         >
-          <ViewObjetivoLayerContent objetivo={objetivos[selection]}/>
+          <ViewObjetivoLayerContent objetivo={objetivos[selection]} small={small} />
         </Layer>
       )
     } else if (addObjetivo) {
@@ -119,7 +119,7 @@ export default class MainScreen extends React.Component {
           onClose={this.onDeselectObjetivo}
           a11yTitle='Adicionar objetivo'
         >
-          <AddObjetivoLayerContent />
+          <AddObjetivoLayerContent small={small}/>
         </Layer>
       )
     }
@@ -170,7 +170,7 @@ export default class MainScreen extends React.Component {
                     </div>
                   }
                 />
-                <Pags />
+                <Pags size={small ? 'small' : 'medium'}/>
               </Card>
             </Box>
             <Box style={{backgroundColor: 'white', width: small ? '' : '65%'}}  margin={small ? 'medium' : {left: 'small', right: 'medium'}}>
@@ -188,7 +188,7 @@ export default class MainScreen extends React.Component {
                   </div>
                   }
               >
-                <Objetivos onSelectObjetivo={this.onSelectObjetivo} onSortEnd={this.onSortEnd} objetivos={objetivos} />
+                <Objetivos onSelectObjetivo={this.onSelectObjetivo} small={small} onSortEnd={this.onSortEnd} objetivos={objetivos} />
               </Card>
             </Box>
           </Box>
