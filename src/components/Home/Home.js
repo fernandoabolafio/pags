@@ -15,10 +15,16 @@ import Image from 'grommet/components/Image';
 import BankSync from '../../containers/BankSync';
 import Menu from 'grommet/components/Menu';
 import Anchor from 'grommet/components/Anchor';
-import Footer from '../Footer';
-import BannerHome from './BannerHome';
 
-import { sectionStyle, colors } from '../../constants/styles';
+import Footer from '../Footer';
+import HomeBanner from './HomeBanner';
+import HomeAdvantages from './HomeAdvantages';
+
+import {
+  sectionStyle,
+  colors,
+  sectionTitleStyle,
+} from '../../constants/styles';
 
 export default class Home extends React.Component {
   constructor(props) {
@@ -71,13 +77,15 @@ export default class Home extends React.Component {
               <Button onClick={this.props.goToLogin}  style={{backgroundColor:'#FFAB00', color: 'black', borderColor: '#FFAB00'}} primary label="Entrar" />
             </Box>
           </Header>
-          <BannerHome />
+          <HomeBanner />
           <Section
             style={{ ...sectionStyle, backgroundColor: colors.lightGray }}
             direction="column"
           >
             <Box align="center">
-              <Heading tag="h3" uppercase={true} strong={true}>Como funciona</Heading>
+              <Heading tag="h3" style={ sectionTitleStyle }>
+                Como funciona
+              </Heading>
             </Box>
             <Box direction="row" justify="center">
               <Box pad="medium" align="center">
@@ -105,29 +113,7 @@ export default class Home extends React.Component {
               <Image size="large" src={'img/landing-section2-img5.png'} />
             </Box>
           </Section>
-          <Section
-            pad="large"
-            style={{ ...sectionStyle, backgroundColor: colors.darkBlue }}
-            direction="column"
-          >
-            <Box align="center">
-              <Heading tag="h3" uppercase={true} strong={true} style={{color: 'white'}}>Vantagens</Heading>
-            </Box>
-            <Box direction="row" justify="between">
-              <Box pad="medium" align="center">
-                <img src={'img/landing-section3-img1.png'}/>
-                <Label style={{maxWidth:'200px', fontWeight:'bold', color: 'white'}} align="center">Coloque os dados do banco e crie seu perfil</Label>
-              </Box>
-              <Box pad="medium" align="center">
-                <img src={'img/landing-section3-img2.png'} />
-                <Label style={{maxWidth:'200px', fontWeight:'bold', color:'white'}} align="center">Determine suas motivações e o valor delas</Label>
-              </Box>
-              <Box pad="medium" align="center">
-                <img src={'img/landing-section3-img3.png'} />
-                <Label style={{maxWidth:'200px', fontWeight:'bold', color: 'white'}} align="center">PAG$ possui um sistema inteligente que sugere os melhores investimentos para você</Label>
-              </Box>
-            </Box>
-          </Section>
+          <HomeAdvantages />
           <Section
             justify="center"
             direction="row"
