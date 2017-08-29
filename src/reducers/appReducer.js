@@ -122,6 +122,22 @@ const ACTION_HANDLER = {
         )
       }
     )
+  },
+  [actions.RECEIVE_EXTRATO]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        extrato: action.extrato
+      }
+    )
+  },
+  [actions.CLEAR_EXTRATO]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        extrato: false
+      }
+    )
   }
 };
 
