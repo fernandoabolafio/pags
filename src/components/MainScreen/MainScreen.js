@@ -8,6 +8,7 @@ import Label from 'grommet/components/Label';
 import Value from 'grommet/components/Value';
 import Image from 'grommet/components/Image';
 import Button from 'grommet/components/Button';
+import Spinning from 'grommet/components/icons/Spinning';
 import Anchor from 'grommet/components/Anchor';
 import AnnotatedMeter from 'grommet-addons/components/AnnotatedMeter';
 import AddIcon from 'grommet/components/icons/base/Add';
@@ -61,12 +62,15 @@ export default class MainScreen extends React.Component {
         acumulado: 1,
         valor: 10000
       }
-    ]
+    ],
+    hasInvestidorInfo: false
   };
   componentWillReceiveProps(nextProps) {
-    // if(!this.props.activeUser && nextProps.activeUser) {
-    //   this.props.fetchInvestidorInfo();
-    // }
+    if(!this.props.investidorInfo && nextProps.investidorInfo) {
+      this.setState({
+        hasInvestidorInfo: true
+      })
+    }
   }
 
   componentDidMount() {
@@ -79,10 +83,10 @@ export default class MainScreen extends React.Component {
     this.setState({selection});
   }
   onDeselectObjetivo = () => {
-    this.setState({selection: undefined, addObjetivo: undefined});
+    this.setState({selection: undefined, addObj: undefined});
   }
   onClickAddObjetivo = () => {
-    this.setState({addObjetivo: true})
+    this.setState({addObj: true})
   }
   onSortEnd = ({oldIndex, newIndex}) => {
     this.setState({
@@ -90,18 +94,27 @@ export default class MainScreen extends React.Component {
     });
   };
   render() {
-    let cpuData = [
-      {value: 510, label: 'CDB', colorIndex: 'accent-1',
-        onClick: () => console.log('CDB')},
-      {value: 42, label: 'LCI', colorIndex: 'accent-2',
-        onClick: () => console.log('LCI')},
-      {value: 55, label: 'LCA', colorIndex: 'neutral-2',
-        onClick: () => console.log('LCA')},
-      {value: 55, label: 'Fundo', colorIndex: 'neutral-3',
-        onClick: () => console.log('Fundo')}
-    ];
-    const {small} = this.props;
-    const {selection, addObjetivo, objetivos} = this.state;
+    console.log(this.props)
+    const {small, addObjetivo, editObjetivo, removeObjetivo} = this.props;
+    const {selection, addObj, objetivos, hasInvestidorInfo} = this.state;
+    let investidorInfo;
+    let investimentos;
+    let investimentosData;
+    if (this.props.investidorInfo && hasInvestidorInfo) {
+      investidorInfo = this.props.investidorInfo;
+      investimentos = investidorInfo.posicao_consolidada.investimentos;
+      investimentosData = investimentos.map((investimento, index) => {
+        return (
+          {
+            label: investimento.nome,
+            value: investimento.saldo,
+            colorIndex: `graph-${index}`,
+            onClick: () => console.log(investimento.nome)
+          }
+        );
+      })
+    }
+
     let layer;
 
     if (selection >= 0) {
@@ -110,21 +123,23 @@ export default class MainScreen extends React.Component {
           onClose={this.onDeselectObjetivo}
           a11yTitle='Detalhes do objetivo'
         >
-          <ViewObjetivoLayerContent objetivo={objetivos[selection]}/>
+          <ViewObjetivoLayerContent objetivo={objetivos[selection]} small={small} editObjetivo={editObjetivo} />
         </Layer>
       )
-    } else if (addObjetivo) {
+    } else if (addObj) {
       layer = (
         <Layer
           onClose={this.onDeselectObjetivo}
           a11yTitle='Adicionar objetivo'
         >
-          <AddObjetivoLayerContent />
+          <AddObjetivoLayerContent small={small} addObjetivo={addObjetivo} />
         </Layer>
       )
     }
 
-    return (
+
+    return hasInvestidorInfo ?
+    (
       <div>
         <Section>
           <Box direction='row'>
@@ -170,7 +185,7 @@ export default class MainScreen extends React.Component {
                     </div>
                   }
                 />
-                <Pags />
+                <Pags size={small ? 'small' : 'medium'}/>
               </Card>
             </Box>
             <Box style={{backgroundColor: 'white', width: small ? '' : '65%'}}  margin={small ? 'medium' : {left: 'small', right: 'medium'}}>
@@ -188,7 +203,7 @@ export default class MainScreen extends React.Component {
                   </div>
                   }
               >
-                <Objetivos onSelectObjetivo={this.onSelectObjetivo} onSortEnd={this.onSortEnd} objetivos={objetivos} />
+                <Objetivos onSelectObjetivo={this.onSelectObjetivo} small={small} onSortEnd={this.onSortEnd} objetivos={objetivos} />
               </Card>
             </Box>
           </Box>
@@ -204,7 +219,7 @@ export default class MainScreen extends React.Component {
               >
                 <Box align='center'>
                   <AnnotatedMeter type="circle" legend={true} units="R$"
-                    size={small ? 'medium' : 'medium'}  series={cpuData} />
+                    size={small ? 'medium' : 'medium'}  series={investimentosData} />
                 </Box>
               </Card>
             </Box>
@@ -224,7 +239,8 @@ export default class MainScreen extends React.Component {
           </Box>
         </Section>
         {layer}
+        }
       </div>
-    );
+    ) : <Spinning size='large' />
   }
 }

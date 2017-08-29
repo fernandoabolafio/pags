@@ -9,46 +9,72 @@ import Heading from 'grommet/components/Heading';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
 
-export default class ViewObjetivoLayerContent extends React.Component {
+export default class AddObjetivoLayerContent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nome: '',
+      valor: '',
+      previsao_de_termino: '',
+      descricao: ''
+    }
+  }
+
+  handleInputChange = (event) => {
+    const {value, name} = event.target;
+    this.setState({
+      [name]: value
+    });
+  }
+
+  onSubmit = () => {
+    console.log(this.state);
+    this.props.addObjetivo(this.state);
+    this.props.onClose();
+  }
+
   render() {
-    const {onClose} = this.props;
+    const {nome, valor, previsao_de_termino, descricao} = this.state;
+    const {onClose, small} = this.props;
     return (
-      <Article pad={{vertical: 'small', between: 'small'}} >
-      <Heading tag="h2" margin="none">Adicionar Objetivo</Heading>
-      <Section style={{minHeight: '480px', minWidth: '548px'}}>
-        <Box direction='column'>
-          <Form pad={{vertical: 'medium'}} >
-            <Box pad={{between: 'medium'}}>
-              <FormField
-                label='Nome'
-              >
-                <TextInput />
-              </FormField>
-              <FormField
-                label='Valor'
-              >
-                <TextInput />
-              </FormField>
-              <FormField
-                label='Previsão de término'
-              >
-                <TextInput />
-              </FormField>
-              <FormField
-                label='Descrição'
-              >
-                <textarea
-                  type='text'
-                />
-              </FormField>
-              <Box direction='row' justify='end' responsive={false}>
-                <Button primary onClick={onClose} label='Adicionar' />
-              </Box>
+      <Section style={ small ? {} : {minHeight: '480px', minWidth: '548px'}}>
+      <Heading tag="h3" margin="none">Adicionar Objetivo</Heading>
+      <Box direction='column'>
+        <Form pad={{vertical: 'medium'}}>
+          <Box pad={{between: 'medium'}}>
+            <FormField
+              label='Nome'
+            >
+              <TextInput name='nome' value={nome} onDOMChange={this.handleInputChange} />
+            </FormField>
+            <FormField
+              label='Valor'
+            >
+              <TextInput name='valor' value={valor} onDOMChange={this.handleInputChange} />
+            </FormField>
+            <FormField
+              label='Previsão de término'
+            >
+              <TextInput name='previsao_de_termino' value={previsao_de_termino} onDOMChange={this.handleInputChange}/>
+            </FormField>
+            <FormField
+              label='Descrição'
+
+            >
+              <textarea
+                onChange={this.handleInputChange}
+                name='descricao'
+                type='text'
+                value={descricao}
+              />
+            </FormField>
+            <Box direction='row' justify='end' responsive={false}>
+              <Button type='button' primary onClick={this.onSubmit} label='Adicionar' />
             </Box>
-          </Form>
-        </Box>
-      </Section>
-     </Article>
+          </Box>
+        </Form>
+      </Box>
+    </Section>
     )
   }
 }

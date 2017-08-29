@@ -18,25 +18,51 @@ import TrashIcon from 'grommet/components/icons/base/Trash';
 import FormPreviousLink from 'grommet/components/icons/base/FormPreviousLink';
 
 export default class ViewObjetivoLayerContent extends React.Component {
-  state = {
-    section: 'editar'
-  };
+  constructor(props) {
+    super(props);
+    const {objetivo} = this.props;
+    this.state = {
+      section: 'editar',
+      form: {
+        descricao: objetivo.descricao
+      }
+    };
+  }
+
   onExcluirClick = () => {
     this.setState({ section: 'excluir' })
   }
+
   onBackClick = () => {
     this.setState({ section: 'editar' })
   }
+
   onMotivoClick = () => {
     this.setState({ section: 'motivo' })
   }
+
+  handleInputChange = (event) => {
+    const {value, name} = event.target;
+    this.setState({
+      form: {
+        [name]: value
+      }
+    });
+  }
+
+  onSubmit = () => {
+    console.log(this.state);
+    this.props.editObjetivo(this.state.form);
+    this.props.onClose();
+  }
   render() {
     const { section } = this.state;
-    const { onClose, objetivo } = this.props;
+    const { descricao } = this.state.form;
+    const { onClose, objetivo, small } = this.props;
     const layerContent = {
       motivo: () => {
         return (
-          <Section style={{minHeight: '480px', minWidth: '548px'}}>
+          <Section style={ small ? {} : {minHeight: '480px', minWidth: '548px'}}>
             <Heading tag='h3' align='center'>
               Por que está excluindo esse objetivo?
             </Heading>
@@ -67,7 +93,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
             <Box flex='grow' justify='end'>
               <Box direction='row' justify='center' pad={{between: 'medium'}} responsive={false}>
                 <Button primary onClick={this.onBackClick} label='Mudei de ideia' />
-                <Button secondary onClick={onClose} label='Enviar e excluir' />
+                <Button secondary onClick={onClose} label='Excluir' />
               </Box>
             </Box>
           </Section>
@@ -75,7 +101,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
       },
       excluir: () => {
         return (
-          <Section style={{minHeight: '480px', minWidth: '548px'}}>
+          <Section style={ small ? {} : {minHeight: '480px', minWidth: '548px'}}>
             <Heading tag='h3' align='center'>
               Tem certeza que deseja excluir esse objetivo?
             </Heading>
@@ -102,7 +128,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
       },
       editar: () => {
         return (
-          <Section style={{minHeight: '480px', minWidth: '548px'}}>
+          <Section style={ small ? {} : {minHeight: '480px', minWidth: '548px'}}>
             <Box direction='column'>
               <Label margin='small'>
                 Adicionado em: {objetivo.criado}
@@ -136,8 +162,10 @@ export default class ViewObjetivoLayerContent extends React.Component {
                   label='Descrição'
                 >
                   <textarea
+                    onChange={this.handleInputChange}
+                    name='descricao'
                     type="text"
-                    value={objetivo.descricao}
+                    value={descricao}
                   />
                 </FormField>
               </Box>
@@ -145,7 +173,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
             <Box flex='grow' justify='end'>
               <Box direction='row' justify='center' pad={{between: 'medium'}} responsive={false}>
                 <Button critical onClick={this.onExcluirClick} icon={<TrashIcon size='small' />} label='Excluir' />
-                <Button primary onClick={onClose} label='Salvar' />
+                <Button primary onClick={this.onSubmit} label='Salvar' />
               </Box>
             </Box>
           </Section>
@@ -154,7 +182,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
     }
     return (
       <Article pad={{vertical: 'small', between: 'small'}} >
-      <Heading tag="h2" margin="none">Nome Objetivo</Heading>
+      <Heading tag="h2" margin="none">{objetivo.nome}</Heading>
       {layerContent[section]()}
      </Article>
     )
