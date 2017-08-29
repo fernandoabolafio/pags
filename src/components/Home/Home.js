@@ -93,12 +93,12 @@ export default class Home extends React.Component {
               <Box pad="medium" align="center">
                 <Heading style={{fontSize: '22px'}} strong={true}>3. Receba sugestões</Heading>
                 <Image size="small" src={'img/landing-section2-img3.png'} />
-                <Label style={{maxWidth:'200px'}} align="center">PAG$ possui um sistema inteligente que sugere os melhores investimentos para você</Label>
+                <Label style={{maxWidth:'200px'}} align="center">Receba sugestões dos melhores investimos</Label>
               </Box>
               <Box pad="medium" align="center">
                 <Heading style={{fontSize: '22px'}} strong={true}>4. Invista</Heading>
                 <Image size="small" src={'img/landing-section2-img4.png'} />
-                <Label style={{maxWidth:'200px'}} align="center">Determine os valores mensais que vão da sua conta para o investimento de forma automática</Label>
+                <Label style={{maxWidth:'200px'}} align="center">Defina investimentos mensais automáticos</Label>
               </Box>
             </Box>
             <Box align="center">
