@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from 'grommet/components/Button';
 import Section from 'grommet/components/Section';
 import Heading from 'grommet/components/Heading';
 import Label from 'grommet/components/Label';
@@ -8,7 +7,7 @@ import Image from 'grommet/components/Image';
 
 import { sectionStyle, colors } from '../../constants/styles';
 
-const BannerHome = () => {
+const HomeBanner = () => {
   const boxStyles = {
     padding: '0 50px',
     justifyContent: 'center',
@@ -48,4 +47,4 @@ const BannerHome = () => {
   )
 }
 
-export default BannerHome;
+export default HomeBanner;
