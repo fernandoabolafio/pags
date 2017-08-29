@@ -190,7 +190,7 @@ export default class MeuInvestimento extends React.Component {
     return (
       <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
         <Box size="medium" align="center">
-          <Anchor primary onClick={() => this.props.goToMain()} icon={<FormPreviousLink />} label="Voltar" />,
+          <Anchor primary onClick={() => this.props.goToMain()} icon={<FormPreviousLink />} label="Voltar" />
           {
             this.state.investimento ?
             <Box align="center" pad="medium" style={{backgroundColor: 'white', width: '100%'}}>
@@ -202,7 +202,7 @@ export default class MeuInvestimento extends React.Component {
               <Label>Data de ínicio do extrato:</Label>
               <DateTime id='id'
                         name='name'
-                        format='D/M'
+                        format='D/M/YYYY'
                         value={this.state.inputs.data}
                         onChange={(value) => this.setValue(value, 'data')}
                 />
