@@ -142,15 +142,15 @@ export default class Inventario extends React.Component {
       '4': 'Money Maker'
     }
     return (
-      <Section>
-        <Box direction='row'>
-          <Box style={{backgroundColor: 'white', width: small ? '' : '30%'}} margin={small ? 'medium' : {left: 'medium', right: 'small'}} pad='medium'>
+      <Section style={{flexShrink: '0'}}>
+        <Box direction='row' style={{flexShrink:'0'}}>
+          <Box style={{backgroundColor: 'white', width: small ? '' : '30%', flexShrink: '0', minHeight: '360px'}} margin={small ? 'medium' : {left: 'medium', right: 'small'}} pad='medium'>
             <Heading tag='h2'>
               Seu Pag$
             </Heading>
-            <div style={{height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+            <Box style={{height: "100%"}} justify="center">
               <Pags src={acessoriosSrc[activeAcessorio]} size={small ? 'small' : 'medium'} />
-            </div>
+            </Box>
           </Box>
           <Box style={{backgroundColor: 'white', width: small ? '' : '70%'}} margin={small ? 'medium' : {left: 'small', right: 'medium'}} pad='medium'>
               <Heading tag='h2'>
