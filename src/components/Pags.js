@@ -5,7 +5,7 @@ import pagsWelcome from '../assets/pags_welcome.png';
 
 const Pags = ({src, size}) =>
   <Box align='center'>
-    <Image id='pags' size={size} style={{maxWidth: '250px', maxHeight: '370px'}} src={src || pagsWelcome} />
+    <Image id='pags' size={size} style={{maxWidth: '220px', maxHeight: '330px'}} src={src || pagsWelcome} />
   </Box>
 
 export default Pags;

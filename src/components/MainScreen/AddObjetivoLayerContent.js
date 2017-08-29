@@ -15,7 +15,7 @@ export default class AddObjetivoLayerContent extends React.Component {
     this.state = {
       nome: '',
       valor: '',
-      previsao_de_termino: '',
+      conclusaoEstimada: '',
       descricao: ''
     }
   }
@@ -34,7 +34,7 @@ export default class AddObjetivoLayerContent extends React.Component {
   }
 
   render() {
-    const {nome, valor, previsao_de_termino, descricao} = this.state;
+    const {nome, valor, conclusaoEstimada, descricao} = this.state;
     const {onClose, small} = this.props;
     return (
       <Section style={ small ? {} : {minHeight: '480px', minWidth: '548px'}}>
@@ -55,7 +55,7 @@ export default class AddObjetivoLayerContent extends React.Component {
             <FormField
               label='Previsão de término'
             >
-              <TextInput name='previsao_de_termino' value={previsao_de_termino} onDOMChange={this.handleInputChange}/>
+              <TextInput name='conclusaoEstimada' value={conclusaoEstimada} onDOMChange={this.handleInputChange}/>
             </FormField>
             <FormField
               label='Descrição'

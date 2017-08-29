@@ -189,7 +189,7 @@ export default class MeuInvestimento extends React.Component {
   render() {
     return (
       <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
-        <Box size="medium">
+        <Box size="medium" align="center">
           <Anchor primary onClick={() => this.props.goToMain()} icon={<FormPreviousLink />} label="Voltar" />,
           {
             this.state.investimento ?

@@ -10,20 +10,34 @@ import Image from 'grommet/components/Image';
 import Paragraph from 'grommet/components/Paragraph';
 import Pags from '../Pags';
 import TipBubble from '../TipBubble';
-import acessorio00 from '../../assets/acessorio00.png'
-import acessorio01 from '../../assets/acessorio01.png'
-import acessorio02 from '../../assets/acessorio02.png'
-import acessorio03 from '../../assets/acessorio03.png'
-import acessorio04 from '../../assets/acessorio04.png'
-import acessorio05 from '../../assets/acessorio05.png'
-import acessorio06 from '../../assets/acessorio06.png'
-import acessorio07 from '../../assets/acessorio07.png'
-import acessorio08 from '../../assets/acessorio08.png'
-import acessorio09 from '../../assets/acessorio09.png'
-import acessorio10 from '../../assets/acessorio10.png'
+import acessorio00 from '../../assets/acessorio00.png';
+import acessorio01 from '../../assets/acessorio01.png';
+import acessorio02 from '../../assets/acessorio02.png';
+import acessorio03 from '../../assets/acessorio03.png';
+import acessorio04 from '../../assets/acessorio04.png';
+import acessorio05 from '../../assets/acessorio05.png';
+import acessorio06 from '../../assets/acessorio06.png';
+import acessorio07 from '../../assets/acessorio07.png';
+import acessorio08 from '../../assets/acessorio08.png';
+import acessorio09 from '../../assets/acessorio09.png';
+import acessorio10 from '../../assets/acessorio10.png';
+
+const acessoriosSrc = {
+  [0]: acessorio00,
+  [1]: acessorio01,
+  [2]: acessorio02,
+  [3]: acessorio03,
+  [4]: acessorio04,
+  [5]: acessorio05,
+  [6]: acessorio06,
+  [7]: acessorio07,
+  [8]: acessorio08,
+  [9]: acessorio09,
+  [10]: acessorio10
+}
 
 export default class Inventario extends React.Component {
-  acessoriosContent = (acessorios, small) => {
+  acessoriosContent = (acessorios, small, changeAcessorio) => {
     const style = {
       notSelected: {
         conquered: {
@@ -52,11 +66,11 @@ export default class Inventario extends React.Component {
               align='center'
               pad={{vertical: 'small', horizontal: 'medium'}}
               margin={small ? 'medium' : 'small'}
-              onClick={acessorio.isConquered ? () => console.log('oi') : null}
+              onClick={acessorio.isConquered ? () => changeAcessorio(acessorio.id) : null}
               colorIndex={acessorio.isConquered ? 'light-1' : 'unknown'}
               style={acessorio.selected ? style.selected : style.notSelected[acessorio.isConquered ? 'conquered' : 'notConquered']}
             >
-              <Image id={`acessorio-${index}`} size='small' src={acessorio.src} style={{maxWidth: '165px', maxHeight: '240px'}}
+              <Image id={`acessorio-${index}`} size='small' src={acessoriosSrc[acessorio.id]} style={{maxWidth: '165px', maxHeight: '240px'}}
               />
               <Label align='center' margin={{bottom: '0'}} style={acessorio.selected ? {color: '#865cd6'} : {}}>{acessorio.text}</Label>
             </Box>
@@ -65,7 +79,7 @@ export default class Inventario extends React.Component {
       </div>
   )}
 
-  rightContent = (small, nivel, title, exp) =>{
+  rightContent = (small, nivel, title, exp) => {
     const completo = exp === 100 ? '1' : '2'
     const text = {
       '1': {
@@ -119,26 +133,14 @@ export default class Inventario extends React.Component {
 }
 
   render() {
-    const {small} = this.props;
+    const {small, pagsAcessorios, changeAcessorio} = this.props;
+    const activeAcessorio = pagsAcessorios.filter(acessorio => acessorio.selected)[0].id;
     const title = {
       '1': 'Junior',
       '2': 'Entusiasta',
       '3': 'Master',
       '4': 'Money Maker'
     }
-    const acessorios = [
-      { src: acessorio00, text: 'Cadastre-se', isConquered: true, selected: true },
-      { src: acessorio01, text: 'Faça o tutorial', isConquered: true, selected: false },
-      { src: acessorio02, text: 'Crie seu primeiro objetivo', isConquered: true, selected: false },
-      { src: acessorio03, text: 'Realize seu primeiro investimento', isConquered: true, selected: false },
-      { src: acessorio04, text: 'Invista por 3 meses', isConquered: true, selected: false },
-      { src: acessorio05, text: 'Invista por 6 meses', isConquered: false, selected: false },
-      { src: acessorio06, text: 'Invista por 1 ano', isConquered: false, selected: false },
-      { src: acessorio07, text: 'Invista em ações', isConquered: false, selected: false },
-      { src: acessorio08, text: 'Assista sua primeira aula', isConquered: true, selected: false },
-      { src: acessorio09, text: 'Complete todas as aulas', isConquered: false, selected: false },
-      { src: acessorio10, text: 'Torne-se um Money Maker', isConquered: false, selected: false }
-    ]
     return (
       <Section>
         <Box direction='row'>
@@ -147,7 +149,7 @@ export default class Inventario extends React.Component {
               Seu Pag$
             </Heading>
             <div style={{height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-              <Pags src={acessorio08} size={small ? 'small' : 'medium'} />
+              <Pags src={acessoriosSrc[activeAcessorio]} size={small ? 'small' : 'medium'} />
             </div>
           </Box>
           <Box style={{backgroundColor: 'white', width: small ? '' : '70%'}} margin={small ? 'medium' : {left: 'small', right: 'medium'}} pad='medium'>
@@ -190,7 +192,7 @@ export default class Inventario extends React.Component {
                 Acessórios
               </Heading>
             }>
-            {this.acessoriosContent(acessorios, small)}
+            {this.acessoriosContent(pagsAcessorios, small, changeAcessorio)}
           </Card>
         </Box>
       </Section>

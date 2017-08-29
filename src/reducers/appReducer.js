@@ -1,7 +1,7 @@
 import { updateObject, updateItemInArrayById } from '../support/objectUtils';
 import lsUtils from '../support/localStorageUtils';
 import { actions } from '../actions/actions';
-
+import {arrayMove} from 'react-sortable-hoc';
 
 const initialState = {
   activeUser: {
@@ -136,6 +136,62 @@ const ACTION_HANDLER = {
       state,
       {
         extrato: false
+      }
+    )
+  },
+  [actions.CHANGE_ACESSORIO]: (state, action) => {
+    const newPagsAcessorio = state.activeUser.pagsAcessorios.map((acessorio, index) => {
+      return {
+        ...acessorio,
+        selected: acessorio.id === action.acessorioId ? true : false
+      };
+    })
+    return updateObject(
+      state,
+      {
+        activeUser: updateObject(
+          state.activeUser,
+          {
+            pagsAcessorios: newPagsAcessorio
+          }
+        )
+      }
+    );
+  },
+  [actions.CONQUER_ACESSORIO]: (state, action) => {
+    const newPagsAcessorio = state.activeUser.pagsAcessorios.map((acessorio, index) => {
+      let isConquered = acessorio.isConquered;
+      if (acessorio.id === action.acessorioId) {
+        isConquered = true;
+      }
+      return {
+        ...acessorio,
+        isConquered
+      };
+    });
+    return updateObject(
+      state,
+      {
+        activeUser: updateObject(
+          state.activeUser,
+          {
+            pagsAcessorios: newPagsAcessorio
+          }
+        )
+      }
+    );
+  },
+
+  [actions.ORDER_OBJETIVO]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        activeUser: updateObject(
+          state.activeUser,
+          {
+            objetivos: arrayMove(state.activeUser.objetivos, action.index.oldIndex, action.index.newIndex)
+          }
+        )
       }
     )
   }
