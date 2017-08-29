@@ -7,7 +7,7 @@ const itauUsers = [
       { id: 0, text: 'Cadastre-se', isConquered: true, selected: true },
       { id: 1, text: 'Faça o tutorial', isConquered: false, selected: false },
       { id: 2, text: 'Crie seu primeiro objetivo', isConquered: true, selected: false },
-      { id: 3, text: 'Realize seu primeiro investimento', isConquered: false, selected: false },
+      { id: 3, text: 'Realize seu primeiro investimento com Pasg$', isConquered: false, selected: false },
       { id: 4, text: 'Invista por 3 meses', isConquered: true, selected: false },
       { id: 5, text: 'Invista por 6 meses', isConquered: true, selected: false },
       { id: 6, text: 'Invista por 1 ano', isConquered: false, selected: false },
@@ -28,7 +28,7 @@ const itauUsers = [
       {
         id: 2,
         nome: 'Cirurgia',
-        criado: '10/6/2017/',
+        criado: '10/6/2017',
         valor: 30000,
         conclusaoEstimada: '10/6/2020',
         descricao: 'Cirurgia de joelho da mamis'
@@ -42,6 +42,13 @@ const itauUsers = [
         descricao: 'Moveis sob encomenda para o novo AP'
       }
     ],
+    novaRecompensa: {
+      active: false,
+      acessorio: {
+        id: 0,
+        motivo: 'completou seu cadastro'
+      }
+    },
     dica: {
       greeting: 'Quase lá!',
       mensagem: 'Para completar todos seus sonhos economize R$5mil por 3 anos e invista em:',
@@ -61,7 +68,7 @@ const itauUsers = [
       { id: 0, text: 'Cadastre-se', isConquered: true, selected: true },
       { id: 1, text: 'Faça o tutorial', isConquered: false, selected: false },
       { id: 2, text: 'Crie seu primeiro objetivo', isConquered: true, selected: false },
-      { id: 3, text: 'Realize seu primeiro investimento', isConquered: false, selected: false },
+      { id: 3, text: 'Realize seu primeiro investimento com Pasg$', isConquered: false, selected: false },
       { id: 4, text: 'Invista por 3 meses', isConquered: true, selected: false },
       { id: 5, text: 'Invista por 6 meses', isConquered: true, selected: false },
       { id: 6, text: 'Invista por 1 ano', isConquered: false, selected: false },
@@ -104,6 +111,13 @@ const itauUsers = [
         descricao: 'Casa com varanda em Minas Gerais'
       }
     ],
+    novaRecompensa: {
+      active: false,
+      acessorio: {
+        id: 0,
+        motivo: 'completou seu cadastro'
+      }
+    },
     dica: {
       greeting: 'Quase lá!',
       mensagem: 'Para completar todos os seus sonhos economize R$17mil por 4 anos ou invista R$10mil por ano em',
@@ -123,7 +137,7 @@ const itauUsers = [
       { id: 0, text: 'Cadastre-se', isConquered: true, selected: true },
       { id: 1, text: 'Faça o tutorial', isConquered: false, selected: false },
       { id: 2, text: 'Crie seu primeiro objetivo', isConquered: true, selected: false },
-      { id: 3, text: 'Realize seu primeiro investimento', isConquered: false, selected: false },
+      { id: 3, text: 'Realize seu primeiro investimento com Pasg$', isConquered: false, selected: false },
       { id: 4, text: 'Invista por 3 meses', isConquered: true, selected: false },
       { id: 5, text: 'Invista por 6 meses', isConquered: true, selected: false },
       { id: 6, text: 'Invista por 1 ano', isConquered: false, selected: false },
@@ -174,6 +188,13 @@ const itauUsers = [
         descricao: 'Casamento na praia (Maresias) com minha amada'
       }
     ],
+    novaRecompensa: {
+      active: false,
+      acessorio: {
+        id: 0,
+        motivo: 'completou seu cadastro'
+      }
+    },
     dica: {
       greeting: 'Quase lá!',
       mensagem: 'Para completar todos seus sonhos Economize R$9mil por 4 anos e invista em:',
@@ -197,7 +218,7 @@ const itauUsers = [
       { id: 0, text: 'Cadastre-se', isConquered: true, selected: true },
       { id: 1, text: 'Faça o tutorial', isConquered: false, selected: false },
       { id: 2, text: 'Crie seu primeiro objetivo', isConquered: true, selected: false },
-      { id: 3, text: 'Realize seu primeiro investimento', isConquered: false, selected: false },
+      { id: 3, text: 'Realize seu primeiro investimento com Pasg$', isConquered: false, selected: false },
       { id: 4, text: 'Invista por 3 meses', isConquered: true, selected: false },
       { id: 5, text: 'Invista por 6 meses', isConquered: true, selected: false },
       { id: 6, text: 'Invista por 1 ano', isConquered: false, selected: false },
@@ -240,6 +261,13 @@ const itauUsers = [
         descricao: 'Limpeza de pele, clareamento de dente e botox no queixo'
       }
     ],
+    novaRecompensa: {
+      active: false,
+      acessorio: {
+        id: 0,
+        motivo: 'completou seu cadastro'
+      }
+    },
     dica: {
       greeting: 'Parabens!',
       mensagem: 'Com essa carteira você realiza seus sonhos e ainda terá R$50mil a mais'

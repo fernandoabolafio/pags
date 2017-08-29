@@ -1,10 +1,10 @@
 import React from 'react';
-import Timestamp from 'grommet/components/Timestamp';
 import Form from 'grommet/components/Form';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
-import Article from 'grommet/components/Article';
 import Section from 'grommet/components/Section';
+import NumberInput from 'grommet/components/NumberInput';
+import DateTime from 'grommet/components/DateTime';
 import Heading from 'grommet/components/Heading';
 import Box from 'grommet/components/Box';
 import Button from 'grommet/components/Button';
@@ -14,7 +14,7 @@ export default class AddObjetivoLayerContent extends React.Component {
     super(props);
     this.state = {
       nome: '',
-      valor: '',
+      valor: 0,
       conclusaoEstimada: '',
       descricao: ''
     }
@@ -27,6 +27,19 @@ export default class AddObjetivoLayerContent extends React.Component {
     });
   }
 
+  handleDataChange = (value) => {
+    this.setState({
+      conclusaoEstimada: value
+    });
+  }
+
+  handleValueChange = (event) => {
+    const {value} = event.target;
+    this.setState({
+      valor: value
+    });
+  }
+
   onSubmit = () => {
     console.log(this.state);
     this.props.addObjetivo(this.state);
@@ -35,7 +48,7 @@ export default class AddObjetivoLayerContent extends React.Component {
 
   render() {
     const {nome, valor, conclusaoEstimada, descricao} = this.state;
-    const {onClose, small} = this.props;
+    const {small} = this.props;
     return (
       <Section style={ small ? {} : {minHeight: '480px', minWidth: '548px'}}>
       <Heading tag="h3" margin="none">Adicionar Objetivo</Heading>
@@ -50,12 +63,16 @@ export default class AddObjetivoLayerContent extends React.Component {
             <FormField
               label='Valor'
             >
-              <TextInput name='valor' value={valor} onDOMChange={this.handleInputChange} />
+              <NumberInput name='valor' step={10} value={valor} onChange={(event) => this.handleValueChange(event)} />
             </FormField>
             <FormField
               label='Previsão de término'
             >
-              <TextInput name='conclusaoEstimada' value={conclusaoEstimada} onDOMChange={this.handleInputChange}/>
+              <DateTime id='id'
+                name='conclusaoEstimada'
+                format='D/M/YYYY'
+                value={conclusaoEstimada}
+                onChange={(value) => this.handleDataChange(value)} />
             </FormField>
             <FormField
               label='Descrição'

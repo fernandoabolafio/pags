@@ -142,7 +142,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
                 Adicionado em: {objetivo.criado}
               </Label>
               <Label margin='small'>
-                Previsão de término: {objetivo.conclusaoEstimada}
+                Previsão de término: {objetivo.conclusaoEstimada === '_sempre_' ? 'Sem data específica' : objetivo.conclusaoEstimada}
               </Label>
             </Box>
             <Box direction='column' style={{maxWidth: '193px'}} margin={{top: 'medium', bottom: 'none'}}>
