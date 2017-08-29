@@ -1,0 +1,23 @@
+@import 'grommet/scss/vanilla/index.scss';
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.x {
+ display: none;
+}
+
+$brand-color: #FFAB00;
+$brand-neutral-colors: (#0A64A0, #DC2878, #501EB4, #49516F);
+$brand-accent-colors: (#00CCEB, #FF7D28);
+$brand-link-color: #C67C00;
+
+$brand-grey-colors: (#000001, #333333, #3B3B3B, #434343, #666666);
+
+$button-secondary-color: nth($brand-neutral-colors, 2);
+
+$brand-font-family: 'Work Sans', Arial, sans-serif;
+$brand-large-number-font-family: 'Work Sans', Arial, sans-serif;
+$code-font-family: Consolas, Menlo, 'DejaVu Sans Mono', 'Liberation Mono', monospace;
+$text-strong-font-weight: 500;
