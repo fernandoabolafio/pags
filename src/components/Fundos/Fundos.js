@@ -223,12 +223,13 @@ export default class Fundos extends React.Component {
   }
 
   getContent = () => {
+    const {small} = this.props;
     const {section} = this.state;
     const mapSectionToContent = {
       [sections.RECOMENDADOS]: [
         <Box direction="row" margin="small">
           <Anchor primary onClick={() => this.handleSetSection(sections.SEARCH)} icon={<Search />} label="Buscar Investimento" />
-          <span style={{padding:"0 10px"}}>|</span>
+          <span style={{padding:"0 10px"}}>{small ? "" : "|"}</span>
           <Anchor primary onClick={() => this.handleSetSection(sections.CARTEIRA)} icon={<Catalog />} label="Carteira de investimento" />
         </Box>,
         this.renderHeading('Investimentos Recomendados'),
