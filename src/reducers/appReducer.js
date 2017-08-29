@@ -4,7 +4,9 @@ import { actions } from '../actions/actions';
 
 
 const initialState = {
-  activeUser: false,
+  activeUser: {
+    objetivos: []
+  },
   opcoesDeInvestimento: {}
 };
 
@@ -75,7 +77,7 @@ const ACTION_HANDLER = {
   },
   [actions.ADD_OBJETIVO]: (state, action) => {
     const {objetivos} = state.activeUser;
-    const newObjetivos = objetivos && objetivos.length > 0 ? objetivos.push(action.data) : [action.data];
+    const newObjetivos = objetivos.concat([action.data]);
     return updateObject(
       state,
       {
