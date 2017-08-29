@@ -78,7 +78,7 @@ export default class MainScreen extends React.Component {
 
   render() {
     const {small, addObjetivo, editObjetivo, removeObjetivo, pagsAcessorios, rawObjetivos, orderObjetivos} = this.props;
-    const activeAcessorio = pagsAcessorios.filter(acessorio => acessorio.selected)[0].id;
+    const activeAcessorio = pagsAcessorios? pagsAcessorios.filter(acessorio => acessorio.selected)[0].id : 'none';
     const {selection, addObj, hasInvestidorInfo} = this.state;
 
     let investidorInfo;
