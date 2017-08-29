@@ -221,12 +221,17 @@ export default class Fundos extends React.Component {
           } = carteiraRecomendada;
     const items = produtosRecomendados.map( produto =>
       (<ListItem justify="between">
-        <Label>{produto.nome_comercial}</Label>
+        <Box style={{maxWidth: '100px'}}>
+          <Label>{produto.nome_comercial}</Label>
+        </Box>
         <Box>
         <Value value={produto.percentual_investimento_sugerido}
           units='%'
           align='start' />
         <Meter value={produto.percentual_investimento_sugerido}/>
+        </Box>
+        <Box>
+          <Anchor primary icon={<FormNextLink />} onClick={() => this.props.seeMoreInvestimento(produto.codigo_produto)} label="Aplicar"/>
         </Box>
       </ListItem>)
     );

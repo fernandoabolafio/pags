@@ -13,7 +13,7 @@ export default class Entenda extends React.Component {
     return (
       <Layer>
         <Section>
-          <Box align="end">
+          <Box align="end" >
             <Anchor  onClick={this.props.onClose} icon={<Close />} />,
           </Box>
           <Box align="center">
