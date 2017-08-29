@@ -9,7 +9,6 @@ import Value from 'grommet/components/Value';
 import Button from 'grommet/components/Button';
 import Spinning from 'grommet/components/icons/Spinning';
 import Anchor from 'grommet/components/Anchor';
-import AnnotatedMeter from 'grommet-addons/components/AnnotatedMeter';
 import AddIcon from 'grommet/components/icons/base/Add';
 import Layer from '../Layer';
 import ViewObjetivoLayerContent from './ViewObjetivoLayerContent';
@@ -17,6 +16,7 @@ import AddObjetivoLayerContent from './AddObjetivoLayerContent';
 import Objetivos from './Objetivos';
 import Pags from '../Pags';
 import TipBubble from '../TipBubble';
+import AnnotatedMeter from '../AnnotatedMeter';
 import acessorio00 from '../../assets/acessorio00.png';
 import acessorio01 from '../../assets/acessorio01.png';
 import acessorio02 from '../../assets/acessorio02.png';
@@ -83,7 +83,7 @@ export default class MainScreen extends React.Component {
 
     let investidorInfo;
     let investimentos;
-    let investimentosData;
+    let investimentosData = [];
     let total;
     if (this.props.investidorInfo && hasInvestidorInfo) {
       investidorInfo = this.props.investidorInfo;
@@ -94,7 +94,7 @@ export default class MainScreen extends React.Component {
           {
             label: investimento.nome,
             value: investimento.saldo,
-            colorIndex: `graph-${index}`,
+            colorIndex: `graph-${index+1}`,
             onClick: () => this.props.seeMoreMeuInvestimento(investimento.codigo)
           }
         );
@@ -237,7 +237,6 @@ export default class MainScreen extends React.Component {
           </Box>
         </Section>
         {layer}
-        }
       </div>
     ) : <Spinning style={{position: 'absolute', top:'50%', left: '50%'}} size='large' />
   }
