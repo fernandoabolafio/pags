@@ -18,6 +18,7 @@ const itauUsers = [
     ],
     objetivos: [
       {
+        id: 1,
         nome: 'Emergência',
         criado: '10/10/2016',
         conclusaoEstimada: '10/10/2017',
@@ -25,6 +26,7 @@ const itauUsers = [
         descricao: 'Dinherio sempre disponível em caso de emergência',
       },
       {
+        id: 2,
         nome: 'Cirurgia',
         criado: '10/6/2017/',
         valor: 30000,
@@ -32,6 +34,7 @@ const itauUsers = [
         descricao: 'Cirurgia de joelho da mamis'
       },
       {
+        id: 3,
         nome: 'Novos Móveis',
         criado: '10/5/2017',
         valor: 20000,
@@ -69,6 +72,7 @@ const itauUsers = [
     ],
     objetivos: [
       {
+        id: 1,
         nome: 'Planos futuros',
         criado: '10/8/2016',
         conclusaoEstimada: '10/8/2017',
@@ -76,6 +80,7 @@ const itauUsers = [
         descricao: 'Talvez viajar, talvez comprar um carro. O tempo dirá.'
       },
       {
+        id: 2,
         nome: 'Bicileta',
         criado: '10/6/2016',
         conclusaoEstimada: '10/6/2017',
@@ -83,6 +88,7 @@ const itauUsers = [
         descricao: 'Bike para trilha'
       },
       {
+        id: 3,
         nome: 'Computador',
         criado: '10/6/2016',
         conclusaoEstimada: '10/6/2017',
@@ -90,6 +96,7 @@ const itauUsers = [
         descricao: 'Notebook Asus 73765 viper *-*'
       },
       {
+        id: 4,
         nome: 'Casa',
         criado: '10/8/2017',
         conclusaoEstimada: '10/8/2021',
@@ -127,6 +134,7 @@ const itauUsers = [
     ],
     objetivos: [
       {
+        id: 1,
         nome: 'Emergência',
         criado: '10/8/2017',
         conclusaoEstimada: '_sempre_',
@@ -134,6 +142,7 @@ const itauUsers = [
         descricao: 'Dinheiro sempre disponivel para emergências'
       },
       {
+        id: 2,
         nome: 'Notebook',
         criado: '10/8/2017',
         conclusaoEstimada: '10/8/2018',
@@ -141,6 +150,7 @@ const itauUsers = [
         descricao: 'Notebook Dell Rolanga Ross 73xWow'
       },
       {
+        id: 3,
         nome: 'Anel de noivado',
         criado: '10/8/2017',
         conclusaoEstimada: '10/08/2019',
@@ -148,6 +158,7 @@ const itauUsers = [
         descricao: 'Dinheiro sempre disponivel para emergências'
       },
       {
+        id: 4,
         nome: 'Carro',
         criado: '10/8/2017',
         conclusaoEstimada: '10/08/2020',
@@ -155,6 +166,7 @@ const itauUsers = [
         descricao: 'Carro 4x4 off Road que eu tanto quero'
       },
       {
+        id: 5,
         nome: 'Casamento',
         criado: '10/08/2017',
         conclusaoEstimada: '10/08/2021',
@@ -196,6 +208,7 @@ const itauUsers = [
     ],
     objetivos: [
       {
+        id: 1,
         name: 'Cofrinho',
         criado: '10/8/2017',
         conclusaoEstimada: '_sempre_',
@@ -203,6 +216,7 @@ const itauUsers = [
         descricao: 'Dinheiro sempre disponível'
       },
       {
+        id: 2,
         name: 'Faculdade',
         criado: '10/8/2017',
         conclusaoEstimada: '10/08/2021',
@@ -210,6 +224,7 @@ const itauUsers = [
         descricao: 'Faculdade de Ciências Sociais na Unip'
       },
       {
+        id: 3,
         name: 'Renovar roupas',
         criado: '10/08/2017',
         conclusaoEstimada: '10/08/2019',
@@ -217,6 +232,7 @@ const itauUsers = [
         descricao: 'Comprar roupas e acessorios novos'
       },
       {
+        id: 4,
         name: 'Beleza',
         criado: '10/8/2017',
         conclusaoEstimada: '10/8/2018',

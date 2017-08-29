@@ -49,7 +49,7 @@ export default class MainScreen extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.investidorInfo) {
+    if(nextProps.investidorInfo || this.props.investidorInfo) {
       this.setState({
         hasInvestidorInfo: true
       })
@@ -59,7 +59,10 @@ export default class MainScreen extends React.Component {
   componentDidMount() {
     if(!this.props.investidorInfo) {
       this.props.fetchInvestidorInfo();
-
+    } else {
+      this.setState({
+        hasInvestidorInfo: true
+      })
     }
   }
 
@@ -118,7 +121,7 @@ export default class MainScreen extends React.Component {
           onClose={this.onDeselectObjetivo}
           a11yTitle='Detalhes do objetivo'
         >
-          <ViewObjetivoLayerContent objetivo={objetivos[selection]} small={small} editObjetivo={editObjetivo} />
+          <ViewObjetivoLayerContent objetivo={objetivos[selection]} small={small} editObjetivo={editObjetivo} removeObjetivo={removeObjetivo} />
         </Layer>
       )
     } else if (addObj) {

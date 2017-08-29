@@ -52,11 +52,17 @@ export default class ViewObjetivoLayerContent extends React.Component {
     });
   }
 
-  onSubmit = () => {
-    console.log(this.state);
+  onEditSubmit = () => {
     this.props.editObjetivo(this.state.form);
     this.props.onClose();
   }
+
+  onRemoveSubmit = () => {
+    console.log(this.props.objetivo);
+    this.props.removeObjetivo(this.props.objetivo.id);
+    this.props.onClose();
+  }
+
   render() {
     const { section } = this.state;
     const { descricao } = this.state.form;
@@ -122,7 +128,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
             <Box flex='grow' justify='end'>
               <Box direction='row' justify='center' pad={{between: 'medium'}} responsive={false}>
                 <Button primary onClick={this.onBackClick} icon={<FormPreviousLink size='small' />} label='Não, Retornar' />
-                <Button secondary onClick={onClose} label='Sim' />
+                <Button secondary onClick={this.onRemoveSubmit} label='Sim' />
               </Box>
             </Box>
           </Section>
@@ -175,7 +181,7 @@ export default class ViewObjetivoLayerContent extends React.Component {
             <Box flex='grow' justify='end'>
               <Box direction='row' justify='center' pad={{between: 'medium'}} responsive={false}>
                 <Button critical onClick={this.onExcluirClick} icon={<TrashIcon size='small' />} label='Excluir' />
-                <Button primary onClick={this.onSubmit} label='Salvar' />
+                <Button primary onClick={this.onEditSubmit} label='Salvar' />
               </Box>
             </Box>
           </Section>
