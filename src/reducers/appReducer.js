@@ -123,6 +123,22 @@ const ACTION_HANDLER = {
       }
     )
   },
+  [actions.RECEIVE_EXTRATO]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        extrato: action.extrato
+      }
+    )
+  },
+  [actions.CLEAR_EXTRATO]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        extrato: false
+      }
+    )
+  },
   [actions.CHANGE_ACESSORIO]: (state, action) => {
     const newPagsAcessorio = state.activeUser.pagsAcessorios.map((acessorio, index) => {
       return {
@@ -178,7 +194,7 @@ const ACTION_HANDLER = {
         )
       }
     )
-  },
+  }
 };
 
 

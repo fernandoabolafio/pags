@@ -1,5 +1,6 @@
 
 import lsUtils from '../support/localStorageUtils';
+import {mapIdToTipoDeInvestimento2} from '../support/itauDataUtils';
 import {
   getFundosRecomendados,
   getCarteiraRecomendada,
@@ -13,7 +14,8 @@ import {
   postCOE,
   postPoupanca,
   postPrevidencia,
-  getInvestidor
+  getInvestidor,
+  getExtrato
  } from '../communication/calls';
 import {push} from 'react-router-redux';
 
@@ -31,7 +33,10 @@ export const actions = {
   REMOVE_OBJETIVO: 'REMOVE_OBJETIVO',
   UPDATE_OBJETIVO: 'EDIT_OBJETIVO',
   SET_OBJETIVOS: 'SET_OBJETIVOS',
+  REMOVE_OBJETIVO: 'REMOVE_OBJETIVO',
   EDIT_OBJETIVO: 'EDIT_OBJETIVO',
+  RECEIVE_EXTRATO: 'RECEIVE_EXTRATO',
+  CLEAR_EXTRATO: 'CLEAR_EXTRATO',
   CHANGE_ACESSORIO: 'CHANGE_ACESSORIO',
   CONQUER_ACESSORIO: 'CONQUER_ACESSORIO',
   ORDER_OBJETIVO: 'ORDER_OBJETIVO'
@@ -44,6 +49,12 @@ const getDate = () => {
 const generateId = () => {
   const timestamp = getDate().getUTCMilliseconds();
   return timestamp;
+}
+
+export function seeMoreMeuInvestimento(investimento_id) {
+  return (dispatch) => {
+    dispatch(push(`/app/meusinvestimentos/${investimento_id}`))
+  }
 }
 
 export function setObjetivos(objetivos) {
@@ -262,12 +273,44 @@ export function setInvestidorInfo(info) {
   }
 }
 
+export function receiveExtrato(extrato) {
+  return {
+    type: actions.RECEIVE_EXTRATO,
+    extrato
+  }
+}
+
+export function clearExtrato() {
+  return {
+    type: actions.CLEAR_EXTRATO
+  }
+}
+
 export function fetchInvestidorInfo() {
   return (dispatch, getState) => {
     const id = getState().app.activeUser.id;
     getInvestidor(id).then(
       (result) => {
         dispatch(setInvestidorInfo(result.data[0]));
+      }
+    ).catch(
+      (error) => {
+        console.log(error);
+      }
+    )
+  }
+}
+
+
+export function fetchExtrato(id_fundo) {
+  return (dispatch, getState) => {
+    const {id} = getState().app.activeUser;
+    const type = mapIdToTipoDeInvestimento2(id_fundo);
+    getExtrato(id, id_fundo, type).then(
+      (result) => {
+        console.log('result');
+        console.log(result.data);
+        dispatch(receiveExtrato(result.data[0]));
       }
     ).catch(
       (error) => {

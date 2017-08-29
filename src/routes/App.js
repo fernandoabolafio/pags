@@ -4,6 +4,7 @@ import Panel from '../containers/Panel';
 import { login } from  '../actions/actions';
 import store from '../store/store';
 
+
 const MainScreenRoute = {
   path: 'main',
   getComponent: (location, cb) => {
@@ -14,6 +15,18 @@ const MainScreenRoute = {
     }, 'MainScreen');
   }
 };
+
+const MeuInvestimentoRoute = {
+  path: 'meusinvestimentos/:investimentoId', 
+  getComponent: (location, cb) => {
+    require.ensure([], (require) => {
+      const MeuInvestimento = require('../containers/MeuInvestimento').default;
+
+      cb(null, MeuInvestimento);
+    }, 'MeuInvestimento');
+  },
+}
+
 
 const InvestimentoDetalhesRoute = {
   path: 'investimentos/:investimentoId',
@@ -69,7 +82,8 @@ const AppRoute = {
     MainScreenRoute,
     InvestimentosRoute,
     InvestimentoDetalhesRoute,
-    InventarioRoute
+    InventarioRoute,
+    MeuInvestimentoRoute
   ]
 };
 

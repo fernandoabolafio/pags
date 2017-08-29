@@ -21,7 +21,12 @@ const OPERATIONS_PATHS = {
   post_fundo: (id_investidor, id_fundo) => `/investimentos/v1/investidores/${id_investidor}/fundos/${id_fundo}/movimentacoes`,
   post_poupanca: (id_investidor, id_poupanca) => `/investimentos/v1/investidores/${id_investidor}/poupancas/${id_poupanca}/movimentacoes`,
   post_previdencia: (id_investidor, id_previdencia) => `/investimentos/v1/investidores/${id_investidor}/previdencias/${id_previdencia}/movimentacoes`,
-  get_investidor: (id_investidor) => `/investimentos/v1/investidores/${id_investidor}`
+  get_investidor: (id_investidor) => `/investimentos/v1/investidores/${id_investidor}`,
+  get_cdb_extrato: (id_investidor, id_cdb) => `/investimentos/v1/investidores/${id_investidor}/cdbs/${id_cdb}/extrato?from_data=banana`,
+  get_coe_extrato: (id_investidor, id_coe) => `/investimentos/v1/investidores/${id_investidor}/coes/${id_coe}/extrato?from_data=banana`,
+  get_fundo_extrato: (id_investidor, id_fundo) => `/investimentos/v1/investidores/${id_investidor}/fundos/${id_fundo}/extrato?from_data=banana`,
+  get_poupanca_extrato: (id_investidor, id_poupanca) => `/investimentos/v1/investidores/${id_investidor}/poupancas/${id_poupanca}/extrato?from_data=banana`,
+  get_previdencia_extrato: (id_investidor, id_previdencia) => `/investimentos/v1/investidores/${id_investidor}/previdencias/${id_previdencia}/extrato?from_data=banana`
 };
 
 export function getCDBS() {
@@ -280,6 +285,24 @@ export function getInvestidor(id_investidor) {
 
   return new Promise(function(resolve, reject) {
     request.get(basePath + getInvestidor(id_investidor))
+    .set(apiAuth.header_name, apiAuth.key)
+    .end((err, res) => {
+      if (res) {
+        resolve(res.body.data);
+      }
+      if (err) {
+        reject(err);
+      }
+    })
+  });
+}
+
+export function getExtrato(id_investidor, id_fundo, type) {
+  const { base_path: basePath, api_auth: apiAuth } = API_CONFIG;
+  const endpoint = OPERATIONS_PATHS[`get_${type}_extrato`];
+  console.log(endpoint, type);
+  return new Promise(function(resolve, reject) {
+    request.get(basePath + endpoint(id_investidor, id_fundo))
     .set(apiAuth.header_name, apiAuth.key)
     .end((err, res) => {
       if (res) {
