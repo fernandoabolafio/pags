@@ -28,6 +28,7 @@ import acessorio07 from '../../assets/acessorio07.png';
 import acessorio08 from '../../assets/acessorio08.png';
 import acessorio09 from '../../assets/acessorio09.png';
 import acessorio10 from '../../assets/acessorio10.png';
+import AulasList from './AulasList';
 
 const acessoriosSrc = {
   [0]: acessorio00,
@@ -206,7 +207,7 @@ export default class MainScreen extends React.Component {
             </Box>
           </Box>
           <Box direction='row'>
-            <Box direction='row' style={{backgroundColor: 'white', width: small ? '' : '65%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small'}}>
+            <Box direction='row'  style={{backgroundColor: 'white', width: small ? '' : '65%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small'}}>
               <Card
                 style={{width:'100%'}}
                 heading={
@@ -221,14 +222,16 @@ export default class MainScreen extends React.Component {
                 </Box>
               </Card>
             </Box>
-            <Box direction='row' style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}}>
+            <Box direction='row' align="center" style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}}>
               <Card
+                style={{width:"100%"}}
                 heading={
                     <Heading tag='h2'>
                       Educacional
                     </Heading>
                   }
               >
+                <AulasList />
               <Box>
 
               </Box>
