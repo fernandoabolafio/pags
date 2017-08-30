@@ -97,7 +97,7 @@ export default class MainScreen extends React.Component {
 
     const active = pagsAcessorios ? pagsAcessorios.filter(acessorio => acessorio.selected) : null;
     let activeAcessorio;
-    if (active[0] !== undefined) {
+    if (active && active[0] !== undefined) {
       activeAcessorio = active[0].id;
     }
 

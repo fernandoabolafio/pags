@@ -289,8 +289,27 @@ const itauUsers = [
       addObjetivo: false,
       verDica: true
     },
+    pagsAcessorios: [
+      { id: 0, text: 'Cadastre-se', isConquered: false, selected: false },
+      { id: 1, text: 'Faça o tutorial', isConquered: false, selected: false },
+      { id: 2, text: 'Crie seu primeiro objetivo', isConquered: false, selected: false },
+      { id: 3, text: 'Realize seu primeiro investimento com Pasg$', isConquered: false, selected: false },
+      { id: 4, text: 'Invista por 3 meses', isConquered: false, selected: false },
+      { id: 5, text: 'Invista por 6 meses', isConquered: false, selected: false },
+      { id: 6, text: 'Invista por 1 ano', isConquered: false, selected: false },
+      { id: 7, text: 'Invista em ações', isConquered: false, selected: false },
+      { id: 8, text: 'Assista sua primeira aula', isConquered: false, selected: false },
+      { id: 9, text: 'Complete todas as aulas', isConquered: false, selected: false },
+      { id: 10, text: 'Torne-se um Money Maker', isConquered: false, selected: false }
+    ],
     dica: {
       mensagem: "Adicione um objetivo para começar a receber dicas!"
+    },
+    objetivos: [],
+    novaRecompensa: {
+      active: false,
+      acessorioId: undefined,
+      motivo: ''
     }
   }
 ];
