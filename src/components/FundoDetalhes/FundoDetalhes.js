@@ -9,7 +9,7 @@ import Button from 'grommet/components/Button';
 import FormPreviousLink from 'grommet/components/icons/base/FormPreviousLink';
 import AplicarWizard from './AplicarWizard';
 import Status from 'grommet/components/icons/Status';
-
+import BadgeLayer from '../BadgeLayer';
 
 import {numberWithCommas} from '../../support/objectUtils';
 
@@ -73,6 +73,11 @@ export default class FundoDetalhes extends React.Component {
       }
 
       if(this.state.applying && nextProps.lastApplyOk){
+        console.log('aquii');
+        console.log(this.props.pagsAcessorios[3].isConquered);
+        if (!this.props.pagsAcessorios[3].isConquered) {
+          this.props.conquerAcessorio(3, 'realizou seu primeiro investimento pelo Pag$');
+        }
         this.setState({
           applying: false,
           applied: nextProps.lastApplyOk[0]
@@ -237,6 +242,7 @@ export default class FundoDetalhes extends React.Component {
     const {tipo_movimentacao, valor, data} = this.state.wizardData;
     const {investInfo} = this.state;
     const {formatValue} = this;
+
     const mapTipoToMessage = {
       H:(<Box align="center">
           <Heading align="center" tag="h3">{`Parabens!`}</Heading>
@@ -254,32 +260,39 @@ export default class FundoDetalhes extends React.Component {
   }
 
   render() {
+    const layer = this.props.novaRecompensa.active ? (<BadgeLayer
+      onClose={this.props.eraseNovaRecompensa}
+      recompensa={this.props.novaRecompensa}
+      small={this.props.small}
+    />) : null
     return (
-      <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
-        {
-          !this.state.applying ?
-          <Box align="center" size="medium">
-            {
-              !this.state.applied ?
-              [
-                <Anchor primary onClick={() => this.props.goToInvestimentos()} icon={<FormPreviousLink />} label="Voltar" />,
-                this.renderHeadings(),
-                this.state.wizard ? this.renderAplicarWizard() : this.getMainContent()
-              ]
-              :
-              <Box pad="medium" style={{backgroundColor: 'white', width: "100%"}}>
-                {this.renderSuccessStep()}
-              </Box>
-            }
-          </Box>
-          :
-          <Box align="center" style={{width: "100%"}} justify="center">
-            <Spinning size="large" />
-            <Label align="center">Processando Investimento, aguarde um instante.</Label>
-          </Box>
-        }
-
-      </Section>
+      <div>
+        <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
+          {
+            !this.state.applying ?
+            <Box align="center" size="medium">
+              {
+                !this.state.applied ?
+                [
+                  <Anchor primary onClick={() => this.props.goToInvestimentos()} icon={<FormPreviousLink />} label="Voltar" />,
+                  this.renderHeadings(),
+                  this.state.wizard ? this.renderAplicarWizard() : this.getMainContent()
+                ]
+                :
+                <Box pad="medium" style={{backgroundColor: 'white', width: "100%"}}>
+                  {this.renderSuccessStep()}
+                </Box>
+              }
+            </Box>
+            :
+            <Box align="center" style={{width: "100%"}} justify="center">
+              <Spinning size="large" />
+              <Label align="center">Processando Investimento, aguarde um instante.</Label>
+            </Box>
+          }
+        </Section>
+        {layer}
+      </div>
     );
   }
 }

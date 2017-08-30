@@ -17,6 +17,7 @@ import Objetivos from './Objetivos';
 import Pags from '../Pags';
 import TipBubble from '../TipBubble';
 import AnnotatedMeter from '../AnnotatedMeter';
+import BadgeLayer from '../BadgeLayer';
 import acessorio00 from '../../assets/acessorio00.png';
 import acessorio01 from '../../assets/acessorio01.png';
 import acessorio02 from '../../assets/acessorio02.png';
@@ -57,6 +58,9 @@ export default class MainScreen extends React.Component {
   }
 
   componentDidMount() {
+    if (!this.props.pagsAcessorios[0].isConquered) {
+      this.props.conquerAcessorio(0, 'completou o cadastro');
+    }
     if(!this.props.investidorInfo) {
       this.props.fetchInvestidorInfo();
     } else {
@@ -65,6 +69,8 @@ export default class MainScreen extends React.Component {
       })
     }
   }
+
+  onCloseTest = () => console.log('oi');
 
   onSelectObjetivo = (selection) => {
     this.setState({selection});
@@ -77,7 +83,7 @@ export default class MainScreen extends React.Component {
   }
 
   render() {
-    const {small, addObjetivo, editObjetivo, removeObjetivo, pagsAcessorios, rawObjetivos, orderObjetivos} = this.props;
+    const {small, addObjetivo, editObjetivo, removeObjetivo, pagsAcessorios, rawObjetivos, orderObjetivos, novaRecompensa, conquerAcessorio, eraseNovaRecompensa} = this.props;
     const activeAcessorio = pagsAcessorios? pagsAcessorios.filter(acessorio => acessorio.selected)[0].id : 'none';
     const {selection, addObj, hasInvestidorInfo} = this.state;
 
@@ -130,11 +136,18 @@ export default class MainScreen extends React.Component {
           onClose={this.onDeselectObjetivo}
           a11yTitle='Adicionar objetivo'
         >
-          <AddObjetivoLayerContent small={small} addObjetivo={addObjetivo} />
+          <AddObjetivoLayerContent small={small} addObjetivo={addObjetivo} conquerAcessorio={conquerAcessorio} pagsAcessorios={pagsAcessorios}/>
         </Layer>
       )
+    } else if (novaRecompensa.active) {
+      layer = (
+        <BadgeLayer
+          onClose={eraseNovaRecompensa}
+          recompensa={novaRecompensa}
+          small={small}
+        />
+      )
     }
-
 
     return hasInvestidorInfo ?
     (
