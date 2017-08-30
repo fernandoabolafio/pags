@@ -181,7 +181,6 @@ const ACTION_HANDLER = {
       }
     );
   },
-
   [actions.ORDER_OBJETIVO]: (state, action) => {
     return updateObject(
       state,

@@ -16,6 +16,10 @@ const itauUsers = [
       { id: 9, text: 'Complete todas as aulas', isConquered: false, selected: false },
       { id: 10, text: 'Torne-se um Money Maker', isConquered: false, selected: false }
     ],
+    completedActions: {
+      verDica: true,
+      addObjetivo: true
+    },
     objetivos: [
       {
         id: 1,
@@ -77,6 +81,10 @@ const itauUsers = [
       { id: 9, text: 'Complete todas as aulas', isConquered: false, selected: false },
       { id: 10, text: 'Torne-se um Money Maker', isConquered: false, selected: false }
     ],
+    completedActions: {
+      verDica: true,
+      addObjetivo: true
+    },
     objetivos: [
       {
         id: 1,
@@ -146,6 +154,10 @@ const itauUsers = [
       { id: 9, text: 'Complete todas as aulas', isConquered: false, selected: false },
       { id: 10, text: 'Torne-se um Money Maker', isConquered: false, selected: false }
     ],
+    completedActions: {
+      verDica: true,
+      addObjetivo: true
+    },
     objetivos: [
       {
         id: 1,
@@ -227,6 +239,10 @@ const itauUsers = [
       { id: 9, text: 'Complete todas as aulas', isConquered: false, selected: false },
       { id: 10, text: 'Torne-se um Money Maker', isConquered: false, selected: false }
     ],
+    completedActions: {
+      verDica: true,
+      addObjetivo: true
+    },
     objetivos: [
       {
         id: 1,
@@ -271,6 +287,18 @@ const itauUsers = [
     dica: {
       greeting: 'Parabens!',
       mensagem: 'Com essa carteira você realiza seus sonhos e ainda terá R$50mil a mais'
+    }
+  },
+  {
+    id: '15000005203200586716443',
+    first_name: 'Joaquim',
+    thumb: 'https://static.computerworld.com.pt/media/2016/03/Jos%C3%A9-Gon%C3%A7alves_Accenture_alto.jpg',
+    completedActions: {
+      addObjetivo: false,
+      verDica: true
+    },
+    dica: {
+      mensagem: "Adicione um objetivo para começar a receber dicas!"
     }
   }
 ];

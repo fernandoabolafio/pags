@@ -8,6 +8,7 @@ import Label from 'grommet/components/Label';
 import Value from 'grommet/components/Value';
 import Button from 'grommet/components/Button';
 import Spinning from 'grommet/components/icons/Spinning';
+import Info from 'grommet/components/icons/base/Info';
 import Anchor from 'grommet/components/Anchor';
 import AddIcon from 'grommet/components/icons/base/Add';
 import Layer from '../Layer';
@@ -29,6 +30,8 @@ import acessorio08 from '../../assets/acessorio08.png';
 import acessorio09 from '../../assets/acessorio09.png';
 import acessorio10 from '../../assets/acessorio10.png';
 import AulasList from './AulasList';
+import Pulse from 'grommet/components/icons/Pulse';
+import Dica from './Dica';
 
 const acessoriosSrc = {
   [0]: acessorio00,
@@ -74,7 +77,14 @@ export default class MainScreen extends React.Component {
     this.setState({selection: undefined, addObj: undefined});
   }
   onClickAddObjetivo = () => {
-    this.setState({addObj: true})
+    this.setState({addObj: true});
+    this.props.setActionComplete('addObjetivo');
+  }
+
+  toggleDica = (value) => {
+    this.setState({
+      dica: value
+    })
   }
 
   render() {
@@ -141,6 +151,12 @@ export default class MainScreen extends React.Component {
     (
       <div>
         <Section>
+          {
+            this.state.dica && this.props.activeUser.dica ?
+            <Dica seeMoreInvestimento={this.props.seeMoreInvestimento} onClose={() => this.toggleDica(false)} dica={this.props.activeUser.dica}  />
+            :
+            null
+          }
           <Box direction='row'>
             <Box style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {left: 'medium', right: 'small'}}>
               <Card
@@ -191,14 +207,27 @@ export default class MainScreen extends React.Component {
               <Card
                 style={{width:'100%'}}
                 heading={
-                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                  <div style={{display: 'flex'}}>
                     <Box margin={{bottom: 'small'}}>
                       <Heading tag='h2' margin='none'>
                         Seus Objetivos
                       </Heading>
                       <Label size='small'>Ordene seus objetivos, defina prioridades</Label>
                     </Box>
-                    <Button onClick={this.onClickAddObjetivo}  icon={<AddIcon />} />
+
+                      {
+                        this.props.activeUser.dica ?
+                        <Box>
+                            <Anchor icon={<Info />} onClick={() => this.toggleDica(this.props.activeUser.dica)} />
+                        </Box>
+                        :
+                        null
+                      }
+
+                    <Box flex="grow" align="end">
+                      <Button onClick={this.onClickAddObjetivo}  icon={<AddIcon />} />
+                    </Box>
+
                   </div>
                   }
               >

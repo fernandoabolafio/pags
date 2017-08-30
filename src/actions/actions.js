@@ -39,7 +39,8 @@ export const actions = {
   CLEAR_EXTRATO: 'CLEAR_EXTRATO',
   CHANGE_ACESSORIO: 'CHANGE_ACESSORIO',
   CONQUER_ACESSORIO: 'CONQUER_ACESSORIO',
-  ORDER_OBJETIVO: 'ORDER_OBJETIVO'
+  ORDER_OBJETIVO: 'ORDER_OBJETIVO',
+  SET_ACTION_COMPLETE: 'SET_ACTION_COMPLETE'
 };
 
 const getDate = () => {
@@ -339,5 +340,13 @@ export function conquerAcessorio(acessorioId) {
   return {
     type: actions.CHANGE_ACESSORIO,
     acessorioId
+  }
+}
+
+export function setActionComplete(action) {
+  console.log(action);
+  return {
+    type: actions.SET_ACTION_COMPLETE,
+    action
   }
 }
