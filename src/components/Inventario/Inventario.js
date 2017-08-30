@@ -134,7 +134,11 @@ export default class Inventario extends React.Component {
 
   render() {
     const {small, pagsAcessorios, changeAcessorio} = this.props;
-    const activeAcessorio = pagsAcessorios.filter(acessorio => acessorio.selected)[0].id;
+    const active = pagsAcessorios ? pagsAcessorios.filter(acessorio => acessorio.selected) : null;
+    let activeAcessorio;
+    if (active[0] !== undefined) {
+      activeAcessorio = active[0].id;
+    }
     const title = {
       '1': 'Junior',
       '2': 'Entusiasta',

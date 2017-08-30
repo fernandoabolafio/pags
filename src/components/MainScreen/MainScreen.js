@@ -70,8 +70,6 @@ export default class MainScreen extends React.Component {
     }
   }
 
-  onCloseTest = () => console.log('oi');
-
   onSelectObjetivo = (selection) => {
     this.setState({selection});
   }
@@ -84,8 +82,13 @@ export default class MainScreen extends React.Component {
 
   render() {
     const {small, addObjetivo, editObjetivo, removeObjetivo, pagsAcessorios, rawObjetivos, orderObjetivos, novaRecompensa, conquerAcessorio, eraseNovaRecompensa} = this.props;
-    const activeAcessorio = pagsAcessorios? pagsAcessorios.filter(acessorio => acessorio.selected)[0].id : 'none';
     const {selection, addObj, hasInvestidorInfo} = this.state;
+
+    const active = pagsAcessorios ? pagsAcessorios.filter(acessorio => acessorio.selected) : null;
+    let activeAcessorio;
+    if (active[0] !== undefined) {
+      activeAcessorio = active[0].id;
+    }
 
     let investidorInfo;
     let investimentos;

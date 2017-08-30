@@ -4,15 +4,15 @@ const itauUsers = [
     first_name: 'Marcela',
     thumb: 'http://www.insidedge.net/images/uploads/callout_images/Callout%20Thumbnails/our-people-linda-thumbnail.jpg',
     pagsAcessorios: [
-      { id: 0, text: 'Cadastre-se', isConquered: true, selected: true },
-      { id: 1, text: 'Faça o tutorial', isConquered: false, selected: false },
+      { id: 0, text: 'Cadastre-se', isConquered: true, selected: false },
+      { id: 1, text: 'Faça o tutorial', isConquered: true, selected: false },
       { id: 2, text: 'Crie seu primeiro objetivo', isConquered: true, selected: false },
       { id: 3, text: 'Realize seu primeiro investimento com Pasg$', isConquered: false, selected: false },
-      { id: 4, text: 'Invista por 3 meses', isConquered: true, selected: false },
-      { id: 5, text: 'Invista por 6 meses', isConquered: true, selected: false },
+      { id: 4, text: 'Invista por 3 meses', isConquered: false, selected: false },
+      { id: 5, text: 'Invista por 6 meses', isConquered: false, selected: false },
       { id: 6, text: 'Invista por 1 ano', isConquered: false, selected: false },
       { id: 7, text: 'Invista em ações', isConquered: false, selected: false },
-      { id: 8, text: 'Assista sua primeira aula', isConquered: false, selected: false },
+      { id: 8, text: 'Assista sua primeira aula', isConquered: true, selected: true },
       { id: 9, text: 'Complete todas as aulas', isConquered: false, selected: false },
       { id: 10, text: 'Torne-se um Money Maker', isConquered: false, selected: false }
     ],
@@ -44,10 +44,8 @@ const itauUsers = [
     ],
     novaRecompensa: {
       active: false,
-      acessorio: {
-        id: 0,
-        motivo: 'completou seu cadastro'
-      }
+      acessorioId: undefined,
+      motivo: ''
     },
     dica: {
       greeting: 'Quase lá!',
@@ -65,15 +63,15 @@ const itauUsers = [
     first_name: 'Júlia',
     thumb: 'https://s-media-cache-ak0.pinimg.com/736x/f8/74/3b/f8743bf131ec8734f61e07e4367e40bc--freckle-photography-photography-portraits.jpg',
     pagsAcessorios: [
-      { id: 0, text: 'Cadastre-se', isConquered: true, selected: true },
-      { id: 1, text: 'Faça o tutorial', isConquered: false, selected: false },
-      { id: 2, text: 'Crie seu primeiro objetivo', isConquered: true, selected: false },
+      { id: 0, text: 'Cadastre-se', isConquered: true, selected: false },
+      { id: 1, text: 'Faça o tutorial', isConquered: true, selected: false },
+      { id: 2, text: 'Crie seu primeiro objetivo', isConquered: true, selected: true },
       { id: 3, text: 'Realize seu primeiro investimento com Pasg$', isConquered: false, selected: false },
-      { id: 4, text: 'Invista por 3 meses', isConquered: true, selected: false },
-      { id: 5, text: 'Invista por 6 meses', isConquered: true, selected: false },
+      { id: 4, text: 'Invista por 3 meses', isConquered: false, selected: false },
+      { id: 5, text: 'Invista por 6 meses', isConquered: false, selected: false },
       { id: 6, text: 'Invista por 1 ano', isConquered: false, selected: false },
       { id: 7, text: 'Invista em ações', isConquered: false, selected: false },
-      { id: 8, text: 'Assista sua primeira aula', isConquered: false, selected: false },
+      { id: 8, text: 'Assista sua primeira aula', isConquered: true, selected: false },
       { id: 9, text: 'Complete todas as aulas', isConquered: false, selected: false },
       { id: 10, text: 'Torne-se um Money Maker', isConquered: false, selected: false }
     ],
@@ -113,10 +111,8 @@ const itauUsers = [
     ],
     novaRecompensa: {
       active: false,
-      acessorio: {
-        id: 0,
-        motivo: 'completou seu cadastro'
-      }
+      acessorioId: undefined,
+      motivo: ''
     },
     dica: {
       greeting: 'Quase lá!',
@@ -138,11 +134,11 @@ const itauUsers = [
       { id: 1, text: 'Faça o tutorial', isConquered: false, selected: false },
       { id: 2, text: 'Crie seu primeiro objetivo', isConquered: true, selected: false },
       { id: 3, text: 'Realize seu primeiro investimento com Pasg$', isConquered: false, selected: false },
-      { id: 4, text: 'Invista por 3 meses', isConquered: true, selected: false },
-      { id: 5, text: 'Invista por 6 meses', isConquered: true, selected: false },
+      { id: 4, text: 'Invista por 3 meses', isConquered: false, selected: false },
+      { id: 5, text: 'Invista por 6 meses', isConquered: false, selected: false },
       { id: 6, text: 'Invista por 1 ano', isConquered: false, selected: false },
       { id: 7, text: 'Invista em ações', isConquered: false, selected: false },
-      { id: 8, text: 'Assista sua primeira aula', isConquered: false, selected: false },
+      { id: 8, text: 'Assista sua primeira aula', isConquered: true, selected: false },
       { id: 9, text: 'Complete todas as aulas', isConquered: false, selected: false },
       { id: 10, text: 'Torne-se um Money Maker', isConquered: false, selected: false }
     ],
@@ -190,10 +186,8 @@ const itauUsers = [
     ],
     novaRecompensa: {
       active: false,
-      acessorio: {
-        id: 0,
-        motivo: 'completou seu cadastro'
-      }
+      acessorioId: undefined,
+      motivo: ''
     },
     dica: {
       greeting: 'Quase lá!',
@@ -215,15 +209,15 @@ const itauUsers = [
     first_name: 'Ana Carolina',
     thumb: 'https://sarasalavarria.files.wordpress.com/2010/03/img_0758-copia-2.jpg',
     pagsAcessorios: [
-      { id: 0, text: 'Cadastre-se', isConquered: true, selected: true },
-      { id: 1, text: 'Faça o tutorial', isConquered: false, selected: false },
+      { id: 0, text: 'Cadastre-se', isConquered: true, selected: false },
+      { id: 1, text: 'Faça o tutorial', isConquered: true, selected: false },
       { id: 2, text: 'Crie seu primeiro objetivo', isConquered: true, selected: false },
       { id: 3, text: 'Realize seu primeiro investimento com Pasg$', isConquered: false, selected: false },
-      { id: 4, text: 'Invista por 3 meses', isConquered: true, selected: false },
-      { id: 5, text: 'Invista por 6 meses', isConquered: true, selected: false },
+      { id: 4, text: 'Invista por 3 meses', isConquered: false, selected: false },
+      { id: 5, text: 'Invista por 6 meses', isConquered: false, selected: false },
       { id: 6, text: 'Invista por 1 ano', isConquered: false, selected: false },
       { id: 7, text: 'Invista em ações', isConquered: false, selected: false },
-      { id: 8, text: 'Assista sua primeira aula', isConquered: false, selected: false },
+      { id: 8, text: 'Assista sua primeira aula', isConquered: true, selected: true },
       { id: 9, text: 'Complete todas as aulas', isConquered: false, selected: false },
       { id: 10, text: 'Torne-se um Money Maker', isConquered: false, selected: false }
     ],
@@ -263,10 +257,8 @@ const itauUsers = [
     ],
     novaRecompensa: {
       active: false,
-      acessorio: {
-        id: 0,
-        motivo: 'completou seu cadastro'
-      }
+      acessorioId: undefined,
+      motivo: ''
     },
     dica: {
       greeting: 'Parabens!',
