@@ -43,6 +43,10 @@ export default class AddObjetivoLayerContent extends React.Component {
   onSubmit = () => {
     console.log(this.state);
     this.props.addObjetivo(this.state);
+    console.log(this.props);
+    if (!this.props.pagsAcessorios[2].isConquered) {
+      this.props.conquerAcessorio(2, 'criou seu primeiro objetivo');
+    }
     this.props.onClose();
   }
 

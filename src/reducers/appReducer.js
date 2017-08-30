@@ -5,7 +5,13 @@ import {arrayMove} from 'react-sortable-hoc';
 
 const initialState = {
   activeUser: {
-    objetivos: []
+    objetivos: [],
+    pagsAcessorios: [],
+    novaRecompensa: {
+      active: false,
+      motivo: 'completou seu cadastro',
+      acessorioId: 0
+    }
   },
   opcoesDeInvestimento: {}
 };
@@ -175,11 +181,33 @@ const ACTION_HANDLER = {
         activeUser: updateObject(
           state.activeUser,
           {
-            pagsAcessorios: newPagsAcessorio
+            pagsAcessorios: newPagsAcessorio,
+            novaRecompensa: {
+              active: true,
+              acessorioId: action.acessorioId,
+              motivo: action.motivo
+            }
           }
         )
       }
     );
+  },
+  [actions.ERASE_NOVA_RECOMPENSA]: (state, action) => {
+    return updateObject(
+      state,
+      {
+        activeUser: updateObject(
+          state.activeUser,
+          {
+            novaRecompensa: {
+              active: false,
+              acessorioId: undefined,
+              motivo: ''
+            }
+          }
+        )
+      }
+    )
   },
   [actions.ORDER_OBJETIVO]: (state, action) => {
     return updateObject(

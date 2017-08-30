@@ -33,14 +33,14 @@ export const actions = {
   REMOVE_OBJETIVO: 'REMOVE_OBJETIVO',
   UPDATE_OBJETIVO: 'EDIT_OBJETIVO',
   SET_OBJETIVOS: 'SET_OBJETIVOS',
-  REMOVE_OBJETIVO: 'REMOVE_OBJETIVO',
   EDIT_OBJETIVO: 'EDIT_OBJETIVO',
   RECEIVE_EXTRATO: 'RECEIVE_EXTRATO',
   CLEAR_EXTRATO: 'CLEAR_EXTRATO',
   CHANGE_ACESSORIO: 'CHANGE_ACESSORIO',
   CONQUER_ACESSORIO: 'CONQUER_ACESSORIO',
   ORDER_OBJETIVO: 'ORDER_OBJETIVO',
-  SET_ACTION_COMPLETE: 'SET_ACTION_COMPLETE'
+  SET_ACTION_COMPLETE: 'SET_ACTION_COMPLETE',
+  ERASE_NOVA_RECOMPENSA: 'ERASE_NOVA_RECOMPENSA'
 };
 
 const getDate = () => {
@@ -336,10 +336,17 @@ export function changeAcessorio(acessorioId) {
   }
 }
 
-export function conquerAcessorio(acessorioId) {
+export function conquerAcessorio(acessorioId, motivo) {
   return {
-    type: actions.CHANGE_ACESSORIO,
-    acessorioId
+    type: actions.CONQUER_ACESSORIO,
+    acessorioId,
+    motivo
+  }
+}
+
+export function eraseNovaRecompensa() {
+  return {
+    type: actions.ERASE_NOVA_RECOMPENSA
   }
 }
 

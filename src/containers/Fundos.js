@@ -6,13 +6,17 @@ import {
   fetchCarteiraRecomendada,
   clearCarteiraRecomendada,
   fetchInvestimentos,
-  seeMoreInvestimento
+  seeMoreInvestimento,
+  conquerAcessorio,
+  eraseNovaRecompensa
   } from '../actions/actions';
 
 const mapStateToProps = state => ({
   fundosRecomendados: state.app.fundosRecomendados,
   carteiraRecomendada: state.app.carteiraRecomendada,
-  opcoesDeInvestimento: state.app.opcoesDeInvestimento
+  opcoesDeInvestimento: state.app.opcoesDeInvestimento,
+  pagsAcessorios: state.app.activeUser.pagsAcessorios,
+  novaRecompensa: state.app.activeUser.novaRecompensa
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({
@@ -20,7 +24,9 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   fetchCarteiraRecomendada,
   fetchInvestimentos,
   clearCarteiraRecomendada,
-  seeMoreInvestimento
+  seeMoreInvestimento,
+  conquerAcessorio,
+  eraseNovaRecompensa
 }, dispatch);
 
 const FundosContainer = connect(mapStateToProps, mapDispatchToProps)(Fundos);

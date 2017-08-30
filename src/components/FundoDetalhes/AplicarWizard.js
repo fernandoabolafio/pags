@@ -10,8 +10,8 @@ import FormNextLink from 'grommet/components/icons/base/FormNextLink';
 import Button from 'grommet/components/Button';
 import NumberInput from 'grommet/components/NumberInput';
 import DateTime from 'grommet/components/DateTime';
-import Heading from 'grommet/components/Heading';
-import {numberWithCommas} from '../../support/objectUtils'
+import {numberWithCommas} from '../../support/objectUtils';
+import BadgeLayer from '../BadgeLayer';
 
 export default class AplicarWizard extends React.Component {
   constructor(props) {
@@ -133,7 +133,7 @@ export default class AplicarWizard extends React.Component {
           </FormField>
         </Form>
       </Box>
-    </Box>;;
+    </Box>;
   }
 
   renderSecondStep = () => {
@@ -214,10 +214,9 @@ export default class AplicarWizard extends React.Component {
 
   render() {
     return (
-      <Box align="center">
-        {this.renderMainContent()}
-
-      </Box>
+        <Box align="center">
+          {this.renderMainContent()}
+        </Box>
     )
   }
 }
