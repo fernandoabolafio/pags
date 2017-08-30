@@ -39,6 +39,7 @@ export const actions = {
   CHANGE_ACESSORIO: 'CHANGE_ACESSORIO',
   CONQUER_ACESSORIO: 'CONQUER_ACESSORIO',
   ORDER_OBJETIVO: 'ORDER_OBJETIVO',
+  SET_ACTION_COMPLETE: 'SET_ACTION_COMPLETE',
   ERASE_NOVA_RECOMPENSA: 'ERASE_NOVA_RECOMPENSA'
 };
 
@@ -346,5 +347,13 @@ export function conquerAcessorio(acessorioId, motivo) {
 export function eraseNovaRecompensa() {
   return {
     type: actions.ERASE_NOVA_RECOMPENSA
+  }
+}
+
+export function setActionComplete(action) {
+  console.log(action);
+  return {
+    type: actions.SET_ACTION_COMPLETE,
+    action
   }
 }

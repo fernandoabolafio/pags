@@ -184,7 +184,7 @@ export default class Fundos extends React.Component {
 
   renderFundos = (fundos, idkey) => {
     const fundosComponents = fundos.map( fundo => this.renderFundo(fundo, idkey));
-    return <Columns size="small" justify="center">
+    return <Columns size="small" justify="center" style={{flexShrink: '0'}}>
             {fundosComponents}
           </Columns>;
   }
@@ -322,7 +322,7 @@ export default class Fundos extends React.Component {
   render() {
 
     return (
-      <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
+      <Section align="center" style={{backgroundColor: '#f5f5f5', flexShrink: '0'}}>
         {this.getContent()}
         {
           this.state.showEntenda ?

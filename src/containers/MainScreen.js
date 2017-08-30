@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import MainScreen from '../components/MainScreen';
-import {seeMoreMeuInvestimento, logout, fetchInvestidorInfo, addObjetivo, removeObjetivo, editObjetivo, orderObjetivos, conquerAcessorio, eraseNovaRecompensa} from '../actions/actions';
+import {seeMoreInvestimento, setActionComplete, seeMoreMeuInvestimento, logout, fetchInvestidorInfo, addObjetivo, removeObjetivo, editObjetivo, orderObjetivos,conquerAcessorio, eraseNovaRecompensa} from '../actions/actions';
 
 const mapStateToProps = state => ({
   activeUser: state.app.activeUser,
@@ -19,6 +19,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   editObjetivo,
   orderObjetivos,
   seeMoreMeuInvestimento,
+  seeMoreInvestimento,
+  setActionComplete,
   conquerAcessorio,
   eraseNovaRecompensa
 }, dispatch);
