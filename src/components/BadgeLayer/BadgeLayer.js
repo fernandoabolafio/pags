@@ -40,10 +40,9 @@ const BadgeLayer = ({onClose, recompensa, small}) =>
         <Box>
           <Pags src={acessoriosSrc[recompensa.acessorioId]} size={small ? 'small' : 'medium'}/>
         </Box>
-        <Box direction='row' responsive={false} justify='between'>
-          <Button path='app/inventario' label='Ver Inventário' />
+        <Box direction='row' responsive={false} justify='center' pad={{between: 'small'}}>
+          <Button path='app/inventario' label='Inventário' />
           <Button onClick={onClose} label='Compartilhar' />
-          <Button onClick={onClose} label='Continuar' />
         </Box>
       </Box>
     </Section>

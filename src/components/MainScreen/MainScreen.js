@@ -208,8 +208,8 @@ export default class MainScreen extends React.Component {
                       </div>
                       <Box wrap>
                         <ul style={{margin: small ? '0 0 0 10px' : '0', padding: '0 0 0 7px'}}>
-                          <li><Anchor label={<Label size='medium' path={{path: 'app/investimentos', index: true}}>Recomendações de Investimento</Label>} /></li>
-                          <li><Anchor label={<Label size='medium'>Ver minhas recompensas</Label>} /></li>
+                          <li><Anchor path='app/investimentos' label={<Label size='medium'>Recomendações de Investimento</Label>} /></li>
+                          <li><Anchor path='app/inventario' label={<Label size='medium'>Ver minhas recompensas</Label>} /></li>
                           <li><Anchor label={<Label size='medium'>Aprender</Label>} /></li>
                         </ul>
                       </Box>
