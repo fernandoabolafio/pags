@@ -61,17 +61,17 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <Article scrollStep={true} selected={this.state.chapter} onSelect={(chapter) => this.setChapter(chapter)}>
-          <Header  style={{backgroundColor: '#102027', paddingLeft: "40px", paddingRight: "40px"}}>
+      <Article scrollStep={true}yar selected={this.state.chapter} onSelect={(chapter) => this.setChapter(chapter)}>
+          <Header colorIndex="brand"  style={{backgroundColor: '#102027', paddingLeft: "40px", paddingRight: "40px"}}>
             <Image style={{width:'45.8px', height: '42.1px'}} src="img/logo.png" />
             <Menu
               inline
               direction='row'
               style={{border: '3px solid transparent'}}
              >
-               <Anchor onClick={() => this.setChapter(2)} style={{color: 'white'}}>Como funciona</Anchor>
-               <Anchor onClick={() => this.setChapter(3)} style={{color: 'white'}}>Vantagens</Anchor>
-               <Anchor onClick={() => this.setChapter(4)} style={{color: 'white'}}>Contato</Anchor>
+               <Anchor onClick={() => this.setChapter(2)} >Como funciona</Anchor>
+               <Anchor onClick={() => this.setChapter(3)} >Vantagens</Anchor>
+               <Anchor onClick={() => this.setChapter(4)} >Contato</Anchor>
             </Menu>
             <Box flex="grow" justify="end" direction="row">
               <Button onClick={this.props.goToLogin}  style={{backgroundColor:'#FFAB00', color: 'black', borderColor: '#FFAB00'}} primary label="Entrar" />
