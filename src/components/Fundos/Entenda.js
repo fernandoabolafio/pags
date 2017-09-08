@@ -14,7 +14,7 @@ export default class Entenda extends React.Component {
       <Layer>
         <Section>
           <Box align="end" >
-            <Anchor  onClick={this.props.onClose} icon={<Close />} />,
+            <Anchor  onClick={this.props.onClose} icon={<Close />} />
           </Box>
           <Box align="center">
             <Heading tag="h3">{this.props.title}</Heading>
