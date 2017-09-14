@@ -52,6 +52,20 @@ const generateId = () => {
   return timestamp;
 }
 
+export function goToMenuItem(item) {
+  return (dispatch) => {
+    const mapItemToPath = {
+      ['inicio']: '/app/inicio',
+      ['conquistas']: '/app/conquistas',
+      ['investimentos']: '/app/investimentos',
+      ['chat']: '/app/chat'
+    }
+    const path = mapItemToPath[item];
+    dispatch(push(path));
+  }
+
+}
+
 export function seeMoreMeuInvestimento(investimento_id) {
   return (dispatch) => {
     dispatch(push(`/app/meusinvestimentos/${investimento_id}`))
