@@ -206,6 +206,39 @@ export function setOpcoesDeInvestimento(optionsType, options) {
   }
 }
 
+export function mergeRentabilidade(type, data) {
+  const mapTypeToRent = {
+    ['cdbs']: {
+      mes: 0.82,
+      ano: 5.71,
+      ['12_meses']: 12.98
+    },
+    ['previdencias']: {
+      mes: 0.82,
+      ano: 5.71,
+      ['12_meses']: 12.98
+    },
+    ['coes']: {
+      mes: 0.82,
+      ano: 5.71,
+      ['12_meses']: 12.98
+    }
+  }
+  const rentabilidades = mapTypeToRent[type];
+
+  if(!rentabilidades) return data;
+
+  const newData = data.map( value => {
+    return ({
+      ...value,
+      rentabilidades
+    });
+  });
+
+  return newData;
+}
+
+
 export function fetchInvestimentos(type) {
   return (dispatch) => {
     const mapTypeTopCall = {
@@ -218,7 +251,7 @@ export function fetchInvestimentos(type) {
     const call = mapTypeTopCall[type];
     call().then(
       (result) => {
-        dispatch(setOpcoesDeInvestimento(type, result.data));
+        dispatch(setOpcoesDeInvestimento(type, mergeRentabilidade(type, result.data)));
       }
     ).catch(
       (error) => {
