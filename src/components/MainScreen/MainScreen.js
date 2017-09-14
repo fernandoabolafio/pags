@@ -11,6 +11,8 @@ import Spinning from 'grommet/components/icons/Spinning';
 import Info from 'grommet/components/icons/base/Info';
 import Anchor from 'grommet/components/Anchor';
 import AddIcon from 'grommet/components/icons/base/Add';
+import Tabs from 'grommet/components/Tabs';
+import Tab from 'grommet/components/Tab';
 import Layer from '../Layer';
 import ViewObjetivoLayerContent from './ViewObjetivoLayerContent';
 import AddObjetivoLayerContent from './AddObjetivoLayerContent';
@@ -33,6 +35,7 @@ import acessorio10 from '../../assets/acessorio10.png';
 import AulasList from './AulasList';
 import Pulse from 'grommet/components/icons/Pulse';
 import Dica from './Dica';
+
 
 const acessoriosSrc = {
   [0]: acessorio00,
@@ -89,6 +92,25 @@ export default class MainScreen extends React.Component {
     this.setState({
       dica: value
     })
+  }
+
+  renderTabs = (InvestimentosBox, ObjetivosBox, DicasPagsBox, EducacionalBox) => {
+    return (
+      <Tabs responsive={false}>
+        <Tab title='Investimentos'>
+          {DicasPagsBox}
+          {InvestimentosBox}
+        </Tab>
+        <Tab title='Projeções'>
+        </Tab>
+        <Tab title='Metas'>
+          {ObjetivosBox}
+        </Tab>
+        <Tab title='Agenda'>
+          {EducacionalBox}
+        </Tab>
+      </Tabs>
+    )
   }
 
   render() {
@@ -162,6 +184,129 @@ export default class MainScreen extends React.Component {
         />
       )
     }
+    const DicasPagsBox = <Box style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {left: 'medium', right: 'small'}}>
+      <Card
+        align='center'
+        full='horizontal'
+      >
+        <TipBubble
+          small={small}
+          caret
+          leftContent={
+            <Meter size='small'
+              colorIndex='warning'
+              type='circle'
+              label={<Value colorIndex='warning' value={35}
+              units='%'
+              size='small' />}
+              value={35}
+            />
+          }
+          rightContent={
+            <div>
+              <div style={{marginLeft: '10px'}}>
+                <Label
+                  size='small'>
+                  Nivel 2
+                </Label>
+                <Heading
+                  tag='h3'
+                  style={{color: '#ffd602'}}
+                >
+                  Entusiasta
+                </Heading>
+              </div>
+              <Box wrap>
+                <ul style={{margin: small ? '0 0 0 10px' : '0', padding: '0 0 0 7px'}}>
+                  <li><Anchor path='app/investimentos' label={<Label size='medium'>Recomendações de Investimento</Label>} /></li>
+                  <li><Anchor path='app/inventario' label={<Label size='medium'>Ver minhas recompensas</Label>} /></li>
+                  <li><Anchor label={<Label size='medium'>Aprender</Label>} /></li>
+                </ul>
+              </Box>
+            </div>
+          }
+        />
+        <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
+      </Card>
+    </Box>;
+
+    const ObjetivosBox = <Box style={{backgroundColor: 'white', width: small ? '' : '65%'}}  margin={small ? 'medium' : {left: 'small', right: 'medium'}}>
+      <Card
+        style={{width:'100%'}}
+        heading={
+          <div style={{display: 'flex'}}>
+            <Box margin={{bottom: 'small'}}>
+              <Heading tag='h2' margin='none'>
+                Seus Objetivos
+              </Heading>
+              <Label size='small'>Ordene seus objetivos, defina prioridades</Label>
+            </Box>
+
+              {
+                this.props.activeUser.dica ?
+                <Box>
+                    <Anchor icon={<Info />} onClick={() => this.toggleDica(this.props.activeUser.dica)} />
+                </Box>
+                :
+                null
+              }
+
+            <Box flex="grow" align="end">
+              <Button onClick={this.onClickAddObjetivo}  icon={<AddIcon />} />
+            </Box>
+
+          </div>
+          }
+      >
+        <Objetivos onSelectObjetivo={this.onSelectObjetivo} small={small} onSortEnd={orderObjetivos} objetivos={objetivos} />
+      </Card>
+    </Box>;
+
+    const InvestimentosBox = <Box direction='row'  style={{backgroundColor: 'white', width: small ? '' : '65%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small'}}>
+      <Card
+        style={{width:'100%'}}
+        heading={
+            <Heading tag='h2'>
+              Seus Investimentos
+            </Heading>
+          }
+      >
+        <Box align='center'>
+          <AnnotatedMeter type="circle" legend={true} units="R$"
+            size={small ? 'medium' : 'medium'}  series={investimentosData} />
+        </Box>
+      </Card>
+    </Box>;
+
+    const EducacionalBox = <Box direction='row' align="center" style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}}>
+      <Card
+        style={{width:"100%"}}
+        heading={
+            <Heading tag='h2'>
+              Educacional
+            </Heading>
+          }
+      >
+        <AulasList />
+      <Box>
+
+      </Box>
+      </Card>
+    </Box>;
+
+    const desktopView = [
+      <Box direction='row'>
+        {DicasPagsBox}
+        {ObjetivosBox}
+      </Box>,
+      <Box direction='row'>
+        {InvestimentosBox}
+        {EducacionalBox}
+      </Box>
+    ];
+
+    const mobileView = this.renderTabs(InvestimentosBox, ObjetivosBox, DicasPagsBox, EducacionalBox);
+
 
     return hasInvestidorInfo ?
     (
@@ -173,116 +318,7 @@ export default class MainScreen extends React.Component {
             :
             null
           }
-          <Box direction='row'>
-            <Box style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {left: 'medium', right: 'small'}}>
-              <Card
-                align='center'
-                full='horizontal'
-              >
-                <TipBubble
-                  small={small}
-                  caret
-                  leftContent={
-                    <Meter size='small'
-                      colorIndex='warning'
-                      type='circle'
-                      label={<Value colorIndex='warning' value={35}
-                      units='%'
-                      size='small' />}
-                      value={35}
-                    />
-                  }
-                  rightContent={
-                    <div>
-                      <div style={{marginLeft: '10px'}}>
-                        <Label
-                          size='small'>
-                          Nivel 2
-                        </Label>
-                        <Heading
-                          tag='h3'
-                          style={{color: '#ffd602'}}
-                        >
-                          Entusiasta
-                        </Heading>
-                      </div>
-                      <Box wrap>
-                        <ul style={{margin: small ? '0 0 0 10px' : '0', padding: '0 0 0 7px'}}>
-                          <li><Anchor path='app/investimentos' label={<Label size='medium'>Recomendações de Investimento</Label>} /></li>
-                          <li><Anchor path='app/inventario' label={<Label size='medium'>Ver minhas recompensas</Label>} /></li>
-                          <li><Anchor label={<Label size='medium'>Aprender</Label>} /></li>
-                        </ul>
-                      </Box>
-                    </div>
-                  }
-                />
-                <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
-              </Card>
-            </Box>
-            <Box style={{backgroundColor: 'white', width: small ? '' : '65%'}}  margin={small ? 'medium' : {left: 'small', right: 'medium'}}>
-              <Card
-                style={{width:'100%'}}
-                heading={
-                  <div style={{display: 'flex'}}>
-                    <Box margin={{bottom: 'small'}}>
-                      <Heading tag='h2' margin='none'>
-                        Seus Objetivos
-                      </Heading>
-                      <Label size='small'>Ordene seus objetivos, defina prioridades</Label>
-                    </Box>
-
-                      {
-                        this.props.activeUser.dica ?
-                        <Box>
-                            <Anchor icon={<Info />} onClick={() => this.toggleDica(this.props.activeUser.dica)} />
-                        </Box>
-                        :
-                        null
-                      }
-
-                    <Box flex="grow" align="end">
-                      <Button onClick={this.onClickAddObjetivo}  icon={<AddIcon />} />
-                    </Box>
-
-                  </div>
-                  }
-              >
-                <Objetivos onSelectObjetivo={this.onSelectObjetivo} small={small} onSortEnd={orderObjetivos} objetivos={objetivos} />
-              </Card>
-            </Box>
-          </Box>
-          <Box direction='row'>
-            <Box direction='row'  style={{backgroundColor: 'white', width: small ? '' : '65%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small'}}>
-              <Card
-                style={{width:'100%'}}
-                heading={
-                    <Heading tag='h2'>
-                      Seus Investimentos
-                    </Heading>
-                  }
-              >
-                <Box align='center'>
-                  <AnnotatedMeter type="circle" legend={true} units="R$"
-                    size={small ? 'medium' : 'medium'}  series={investimentosData} />
-                </Box>
-              </Card>
-            </Box>
-            <Box direction='row' align="center" style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}}>
-              <Card
-                style={{width:"100%"}}
-                heading={
-                    <Heading tag='h2'>
-                      Educacional
-                    </Heading>
-                  }
-              >
-                <AulasList />
-              <Box>
-
-              </Box>
-              </Card>
-            </Box>
-          </Box>
+          {small ? mobileView : desktopView}
         </Section>
         {layer}
       </div>
