@@ -28,7 +28,7 @@ export const MyHeader = ({logout, activeUser}) =>
        style={{border: '3px solid transparent'}}
       >
         <Anchor path={{ path: 'app/investimentos', index: true }}>Investimentos</Anchor>
-        <Anchor path={{ path: 'app/inventario', index: true }}>Inventário</Anchor>
+        <Anchor path={{ path: 'app/conquistas', index: true }}>Inventário</Anchor>
      </Menu>
      <Box
        justify='end'

@@ -6,7 +6,7 @@ import store from '../store/store';
 
 
 const MainScreenRoute = {
-  path: 'main',
+  path: 'inicio',
   getComponent: (location, cb) => {
     require.ensure([], (require) => {
       const MainScreen = require('../containers/MainScreen').default;
@@ -51,7 +51,7 @@ const InvestimentosRoute = {
 };
 
 const InventarioRoute = {
-  path: 'inventario',
+  path: 'conquistas',
   getComponent: (location, cb) => {
     require.ensure([], (require) => {
       const Inventario = require('../containers/Inventario').default;
@@ -60,6 +60,18 @@ const InventarioRoute = {
     }, 'Inventario');
   }
 };
+
+const ChatRoute = {
+  path: 'chat',
+  getComponent: (location, cb) => {
+    require.ensure([], (require) => {
+      const Chat = require('../components/Chat').default;
+
+      cb(null, Chat);
+    }, 'Chat');
+  }
+};
+
 
 const AppRoute = {
   onEnter: (nextState, replace, callback) => {
@@ -83,7 +95,8 @@ const AppRoute = {
     InvestimentosRoute,
     InvestimentoDetalhesRoute,
     InventarioRoute,
-    MeuInvestimentoRoute
+    MeuInvestimentoRoute,
+    ChatRoute
   ]
 };
 
