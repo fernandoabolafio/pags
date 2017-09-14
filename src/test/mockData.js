@@ -314,6 +314,7 @@ const itauUsers = [
   }
 ];
 
+const defaultUser = itauUsers[1];
 
 const banks = [
   {
@@ -325,5 +326,6 @@ const banks = [
 
  export {
    itauUsers,
+   defaultUser,
    banks
  };
