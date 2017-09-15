@@ -63,7 +63,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <Article selected={this.state.chapter} onSelect={(chapter) => this.setChapter(chapter)}>
+      <Article scrollStep selected={this.state.chapter} onSelect={(chapter) => this.setChapter(chapter)}>
           <Header colorIndex="brand"  style={{backgroundColor: '#102027', paddingLeft: "40px", paddingRight: "40px"}}>
             <Image style={{width:'45.8px', height: '42.1px'}} src="img/logo.png" />
             <Menu
@@ -71,9 +71,10 @@ export default class Home extends React.Component {
               direction='row'
               style={{border: '3px solid transparent'}}
              >
-               <Anchor onClick={() => this.setChapter(2)} >Como funciona</Anchor>
-               <Anchor onClick={() => this.setChapter(3)} >Vantagens</Anchor>
-               <Anchor onClick={() => this.setChapter(4)} >Contato</Anchor>
+               <Anchor onClick={() => this.setChapter(2)} >Por que investir?</Anchor>
+               <Anchor onClick={() => this.setChapter(4)} >Como funciona</Anchor>
+               <Anchor onClick={() => this.setChapter(5)} >Vantagens</Anchor>
+               <Anchor onClick={() => this.setChapter(6)} >Contato</Anchor>
             </Menu>
             <Box flex="grow" justify="end" direction="row">
               <Button onClick={this.props.goToLogin}  style={{backgroundColor:'#FFAB00', color: 'black', borderColor: '#FFAB00'}} primary label="Entrar" />
