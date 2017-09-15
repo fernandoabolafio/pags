@@ -118,7 +118,7 @@ export function goToInvestimentos() {
 
 export function goToMain() {
   return(dispatch) => {
-    dispatch(push('/app/main'));
+    dispatch(push('/app/inicio'));
   }
 }
 
@@ -135,7 +135,7 @@ export function login(user, redirect=true) {
   return (dispatch) => {
     dispatch(loginSync(user));
     if(redirect) {
-      dispatch(push('/app/main'));
+      dispatch(goToMain());
     }
   }
 }
