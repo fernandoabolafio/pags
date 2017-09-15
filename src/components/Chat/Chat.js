@@ -37,7 +37,7 @@ export default class Chat extends React.Component {
             <li className="comment">
               <section className="author">
                 <img className="photo" src="img/persons/julia.jpg"/>
-                <span className="name">Julia piranha</span>
+                <span className="name">Julia</span>
               </section>
               <section className="content">
                 <p>I don't know... what?</p>
