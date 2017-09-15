@@ -5,7 +5,7 @@ const GraphSubtitle = ({ color, text }) => {
   const wrapperStyle = {
     display: 'flex',
     flexFlow: 'row wrap',
-    margin: '5px 0',
+    margin: '5px 10px 5px 0',
   };
 
   const colorBoxStyle = {

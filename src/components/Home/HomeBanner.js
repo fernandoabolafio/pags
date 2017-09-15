@@ -31,7 +31,7 @@ const HomeBanner = () => {
           marginBottom: '0',
         }}
       >
-        INVISTA COM PAG$
+        CONHEÇA PAG$
       </Heading>
       <Heading
         tag="h3"

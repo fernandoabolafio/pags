@@ -25,7 +25,7 @@ const HomeReasons = () => {
 
 	return (
     <Section
-      style={{ ...sectionStyle, backgroundColor: colors.darkBlue }}
+      style={{ ...sectionStyle, backgroundColor: colors.darkBlue, textAlign: 'center' }}
       direction="column"
       align="center"
     >

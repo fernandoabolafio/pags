@@ -28,22 +28,22 @@ const HomeReasons = () => {
       
       <Box
         align="center"
+        justify="center"
         direction="row"
-        style={{ justifyContent: 'space-around' }}
       >
         <Box align="center" pad="large">
-          <Image src='img/reasons-to-invest-bot.svg' />
+          <Image src='img/reasons-to-invest-bot.svg' size="large"/>
         </Box>
-        <Box align="center" direction="column" pad="large" style={{maxWidth: '500px'}}>
+        <Box align="center" direction="column" pad="large">
           <Label style={{marginTop: '0'}}>
             O que aconteceria com meus R$2.000,00 se eu o deixasse guardado por 8 anos...
           </Label>
-          <Box direction="row" justify="between" style={{width: '100%'}}>
+          <Box direction="row" style={{width: '100%'}}>
             <GraphSubtitle color={colors.darkBlue} text="no colchão" />
             <GraphSubtitle color={colors.lightGray} text="na poupança" />
             <GraphSubtitle color={colors.yellow} text="no tesouro selic" />
           </Box>
-          <Image src='img/reasons-to-invest-graph.svg' />
+          <Image src='img/reasons-to-invest-graph.svg' size="large" />
         </Box>
       </Box>
     </Section>
