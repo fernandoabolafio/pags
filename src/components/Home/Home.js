@@ -19,6 +19,8 @@ import Anchor from 'grommet/components/Anchor';
 import Footer from '../Footer';
 import HomeBanner from './HomeBanner';
 import HomeAdvantages from './HomeAdvantages';
+import HomeReasons from './HomeReasons';
+import HomeAdvertise from './HomeAdvertise';
 
 import {
   sectionStyle,
@@ -78,6 +80,8 @@ export default class Home extends React.Component {
             </Box>
           </Header>
           <HomeBanner />
+          <HomeReasons />
+          <HomeAdvertise />
           <Section
             style={{ ...sectionStyle, backgroundColor: colors.lightGray }}
             direction="column"
