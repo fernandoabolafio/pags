@@ -2,6 +2,12 @@
   position: relative;
 }
 
+@media (max-width: 350px) {
+  .tipBubble {
+    padding: 12px !important;
+  }
+}
+
 .caret:after {
   content: '';
   position: absolute;

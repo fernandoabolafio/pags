@@ -9,7 +9,7 @@ import Button from 'grommet/components/Button';
 import Spinning from 'grommet/components/icons/Spinning';
 import Info from 'grommet/components/icons/base/Info';
 import Anchor from 'grommet/components/Anchor';
-import Form from 'grommet/components/Form';
+import Select from 'grommet/components/Select';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
 import AddIcon from 'grommet/components/icons/base/Add';
@@ -95,12 +95,14 @@ export default class MainScreen extends React.Component {
     })
   }
 
-  renderTabs = (InvestimentosBox, ObjetivosBox, DicasPagsBox, EducacionalBox) => {
+  renderTabs = (InvestimentosBox, ObjetivosBox, DicasPagsBox, EducacionalBox, SaldoBox, InvestirBox) => {
     return (
       <Tabs responsive={false}>
         <Tab title='Investimentos'>
           {DicasPagsBox}
           {InvestimentosBox}
+          {SaldoBox}
+          {InvestirBox}
         </Tab>
         <Tab title='Projeções'>
         </Tab>
@@ -186,46 +188,46 @@ export default class MainScreen extends React.Component {
       )
     }
     const DicasPagsBox =
-    <Box style={{backgroundColor: 'white', width: small ? '' : '35%'}}
-      margin={small ? 'medium' : {left: 'medium', right: 'small'}}
-      direction={small ? 'row' : 'column'}
-      align='center'
-      justify='center'
-      pad={{between: 'small'}}
-      responsive={false} >
-      {!small &&
-        <TipBubble
-          style={{maxWidth: '292px'}}
-          small={small}
-          caret >
-            <Box pad={{between: 'medium'}}>
-              <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
-              <Paragraph size='large' margin='none'>
-                Não é ótimo
-                ganhar um
-                dinheirinho só
-                investindo?
-              </Paragraph>
-            </Box>
-        </TipBubble>
-      }
-      <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
-      {small &&
-        <TipBubble
-          style={{maxWidth: '292px'}}
-          small={small} >
-            <Box pad={small ? {between: 'large'} : {between: 'medium'}}>
-              <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
-              <Paragraph size='large' margin='none'>
-                Não é ótimo
-                ganhar um
-                dinheirinho só
-                investindo?
-              </Paragraph>
-            </Box>
-        </TipBubble>
-      }
-    </Box>;
+      <Box style={{backgroundColor: 'white', width: small ? '' : '35%'}}
+        margin={small ? 'medium' : {left: 'medium', right: 'small'}}
+        direction={small ? 'row' : 'column'}
+        align='center'
+        justify='center'
+        pad={{vertical: 'medium', between: 'small'}}
+        responsive={false} >
+        {!small &&
+          <TipBubble
+            style={{maxWidth: '292px'}}
+            small={small}
+            caret >
+              <Box pad={{between: 'medium'}}>
+                <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
+                <Paragraph size='large' margin='none'>
+                  Não é ótimo
+                  ganhar um
+                  dinheirinho só
+                  investindo?
+                </Paragraph>
+              </Box>
+          </TipBubble>
+        }
+        <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
+        {small &&
+          <TipBubble
+            style={{maxWidth: '292px'}}
+            small={small} >
+              <Box pad={small ? {between: 'large'} : {between: 'medium'}}>
+                <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
+                <Paragraph size='large' margin='none'>
+                  Não é ótimo
+                  ganhar um
+                  dinheirinho só
+                  investindo?
+                </Paragraph>
+              </Box>
+          </TipBubble>
+        }
+        </Box>;
 
     const ObjetivosBox = <Box style={{backgroundColor: 'white', width: small ? '' : '65%'}}  margin={small ? 'medium' : {left: 'small', right: 'medium'}}>
       <Card
@@ -239,15 +241,6 @@ export default class MainScreen extends React.Component {
               <Label size='small'>Ordene seus objetivos, defina prioridades</Label>
             </Box>
 
-              {
-                this.props.activeUser.dica ?
-                <Box>
-                    <Anchor icon={<Info />} onClick={() => this.toggleDica(this.props.activeUser.dica)} />
-                </Box>
-                :
-                null
-              }
-
             <Box flex="grow" align="end">
               <Button onClick={this.onClickAddObjetivo}  icon={<AddIcon />} />
             </Box>
@@ -259,7 +252,8 @@ export default class MainScreen extends React.Component {
       </Card>
     </Box>;
 
-    const InvestimentosBox = <Box direction='row'  style={{backgroundColor: 'white', width: small ? '' : '65%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small'}}>
+    const InvestimentosBox =
+    <Box direction='row'  style={{backgroundColor: 'white', width: small ? '' : '65%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small'}}>
       <Card
         style={{width:'100%'}}
         heading={
@@ -273,7 +267,7 @@ export default class MainScreen extends React.Component {
             size={small ? 'medium' : 'medium'}  series={investimentosData} />
           <Box pad={{vertical: 'large', horizontal: 'medium', between: 'medium'}}>
             <FormField size='medium'>
-              <TextInput placeHolder="Valor do resgate"></TextInput>
+              <TextInput placeHolder="Valor do resgate" />
             </FormField>
             <Button label='Resgatar' primary onClick={() => console.log('RESGATE FEITO')}/>
           </Box>
@@ -297,6 +291,55 @@ export default class MainScreen extends React.Component {
       </Card>
     </Box>;
 
+    const SaldoBox =
+    <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
+      <Heading tag='h2'>
+        Saldo da Conta Corrente
+      </Heading>
+      <Heading tag='h2'>
+        R$ 1.220,30
+      </Heading>
+    </Box>
+
+    const InvestirBox =
+    <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
+      <Heading tag='h2'>
+        Investir
+      </Heading>
+      <Box pad='small' align='center'>
+        <Box style={small ? {maxWidth: '300px'} : {}}>
+          <FormField size='medium' style={{width: '100%'}}>
+            <TextInput placeHolder="R$" />
+          </FormField>
+          <Box justify='center'>
+            <Box direction='row' responsive={false} pad={{between: 'medium'}} align='center'>
+              <Label style={{width: '40px'}}>
+                De
+              </Label>
+              <Select
+                onChange={() => console.log('oi')}
+                options={['Poupança']}
+                placeHolder='Escolher'
+              />
+            </Box>
+            <Box direction='row' responsive={false} pad={{between: 'medium'}} align='center'>
+              <Label style={{width: '40px'}}>
+                Para
+              </Label>
+              <Select
+                onChange={() => console.log('oi')}
+                options={['Poupança']}
+                placeHolder='Escolher'
+              />
+            </Box>
+            <Box justify='center'>
+              <Button label='Investir' primary onClick={() => console.log('INVESTIMENTO FEITO')}/>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+
     const desktopView = [
       <Box direction='row'>
         {DicasPagsBox}
@@ -304,11 +347,17 @@ export default class MainScreen extends React.Component {
       </Box>,
       <Box direction='row'>
         {InvestimentosBox}
-        {EducacionalBox}
+        <Box direction='column' style={{width: small ? '' : '35%'}}>
+          {SaldoBox}
+          {InvestirBox}
+        </Box>
+      </Box>,
+      <Box direction='row'>
+
       </Box>
     ];
 
-    const mobileView = this.renderTabs(InvestimentosBox, ObjetivosBox, DicasPagsBox, EducacionalBox);
+    const mobileView = this.renderTabs(InvestimentosBox, ObjetivosBox, DicasPagsBox, EducacionalBox, SaldoBox, InvestirBox);
 
 
     return hasInvestidorInfo ?

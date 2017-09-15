@@ -1,0 +1,5 @@
+@media (max-width: 350px) {
+  .pags {
+    max-width: 145px !important;
+  }
+}

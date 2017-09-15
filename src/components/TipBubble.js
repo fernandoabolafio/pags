@@ -7,6 +7,7 @@ const TipBubble = ({small, leftContent, rightContent, caret, style, children, no
     <Box
       style={ noPropagate ? {borderRadius: '10px', width: '100%'} : {borderRadius: '10px', width: '100%', ...style}}
       direction='row'
+      className='tipBubble'
       responsive={false}
       align='center'
       pad={small ? 'large' : 'medium'}
