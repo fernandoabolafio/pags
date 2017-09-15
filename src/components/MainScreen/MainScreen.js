@@ -3,9 +3,8 @@ import Section from 'grommet/components/Section';
 import Card from 'grommet/components/Card';
 import Heading from 'grommet/components/Heading';
 import Box from 'grommet/components/Box';
-import Meter from 'grommet/components/Meter';
+import Paragraph from 'grommet/components/Paragraph';
 import Label from 'grommet/components/Label';
-import Value from 'grommet/components/Value';
 import Button from 'grommet/components/Button';
 import Spinning from 'grommet/components/icons/Spinning';
 import Info from 'grommet/components/icons/base/Info';
@@ -33,7 +32,6 @@ import acessorio08 from '../../assets/acessorio08.png';
 import acessorio09 from '../../assets/acessorio09.png';
 import acessorio10 from '../../assets/acessorio10.png';
 import AulasList from './AulasList';
-import Pulse from 'grommet/components/icons/Pulse';
 import Dica from './Dica';
 
 
@@ -184,50 +182,43 @@ export default class MainScreen extends React.Component {
         />
       )
     }
-    const DicasPagsBox = <Box style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {left: 'medium', right: 'small'}}>
-      <Card
-        align='center'
-        full='horizontal'
-      >
+    const DicasPagsBox =
+    <Box style={{backgroundColor: 'white', width: small ? '' : '35%'}}
+      margin={small ? 'medium' : {left: 'medium', right: 'small'}}
+      direction={small ? 'row' : 'column'}
+      align='center'
+      justify='center'
+      responsive={false} >
+      {!small &&
         <TipBubble
           small={small}
-          caret
-          leftContent={
-            <Meter size='small'
-              colorIndex='warning'
-              type='circle'
-              label={<Value colorIndex='warning' value={35}
-              units='%'
-              size='small' />}
-              value={35}
-            />
-          }
-          rightContent={
-            <div>
-              <div style={{marginLeft: '10px'}}>
-                <Label
-                  size='small'>
-                  Nivel 2
-                </Label>
-                <Heading
-                  tag='h3'
-                  style={{color: '#ffd602'}}
-                >
-                  Entusiasta
-                </Heading>
-              </div>
-              <Box wrap>
-                <ul style={{margin: small ? '0 0 0 10px' : '0', padding: '0 0 0 7px'}}>
-                  <li><Anchor path='app/investimentos' label={<Label size='medium'>Recomendações de Investimento</Label>} /></li>
-                  <li><Anchor path='app/inventario' label={<Label size='medium'>Ver minhas recompensas</Label>} /></li>
-                  <li><Anchor label={<Label size='medium'>Aprender</Label>} /></li>
-                </ul>
-              </Box>
-            </div>
-          }
-        />
-        <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
-      </Card>
+          caret >
+            <Box pad={{between: 'medium'}}>
+              <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
+              <Paragraph size='large' margin='none'>
+                Não é ótimo
+                ganhar um
+                dinheirinho só
+                investindo?
+              </Paragraph>
+            </Box>
+        </TipBubble>
+      }
+      <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
+      {small &&
+        <TipBubble
+          small={small} >
+            <Box pad={small ? {between: 'large'} : {between: 'medium'}}>
+              <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
+              <Paragraph size='large' margin='none'>
+                Não é ótimo
+                ganhar um
+                dinheirinho só
+                investindo?
+              </Paragraph>
+            </Box>
+        </TipBubble>
+      }
     </Box>;
 
     const ObjetivosBox = <Box style={{backgroundColor: 'white', width: small ? '' : '65%'}}  margin={small ? 'medium' : {left: 'small', right: 'medium'}}>

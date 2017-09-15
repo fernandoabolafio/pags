@@ -2,23 +2,16 @@ import React from 'react';
 import Box from 'grommet/components/Box';
 import './TipBubble.css'
 
-const TipBubble = ({small, leftContent, rightContent, caret, style}) =>
-  <Box align='center' style={{...style, zIndex: '2'}}>
+const TipBubble = ({small, leftContent, rightContent, caret, style, children}) =>
+  <Box align='center' style={{...style, zIndex: '2', maxWidth: '292px'}}>
     <Box
       style={{borderRadius: '10px', width: '100%'}}
       direction='row'
       responsive={false}
-      pad={small ? 'medium' : 'small'}
+      pad={small ? 'large' : 'medium'}
       colorIndex="grey-2"
     >
-      {leftContent ?
-      <Box pad={{horizontal: 'small'}}>
-        {leftContent}
-      </Box>
-      : null}
-      <Box pad={leftContent ? 'none' : {horizontal: 'medium'}}>
-        {rightContent}
-      </Box>
+      {children}
     </Box>
     {caret ? <div className='caret' /> : null}
   </Box>
