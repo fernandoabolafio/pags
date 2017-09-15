@@ -69,7 +69,7 @@ const HomeAdvantages = () => {
           <Image src="img/landing-section3-img3.svg" style={ imageStyles } />
           <Title style={ titleStyles }>Prático</Title>
           <Label style={ labelStyles }>
-            Pag$ é o que você precisa!<br/>
+            PAG$ é o que você precisa!<br/>
 É prático para investir e a informação vem sempre que você precisa, de forma simples, transparente e objetiva
           </Label>
         </Box>
