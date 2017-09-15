@@ -2,7 +2,7 @@ import utils from '../support/localStorageUtils';
 
 export function checkSession(nextState, replace, callback) {
   if (utils.get('activeUser')) {
-    replace('/app/main');
+    replace('/app/inicio');
   }
   callback();
 }
