@@ -6,6 +6,8 @@
   bottom: 0;
   right: 0;
   z-index: 9;
+  width: 500px;
+
 }
 
 
@@ -46,7 +48,6 @@
   border-radius: 3px;
   padding: 8px;
   outline: none;
-  width: 234px;
 }
 
 .chat-message-counter {
@@ -85,7 +86,7 @@
 }
 
 .chat-history {
-  height: 252px;
+  height: 402px;
   padding: 8px 24px;
   overflow-y: scroll;
 }
@@ -111,4 +112,11 @@
 .chat-feedback {
   font-style: italic;
   margin: 0 0 0 80px;
+}
+
+.chat-input-place{
+  width: 100%;
+}
+.chat-input{
+  border-radius: 20%;
 }
