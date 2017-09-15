@@ -135,7 +135,7 @@ export default class Home extends React.Component {
               <Box>
                 <Image size="small" src={'img/landing-section4-img1.png'} />
               </Box>
-              <Box align="center" style={{maxWidth:'400px'}}>
+              <Box align="center" style={{maxWidth:'400px'}} margin="large">
                 <Heading  strong={true}>PAG$ é GRÁTI$</Heading>
                 <Label align="center">Você tem acesso total as funcionalidades e só paga as taxas administrativas dos investimentos que escolher</Label>
               </Box>
