@@ -88,7 +88,7 @@ export default class Menu extends React.Component {
       width: '100%',
       justifyContent: 'space-around',
       boxShadow: '0 -5px 5px -5px #333',
-      zIndex: '99999'
+      zIndex: '9'
     }
 
     const menuItems = menuStructure.map((menuItem, i) => this.renderMenuItem(menuItem, menuItem.value === this.state.tab));

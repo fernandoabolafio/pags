@@ -9,6 +9,9 @@ import Button from 'grommet/components/Button';
 import Spinning from 'grommet/components/icons/Spinning';
 import Info from 'grommet/components/icons/base/Info';
 import Anchor from 'grommet/components/Anchor';
+import Form from 'grommet/components/Form';
+import FormField from 'grommet/components/FormField';
+import TextInput from 'grommet/components/TextInput';
 import AddIcon from 'grommet/components/icons/base/Add';
 import Tabs from 'grommet/components/Tabs';
 import Tab from 'grommet/components/Tab';
@@ -188,9 +191,11 @@ export default class MainScreen extends React.Component {
       direction={small ? 'row' : 'column'}
       align='center'
       justify='center'
+      pad={{between: 'small'}}
       responsive={false} >
       {!small &&
         <TipBubble
+          style={{maxWidth: '292px'}}
           small={small}
           caret >
             <Box pad={{between: 'medium'}}>
@@ -207,6 +212,7 @@ export default class MainScreen extends React.Component {
       <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
       {small &&
         <TipBubble
+          style={{maxWidth: '292px'}}
           small={small} >
             <Box pad={small ? {between: 'large'} : {between: 'medium'}}>
               <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
@@ -265,6 +271,12 @@ export default class MainScreen extends React.Component {
         <Box align='center'>
           <AnnotatedMeter type="circle" legend={true} units="R$"
             size={small ? 'medium' : 'medium'}  series={investimentosData} />
+          <Box pad={{vertical: 'large', horizontal: 'medium', between: 'medium'}}>
+            <FormField size='medium'>
+              <TextInput placeHolder="Valor do resgate"></TextInput>
+            </FormField>
+            <Button label='Resgatar' primary onClick={() => console.log('RESGATE FEITO')}/>
+          </Box>
         </Box>
       </Card>
     </Box>;

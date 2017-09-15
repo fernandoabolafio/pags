@@ -152,8 +152,33 @@ export default class Inventario extends React.Component {
             <Heading tag='h2'>
               Seu Pag$
             </Heading>
-            <Box style={{height: "100%"}} justify="center">
-              <Pags src={acessoriosSrc[activeAcessorio]} size={small ? 'small' : 'medium'} />
+            <Box
+              margin={small ? 'medium' : {left: 'medium', right: 'small'}}
+              direction={small ? 'row' : 'column'}
+              align='center'
+              justify='center'
+              pad={{vertical: 'medium', between: 'small'}}
+              responsive={false} >
+              {!small &&
+                <TipBubble
+                  style={{maxWidth: '292px', minHeight: '200px'}}
+                  small={small}
+                  caret >
+                    <Box pad={{between: 'medium'}}>
+                      <Paragraph size='large' margin='none'>Eaí, beleza? Qual a boa de hoje?</Paragraph>
+                    </Box>
+                </TipBubble>
+              }
+              <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
+              {small &&
+                <TipBubble
+                  style={{maxWidth: '292px', minHeight: '200px'}}
+                  small={small} >
+                    <Box pad={small ? {between: 'large'} : {between: 'medium'}}>
+                      <Paragraph size='large' margin='none'>Eaí, beleza? Qual a boa de hoje?</Paragraph>
+                    </Box>
+                </TipBubble>
+              }
             </Box>
           </Box>
           <Box style={{backgroundColor: 'white', width: small ? '' : '70%'}} margin={small ? 'medium' : {left: 'small', right: 'medium'}} pad='medium'>
@@ -163,27 +188,31 @@ export default class Inventario extends React.Component {
               <Box>
                 <Box direction='row' pad={{vertical: 'small', horizontal: 'small', between: 'small'}} justify='center'>
                   <TipBubble
+                    noPropagate
                     style={small ? {} : {width: '50%'}}
-                    small={small}
-                    rightContent={this.rightContent(small, 1, title['1'], 100)}
-                   />
+                    small={small} >
+                      {this.rightContent(small, 1, title['1'], 100)}
+                    </TipBubble>
                    <TipBubble
+                     noPropagate
                      style={small ? {} : {width: '50%'}}
-                     small={small}
-                     rightContent={this.rightContent(small, 2, title['2'], 35)}
-                    />
+                     small={small} >
+                       {this.rightContent(small, 2, title['2'], 35)}
+                     </TipBubble>
                 </Box>
                 <Box direction='row' pad={{vertical: 'none', horizontal: 'small', between: 'small'}} justify='center'>
                   <TipBubble
+                    noPropagate
                     style={small ? {} : {width: '50%'}}
-                    small={small}
-                    rightContent={this.rightContent(small, 3, title['3'], 0)}
-                   />
+                    small={small} >
+                      {this.rightContent(small, 3, title['3'], 0)}
+                    </TipBubble>
                    <TipBubble
+                     noPropagate
                      style={small ? {} : {width: '50%'}}
-                     small={small}
-                     rightContent={this.rightContent(small, 4, title['4'], 0)}
-                    />
+                     small={small}>
+                       {this.rightContent(small, 4, title['4'], 0)}
+                     </TipBubble>
                  </Box>
               </Box>
           </Box>
