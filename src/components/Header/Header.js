@@ -15,7 +15,7 @@ export const MyHeader = ({logout, activeUser}) =>
      <Anchor
        style={{ textDecoration: 'none' }}
        a11yTitle='Toryca página principal'
-       path={{ path: 'app/main', index: true }}
+       path={{ path: 'app/inicio', index: true }}
        label={
        <Image style={{width:'45.8px', height: '42.1px'}} src="img/logo.png" />
      }
