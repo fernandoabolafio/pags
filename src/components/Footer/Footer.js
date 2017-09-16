@@ -11,50 +11,52 @@ import Anchor from 'grommet/components/Anchor';
 import GrommetIcon from 'grommet/components/icons/base/BrandGrommetOutline';
 import Image from 'grommet/components/Image';
 
+import {
+  colors,
+  sectionTitleNegativeStyle
+} from '../../constants/styles';
+
 export const MyFooter = ({small}) =>
   <Footer >
     <Section
-      align="center"
+      align="start"
       pad="medium"
       full="horizontal"
       direction="row"
+      style={{background: colors.darkBlue}}
     >
-      <Box basis="1/2" pad={{horizontal: 'large', vertical: 'large'}} wrap direction='row' justify='center'>
-        <Box basis='1/2' align='center'  margin={{vertical: 'small'}}>
-          <Label size={small ? 'medium' : 'small'} uppercase>Parceiros</Label>
-          <Image style={{width: '120px', height: '120px'}} src={'https://seeklogo.com/images/I/Itau-logo-082730CE51-seeklogo.com.png'}/>
-        </Box>
-        <Box basis='1/2' direction='row' justify='center' margin={{vertical: 'small'}} responsive={false}>
-          <div style={{display: 'flex', flexDirection: 'column', marginRight: small ? '25px' : '10px'}}>
-            <Label size={small ? 'medium' : 'small'} uppercase>Empresa</Label>
-            <Anchor label={<Label size={small ? 'medium' : 'small'}>Sobre nós</Label>}></Anchor>
-            <Anchor label={<Label size={small ? 'medium' : 'small'}>Blog</Label>}></Anchor>
-            <Anchor label={<Label size={small ? 'medium' : 'small'}>Guias</Label>}></Anchor>
-          </div>
-          <div style={{display: 'flex', flexDirection: 'column'}}>
-            <Label size={small ? 'medium' : 'small'} uppercase>Produto</Label>
-            <Anchor label={<Label size={small ? 'medium' : 'small'}>Por que Pag$?</Label>}></Anchor>
-            <Anchor label={<Label size={small ? 'medium' : 'small'}>Depoimentos</Label>}></Anchor>
-            <Anchor label={<Label size={small ? 'medium' : 'small'}>Segurança</Label>}></Anchor>
-            <Anchor label={<Label size={small ? 'medium' : 'small'}>Educacional</Label>}></Anchor>
-          </div>
-        </Box>
+      <Box basis="1/3" pad={{horizontal: 'large', vertical: 'large'}} wrap direction='column' align='center'>
+        <Label style={{ ...sectionTitleNegativeStyle, marginTop: '0' }}>
+          Parceiros
+        </Label>
+        <Image style={{width: '120px', height: '120px'}} src='img/itau-logo-negative.svg'/>
+        <Label style={{maxWidth: '150px', fontSize: '16px', color: 'white'}}>
+          Seu banco não está aqui? Fala pra gente.
+        </Label>
       </Box>
-      <Box basis="1/2" pad={{horizontal: 'large', vertical: 'large'}} separator='left'>
+      <Box basis="2/3" pad={{horizontal: 'large', vertical: 'large'}} separator='left'>
         <Form plain>
-          <Label uppercase>Fale conosco</Label>
+          <Label style={sectionTitleNegativeStyle}>
+            Contato
+          </Label>
           <Box direction="column" responsive={false} pad={{between: 'medium', vertical: 'medium'}}>
-            <FormField help='Seu email'>
-              <input
-                type="email"
-              />
+            <FormField help='Seu email' style={{textAlign: 'left'}}>
+              <input type="email"/>
             </FormField>
-            <FormField help='Mensagem'>
-              <textarea
-                type="text"
-              />
+            <FormField help='Mensagem' style={{textAlign: 'left'}}>
+              <textarea type="text"/>
             </FormField>
-            <Button label="Enviar" fill onClick={() => console.log('recebemos um email, uhul!')} />
+            <Button
+              label="Enviar"
+              onClick={() => console.log('recebemos um email, uhul!')}
+              style={{
+                background: colors.yellow,
+                borderColor: colors.yellow,
+                color: colors.darkGray,
+                width: '100px'
+              }}
+              fill
+            />
           </Box>
         </Form>
         <Box direction="row" margin={{top: 'medium', bottom: 'small'}} responsive={false}>

@@ -38,8 +38,8 @@ export default class Login extends React.Component {
 
   render() {
     const sectionStyle = {
-      backgroundColor: 'white',
-      justifyContent: 'flex-stat',
+      backgroundColor: colors.lightGray,
+      justifyContent: 'center',
     };
 
     const wrapperStyle = {
@@ -51,15 +51,23 @@ export default class Login extends React.Component {
     };
 
     const boxStyle = {
-      backgroundColor: colors.darkBlue,
+      backgroundColor: 'white',
       width: '80%',
       minWidth: '300px',
       maxWidth: '500px',
+      boxShadow: '0 0 20px rgba(0, 0, 0, .08)',
+      borderRadius: '3px'
     };
 
     const logoStyle = {
       width: '290px',
+      marginBottom: '50px'
     };
+
+    const titleStyle = {
+      color: colors.yellow,
+      fontWeight: 'bold',
+    }
 
     return (
         <Article>
@@ -67,8 +75,8 @@ export default class Login extends React.Component {
             <div style={wrapperStyle}>
               <Image style={logoStyle} src="img/pags_marca_azul.svg" />
               <Box style={boxStyle} pad="large" align="center" flex="grow">
-                <Title style={{color: colors.yellow}}>Entre</Title>
-                <Paragraph margin="small" style={{color: 'white'}}>Escolha seu usuário</Paragraph>
+                <Title style={titleStyle}>Seja bem vindo :)</Title>
+                <Paragraph margin="small">Escolha seu usuário para entrar</Paragraph>
                 {this.getStepContent()}
               </Box>
             </div>
