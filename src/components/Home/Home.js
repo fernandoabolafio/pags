@@ -19,6 +19,8 @@ import Anchor from 'grommet/components/Anchor';
 import Footer from '../Footer';
 import HomeBanner from './HomeBanner';
 import HomeAdvantages from './HomeAdvantages';
+import HomeReasons from './HomeReasons';
+import HomeAdvertise from './HomeAdvertise';
 
 import {
   sectionStyle,
@@ -61,7 +63,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <Article scrollStep={true}yar selected={this.state.chapter} onSelect={(chapter) => this.setChapter(chapter)}>
+      <Article scrollStep selected={this.state.chapter} onSelect={(chapter) => this.setChapter(chapter)}>
           <Header colorIndex="brand"  style={{backgroundColor: '#102027', paddingLeft: "40px", paddingRight: "40px"}}>
             <Image style={{width:'45.8px', height: '42.1px'}} src="img/logo.png" />
             <Menu
@@ -69,15 +71,18 @@ export default class Home extends React.Component {
               direction='row'
               style={{border: '3px solid transparent'}}
              >
-               <Anchor onClick={() => this.setChapter(2)} >Como funciona</Anchor>
-               <Anchor onClick={() => this.setChapter(3)} >Vantagens</Anchor>
-               <Anchor onClick={() => this.setChapter(4)} >Contato</Anchor>
+               <Anchor onClick={() => this.setChapter(2)} >Por que investir?</Anchor>
+               <Anchor onClick={() => this.setChapter(4)} >Como funciona</Anchor>
+               <Anchor onClick={() => this.setChapter(5)} >Vantagens</Anchor>
+               <Anchor onClick={() => this.setChapter(6)} >Contato</Anchor>
             </Menu>
             <Box flex="grow" justify="end" direction="row">
               <Button onClick={this.props.goToLogin}  style={{backgroundColor:'#FFAB00', color: 'black', borderColor: '#FFAB00'}} primary label="Entrar" />
             </Box>
           </Header>
           <HomeBanner />
+          <HomeReasons />
+          <HomeAdvertise />
           <Section
             style={{ ...sectionStyle, backgroundColor: colors.lightGray }}
             direction="column"
@@ -90,27 +95,34 @@ export default class Home extends React.Component {
             <Box direction="row" justify="center">
               <Box pad="medium" align="center">
                 <Heading style={{fontSize: '22px'}} strong={true}>1. Cadastre-se</Heading>
-                <Image size="small" src={'img/landing-section2-img1.png'} />
+                <Image size="small" src={'img/landing-section2-img1.svg'} />
                 <Label style={{maxWidth:'200px'}} align="center">Coloque os dados do banco e crie seu perfil</Label>
               </Box>
               <Box pad="medium" align="center">
-                <Heading style={{fontSize: '22px'}} strong={true}>2. Liste Sonhos</Heading>
-                <Image size="small" src={'img/landing-section2-img2.png'} />
-                <Label style={{maxWidth:'200px'}} align="center">Determine suas motivações e o valor delas</Label>
+                <Heading style={{fontSize: '22px'}} strong={true}>2. Coloque metas</Heading>
+                <Image size="small" src={'img/landing-section2-img2.svg'} />
+                <Label style={{maxWidth:'200px'}} align="center">Determine as motivações para seus investimentos e o valor delas</Label>
               </Box>
               <Box pad="medium" align="center">
-                <Heading style={{fontSize: '22px'}} strong={true}>3. Receba sugestões</Heading>
-                <Image size="small" src={'img/landing-section2-img3.png'} />
-                <Label style={{maxWidth:'200px'}} align="center">Receba sugestões dos melhores investimos</Label>
+                <Heading style={{fontSize: '22px'}} strong={true}>3. Faça missões</Heading>
+                <Image size="small" src={'img/landing-section2-img3.svg'} />
+                <Label style={{maxWidth:'200px'}} align="center">Entenda de forma divertida e bem simples os termos sobre investimentos</Label>
               </Box>
               <Box pad="medium" align="center">
                 <Heading style={{fontSize: '22px'}} strong={true}>4. Invista</Heading>
-                <Image size="small" src={'img/landing-section2-img4.png'} />
-                <Label style={{maxWidth:'200px'}} align="center">Defina investimentos mensais automáticos</Label>
+                <Image size="small" src={'img/landing-section2-img4.svg'} />
+                <Label style={{maxWidth:'200px'}} align="center">Escolha de forma conciente o investimento mais rentável para você</Label>
               </Box>
             </Box>
-            <Box align="center">
-              <Image size="large" src={'img/landing-section2-img5.png'} />
+            <Box align="center" direction="row" justify="center">
+              <Image
+                src={'img/how-it-works-bot.svg'}
+                style={{height: '250px', padding: '20px'}}
+              />
+              <Image
+                src={'img/how-it-works-avatars.svg'}
+                style={{height: '250px', padding: '20px', width: 'auto'}}
+              />
             </Box>
           </Section>
           <HomeAdvantages />
@@ -123,7 +135,7 @@ export default class Home extends React.Component {
               <Box>
                 <Image size="small" src={'img/landing-section4-img1.png'} />
               </Box>
-              <Box align="center" style={{maxWidth:'400px'}}>
+              <Box align="center" style={{maxWidth:'400px'}} margin="large">
                 <Heading  strong={true}>PAG$ é GRÁTI$</Heading>
                 <Label align="center">Você tem acesso total as funcionalidades e só paga as taxas administrativas dos investimentos que escolher</Label>
               </Box>

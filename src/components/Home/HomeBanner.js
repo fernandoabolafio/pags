@@ -27,21 +27,29 @@ const HomeBanner = () => {
           textTransform: 'uppercase',
           fontSize: '65px',
           fontWeight: 'bold',
-          textAlign: 'center'
+          textAlign: 'center',
+          marginBottom: '0',
         }}
       >
         CONHEÇA PAG$
       </Heading>
-      <Heading tag="h3" style={{textAlign: 'center', fontSize: '28px'}}>
-        Seu assitente pessoal de investimentos
+      <Heading
+        tag="h3"
+        style={{
+          textAlign: 'center',
+          fontSize: '42px',
+          fontWeight: 'bold',
+        }}
+      >
+        é tão fácil quanto a poupança
       </Heading>
-      <Label align="center">
-        Aprenda a investir na prática de modo seguro, <br/>
+      <Label align="center" margin="small" style={{maxWidth: '350px'}}>
+        Aprenda a investir na prática de modo seguro,
         passo a passo e de forma divertida.
       </Label>
     </Box>
     <Box style={ boxStyles }>
-      <Image size="medium" src="img/landing-img1.png"/>
+      <Image size="medium" src="img/landing-img.svg"/>
     </Box>
     </Section>
   )

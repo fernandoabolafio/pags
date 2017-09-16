@@ -66,11 +66,11 @@ const HomeAdvantages = () => {
           </Label>
         </Box>
         <Box pad="medium" style={ advantageBoxStyles }>
-          <Image src="img/landing-section3-img3.png" style={ imageStyles } />
-          <Title style={ titleStyles }>Taxas</Title>
+          <Image src="img/landing-section3-img3.svg" style={ imageStyles } />
+          <Title style={ titleStyles }>Prático</Title>
           <Label style={ labelStyles }>
-            PAG$ só ganha se você ganhar!<br/>
-            Quando um cliente utiliza o PAG$ para realizar um investimento, uma porcentagem da taxa de administração vai para melhorias do PAG$
+            PAG$ é o que você precisa!<br/>
+É prático para investir e a informação vem sempre que você precisa, de forma simples, transparente e objetiva
           </Label>
         </Box>
       </Box>
