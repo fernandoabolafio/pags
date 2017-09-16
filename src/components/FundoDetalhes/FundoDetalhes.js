@@ -36,11 +36,8 @@ export default class FundoDetalhes extends React.Component {
 
   constructor(props){
     super(props);
-    console.log(window.location.hash);
     const investId = window.location.hash.split("/")[3];
-    console.log(investId);
     const investimento = recomendados.filter(rec => rec.id === parseInt(investId))[0];
-    console.log(investimento);
 
     function getQueryStringValue (key) {
       return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));

@@ -200,9 +200,7 @@ export default class Fundos extends React.Component {
 
 
   renderFundoRecomendado = (fundo) => {
-    console.log(fundo.invest_min);
     const description = `Valor mínimo R$${numberWithCommas(fundo.invest_min)}`;
-    console.log(this.state.inputsRecomendados.quantia);
     const rend = generateRendBruto(fundo, this.state.inputsRecomendados.prazo, parseFloat(this.state.inputsRecomendados.quantia));
     const rendaEsperada = rend[rend.length-1]-rend[0];
     const mes = `Rendimento de R$${numberWithCommas(parseInt(rendaEsperada))}`;
