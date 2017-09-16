@@ -17,41 +17,64 @@ export default class Chat extends React.Component {
 
   render() {
     return (
-      <div id="live-chat" className="chat-body">
+      <div id="live-chat" className="box_chat-body">
         <header onClick={()=>this.handleClick()}>
-          <a href="#" className="chat-close">x</a>
+          <a href="#" className="box_chat-close">X</a>
           <h3>John Doe</h3>
         </header>
 
         <div className="chat"
-          style={
-            {
-              display: this.state.visible ? 'block' : 'none'
-            }
+             style={
+               {
+                 display: this.state.visible ? 'block' : 'none'
+               }
 
-          }
+             }
         >
 
-          <div className="chat-history">
-            <div className="chat-message clearfix">
+          <div className="box_chat-history">
+            <div className="box_chat-message">
               <img className="photo" src="img/logo.png" width="32" height="32"/>
-                <div className="chat-message-content">
-                  <h3>Pag$</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, explicabo quasi ratione odio dolorum harum.</p>
+              <div className="box_chat-message-content">
+                <h3>Pag$</h3>
+                <div className="box_content">
+                  <p className="box_ballon">Olá, como posso te ajudar?! </p>
                 </div>
+              </div>
             </div>
 
-              <div className="chat-message clearfix">
-                <img src="img/persons/julia.jpg" alt="" width="32" height="32" />
-                  <div className="chat-message-content clearfix">
-                    <h3>Julia</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>
-                  </div>
+            <div className="box_chat-message ">
+              <img src="img/persons/julia.jpg" alt="" width="32" height="32" />
+              <div className="chat-message-content">
+                <h3>Julia</h3>
+                <div className="box_content">
+                  <p className="box_ballon">1 - Quanto a poupança rende hoje? </p>
+                </div>
+                <div className="box_content">
+                  <p className="box_ballon"
+                     style={
+                       {
+                         border: '1px solid #e2780a'
+                       }
+                     }>2 - Quanto rende o Tesouro SELIC? </p>
+                </div>
+                <div className="box_content">
+                  <p className="box_ballon">3 - Quanto rende o Tesouro pré-fixado? </p>
+                </div>
               </div>
+            </div>
+
+            <div className="box_chat-message">
+              <img className="photo" src="img/logo.png" width="32" height="32"/>
+              <div className="box_chat-message-content">
+                <h3>Pag$</h3>
+                <div className="box_content">
+                  <p className="box_ballon"> Hoje, a rentabilidade do Tesouro SELIC está em 9.31% ao ano </p>
+                </div>
+              </div>
+            </div>
 
           </div>
-
-          <p className="chat-feedback">Your partner is typing…</p>
 
           <div className="chat-input-place">
             <FormField

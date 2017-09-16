@@ -10,6 +10,7 @@ export default class Chat extends React.Component {
       <div className="chat-body">
         <div className="chat">
           <ul className="comments">
+
             <li className="comment" >
               <section className="author">
                 <img className="photo" src="img/logo.png"/>
@@ -18,31 +19,39 @@ export default class Chat extends React.Component {
               <section className="content">
                 <p>Olá, Como posso te ajudar?! </p>
               </section>
-              <section className="content">
-                <p>1 - Quanto a poupança rende hoje? </p>
-              </section>
-              <section className="content">
-                <p>2 - Quanto a poupança rende hoje? </p>
-              </section>
-              <section className="content">
-                <p>3 - Quanto a poupança rende hoje? </p>
-              </section>
-              <section className="content">
-                <p>4 - Quanto a poupança rende hoje? </p>
-              </section>
-              <section className="content">
-                <p>Clique na pergunta que possa te ajudar</p>
-              </section>
             </li>
+
             <li className="comment">
               <section className="author">
                 <img className="photo" src="img/persons/julia.jpg"/>
                 <span className="name">Julia</span>
               </section>
               <section className="content">
-                <p>I don't know... what?</p>
+                <p>1 - Quanto a poupança rende hoje? </p>
+              </section>
+              <section className="content"
+                       style={
+                         {
+                           border: '1px solid #e2780a'
+                         }
+                       }>
+                <p>2 - Quanto rende o Tesouro SELIC? </p>
+              </section>
+              <section className="content">
+                <p>3 - Quanto rende o Tesouro pré-fixado? </p>
               </section>
             </li>
+
+            <li className="comment" >
+              <section className="author">
+                <img className="photo" src="img/logo.png"/>
+                <span className="name">Pag$</span>
+              </section>
+              <section className="content">
+                <p> Hoje, a rentabilidade do Tesouro SELIC está em 9.31% ao ano </p>
+              </section>
+            </li>
+            
           </ul>
         </div>
         <div className="chat-input-place">
