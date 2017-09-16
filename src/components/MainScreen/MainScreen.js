@@ -299,7 +299,7 @@ export default class MainScreen extends React.Component {
           Agenda
         </Heading>
         <Paragraph>
-          Você tem um investimento de R$50,00 agendado para todo dia {this.state.agenda.substring(0, 2)}
+          Você tem um investimento de R$50,00 agendado para todo dia {this.state.agenda.substring(0, 2) || '05'} do mês
         </Paragraph>
         <Box pad={{between: 'medium'}}>
         <Button onClick={() => this.toggleEdit()} label='Editar' />
