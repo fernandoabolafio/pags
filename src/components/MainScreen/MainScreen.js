@@ -36,7 +36,6 @@ import acessorio09 from '../../assets/acessorio09.png';
 import acessorio10 from '../../assets/acessorio10.png';
 import AulasList from './AulasList';
 import Dica from './Dica';
-import ProjectionChart from '../ProjectionChart';
 
 
 const acessoriosSrc = {
@@ -339,10 +338,6 @@ export default class MainScreen extends React.Component {
           </Box>
         </Box>
       </Box>
-    </Box>
-
-    const ProjectionBox = <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
-
     </Box>
 
     const desktopView = [
