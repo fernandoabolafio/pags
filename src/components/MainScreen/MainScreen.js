@@ -7,8 +7,8 @@ import Paragraph from 'grommet/components/Paragraph';
 import Label from 'grommet/components/Label';
 import Button from 'grommet/components/Button';
 import Spinning from 'grommet/components/icons/Spinning';
-import Info from 'grommet/components/icons/base/Info';
 import Anchor from 'grommet/components/Anchor';
+import Form from 'grommet/components/Form';
 import Select from 'grommet/components/Select';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
@@ -16,6 +16,7 @@ import AddIcon from 'grommet/components/icons/base/Add';
 import Tabs from 'grommet/components/Tabs';
 import Tab from 'grommet/components/Tab';
 import Layer from '../Layer';
+import DateTime from 'grommet/components/DateTime';
 import ViewObjetivoLayerContent from './ViewObjetivoLayerContent';
 import AddObjetivoLayerContent from './AddObjetivoLayerContent';
 import Objetivos from './Objetivos';
@@ -54,7 +55,9 @@ const acessoriosSrc = {
 
 export default class MainScreen extends React.Component {
   state = {
-    hasInvestidorInfo: false
+    hasInvestidorInfo: false,
+    agenda: '',
+    editAgenda: false
   };
 
   componentWillReceiveProps(nextProps) {
@@ -78,6 +81,12 @@ export default class MainScreen extends React.Component {
     }
   }
 
+  handleDataChange = (value) => {
+    this.setState({
+      agenda: value
+    });
+  }
+
   onSelectObjetivo = (selection) => {
     this.setState({selection});
   }
@@ -95,7 +104,13 @@ export default class MainScreen extends React.Component {
     })
   }
 
-  renderTabs = (InvestimentosBox, ObjetivosBox, DicasPagsBox, EducacionalBox, SaldoBox, InvestirBox) => {
+  toggleEdit = () => {
+    this.setState({
+      editAgenda: !this.state.editAgenda
+    })
+  }
+
+  renderTabs = (InvestimentosBox, ObjetivosBox, DicasPagsBox, AgendaBox, SaldoBox, InvestirBox) => {
     return (
       <Tabs responsive={false}>
         <Tab title='Investimentos'>
@@ -110,7 +125,7 @@ export default class MainScreen extends React.Component {
           {ObjetivosBox}
         </Tab>
         <Tab title='Agenda'>
-          {EducacionalBox}
+          {AgendaBox}
         </Tab>
       </Tabs>
     )
@@ -275,20 +290,31 @@ export default class MainScreen extends React.Component {
       </Card>
     </Box>;
 
-    const EducacionalBox = <Box direction='row' align="center" style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}}>
-      <Card
-        style={{width:"100%"}}
-        heading={
-            <Heading tag='h2'>
-              Educacional
-            </Heading>
-          }
-      >
-        <AulasList />
-      <Box>
-
-      </Box>
-      </Card>
+    const AgendaBox =
+    <Box direction='column' pad='medium' style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'medium'}}>
+        <Heading tag='h2'>
+          Agenda
+        </Heading>
+        <Paragraph>
+          Você tem um investimento de R$50,00 agendado para todo dia {this.state.agenda.substring(0, 2)}
+        </Paragraph>
+        <Box pad={{between: 'medium'}}>
+        <Button onClick={() => this.toggleEdit()} label='Editar' />
+        {this.state.editAgenda ?
+          <Box pad={{between: 'medium'}}>
+            <Form>
+              <FormField>
+                <DateTime id='agenda'
+                  name='conclusaoEstimada'
+                  format='D/M/YYYY'
+                  value={this.state.agenda}
+                  onChange={(value) => this.handleDataChange(value)} />
+              </FormField>
+            </Form>
+            <Button onClick={() => this.toggleEdit()} label='Salvar' />
+          </Box>
+          : null}
+        </Box>
     </Box>;
 
     const SaldoBox =
@@ -353,11 +379,11 @@ export default class MainScreen extends React.Component {
         </Box>
       </Box>,
       <Box direction='row'>
-
+        {AgendaBox}
       </Box>
     ];
 
-    const mobileView = this.renderTabs(InvestimentosBox, ObjetivosBox, DicasPagsBox, EducacionalBox, SaldoBox, InvestirBox);
+    const mobileView = this.renderTabs(InvestimentosBox, ObjetivosBox, DicasPagsBox, AgendaBox, SaldoBox, InvestirBox);
 
 
     return hasInvestidorInfo ?
