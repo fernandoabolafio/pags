@@ -27,6 +27,8 @@ import Meter from 'grommet/components/Meter';
 import Value from 'grommet/components/Value';
 import {numberWithCommas} from '../../support/objectUtils';
 import Entenda from './Entenda';
+import FormRecomendador from './FormRecomendador';
+import {recomendados, generateRendBruto, generateRendLiq, generateFormatedData, generateFormatedDataWithPoupanca} from '../../test/mockedRecomendados';
 
 const Fundo = {
         "id_cdb": "1019",
@@ -61,6 +63,7 @@ export default class Fundos extends React.Component {
       [3]: 'previdencias',
       [4]: 'poupancas'
     }
+
     const mapTypeToIdKey = {
       cdbs: 'id_cdb',
       coes: 'id_coe',
@@ -68,12 +71,20 @@ export default class Fundos extends React.Component {
       previdencias: 'id_previdencia',
       poupancas: 'id_poupanca'
     };
+    const inputsRecomendados = {
+      quantia: 100,
+      prazo: 6,
+      liquidez: 'diario',
+      rendimento: 'pre_fixado',
+      risco: 'baixo'
+    };
     this.state = {
       mapTabToInvestimento,
       mapTypeToIdKey,
       section: sections.RECOMENDADOS,
       tab: 0,
       loadingCarteira: false,
+      inputsRecomendados,
       inputs: {
         carteira: {
           valor: 100,
@@ -84,14 +95,18 @@ export default class Fundos extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchFundosRecomendados();
-    this.props.fetchInvestimentos('cdbs');
-    this.props.fetchInvestimentos('coes');
-    this.props.fetchInvestimentos('fundos');
-    this.props.fetchInvestimentos('previdencias');
-    this.props.fetchInvestimentos('poupancas');
+    // this.props.fetchFundosRecomendados();
+    // this.props.fetchInvestimentos('cdbs');
+    // this.props.fetchInvestimentos('coes');
+    // this.props.fetchInvestimentos('fundos');
+    // this.props.fetchInvestimentos('previdencias');
+    // this.props.fetchInvestimentos('poupancas');
   }
-
+  onChangeForm = (inputsRecomendados) => {
+    this.setState({
+      inputsRecomendados
+    })
+  }
   mapTabToInfo(tab) {
     const mapTabToInfo = {
       0:  {
@@ -182,8 +197,43 @@ export default class Fundos extends React.Component {
     </Box>);
   }
 
-  renderFundos = (fundos, idkey) => {
-    const fundosComponents = fundos.map( fundo => this.renderFundo(fundo, idkey));
+
+
+  renderFundoRecomendado = (fundo) => {
+    const description = `Valor mínimo R$${numberWithCommas(fundo.invest_min)}`;
+    const rend = generateRendBruto(fundo, this.state.inputsRecomendados.prazo, parseFloat(this.state.inputsRecomendados.quantia));
+    const rendaEsperada = rend[rend.length-1]-rend[0];
+    const mes = `Rendimento de R$${numberWithCommas(parseInt(rendaEsperada))}`;
+    return (
+    <Box margin="small" >
+      <Card
+        style={{backgroundColor: 'white'}}
+        label={fundo.risco}
+        textSize="small"
+        contentPad="small"
+        heading={<Heading strong={true} tag="h3">{fundo.nome}</Heading>}
+        description={mes}
+        link={<Anchor primary icon={<FormNextLink />} onClick={() => this.props.seeMoreInvestimento(fundo.id, this.state.inputsRecomendados)} label="Aplicar"/>}
+      />
+    </Box>
+    );
+  }
+
+  renderFundos = (fundos) => {
+    const {inputsRecomendados} = this.state;
+    const fundosFiltered= fundos.filter( fundo => {
+      const matchLiq = fundo.liquidez === inputsRecomendados.liquidez;
+      const matchRend = fundo.rendimento === inputsRecomendados.rendimento;
+      const matchRisco = fundo.risco === inputsRecomendados.risco;
+      const matchVal = fundo.invest_min <= inputsRecomendados.quantia;
+      const matchPrazo = fundo.tempo_min <= inputsRecomendados.prazo;
+      if( matchVal && matchLiq && matchRend && matchRisco && matchPrazo) {
+        return true;
+      }else {
+        return false;
+      }
+    });
+    const fundosComponents = fundosFiltered.map( fundo => this.renderFundoRecomendado(fundo));
     return <Columns size="small" justify="center" style={{flexShrink: '0'}}>
             {fundosComponents}
           </Columns>;
@@ -257,19 +307,11 @@ export default class Fundos extends React.Component {
 
   getContent = () => {
     const {small} = this.props;
-    const {section} = this.state;
+    const {section, inputsRecomendados} = this.state;
     const mapSectionToContent = {
       [sections.RECOMENDADOS]: [
-        <Box direction="row" margin="small">
-          <Anchor primary onClick={() => this.handleSetSection(sections.SEARCH)} icon={<Search />} label="Buscar Investimento" />
-          <span style={{padding:"0 10px"}}>{small ? "" : "|"}</span>
-          <Anchor primary onClick={() => this.handleSetSection(sections.CARTEIRA)} icon={<Catalog />} label="Carteira de investimento" />
-        </Box>,
-        this.renderHeading('Investimentos Recomendados'),
-          (this.props.fundosRecomendados && !this.state.searching ?
-          this.renderFundos(this.props.fundosRecomendados, 'codigo_produto')
-          :
-          <Spinning size="large" />)
+        <FormRecomendador small={small} inputs={inputsRecomendados} onChangeInputs={this.onChangeForm}/>,
+        this.renderFundos(recomendados)
       ],
       [sections.SEARCH]: [
         this.renderAnchorBackToRecomendations(),
@@ -323,6 +365,8 @@ export default class Fundos extends React.Component {
 
     return (
       <Section align="center" style={{backgroundColor: '#f5f5f5', flexShrink: '0'}}>
+        <Heading align="center" tag="h3">Investimentos Recomendados</Heading>
+        <Heading align="center" tag="h4">Modifique os parametros para encontrar um investimento</Heading>
         {this.getContent()}
         {
           this.state.showEntenda ?

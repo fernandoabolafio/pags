@@ -41,7 +41,7 @@ export default class AplicarWizard extends React.Component {
       inputs: {
         tipo_movimentacao: 'H',
         data: '',
-        valor: this.props.investInfo.valor_minimo_aplicacao
+        valor: this.props.investInfo.invest_min
       }
     }
   }

@@ -37,6 +37,8 @@ import acessorio09 from '../../assets/acessorio09.png';
 import acessorio10 from '../../assets/acessorio10.png';
 import AulasList from './AulasList';
 import Dica from './Dica';
+import ProjectionChart from '../ProjectionChart';
+import {recomendados, generateRendBruto, generateRendLiq, generateFormatedData, generateFormatedDataWithPoupanca} from '../../test/mockedRecomendados';
 
 
 const acessoriosSrc = {
@@ -110,7 +112,7 @@ export default class MainScreen extends React.Component {
     })
   }
 
-  renderTabs = (InvestimentosBox, ObjetivosBox, DicasPagsBox, AgendaBox, SaldoBox, InvestirBox) => {
+  renderTabs = (InvestimentosBox, ObjetivosBox, DicasPagsBox, AgendaBox, SaldoBox, InvestirBox, ProjectionBox) => {
     return (
       <Tabs responsive={false}>
         <Tab title='Investimentos'>
@@ -120,6 +122,7 @@ export default class MainScreen extends React.Component {
           {InvestirBox}
         </Tab>
         <Tab title='Projeções'>
+          {ProjectionBox}
         </Tab>
         <Tab title='Metas'>
           {ObjetivosBox}
@@ -366,6 +369,13 @@ export default class MainScreen extends React.Component {
       </Box>
     </Box>
 
+    const ProjectionBox = <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
+      <Heading tag='h2'>
+        Seu investimento nos próximos 12 meses
+      </Heading>
+      <ProjectionChart small={small} investimento={recomendados[0]} meses={12} valor={33252.53} />
+    </Box>
+
     const desktopView = [
       <Box direction='row'>
         {DicasPagsBox}
@@ -373,6 +383,7 @@ export default class MainScreen extends React.Component {
       </Box>,
       <Box direction='row'>
         {InvestimentosBox}
+        {ProjectionBox}
         <Box direction='column' style={{width: small ? '' : '35%'}}>
           {SaldoBox}
           {InvestirBox}
@@ -383,7 +394,7 @@ export default class MainScreen extends React.Component {
       </Box>
     ];
 
-    const mobileView = this.renderTabs(InvestimentosBox, ObjetivosBox, DicasPagsBox, AgendaBox, SaldoBox, InvestirBox);
+    const mobileView = this.renderTabs(InvestimentosBox, ObjetivosBox, DicasPagsBox, AgendaBox, SaldoBox, InvestirBox, ProjectionBox);
 
 
     return hasInvestidorInfo ?
