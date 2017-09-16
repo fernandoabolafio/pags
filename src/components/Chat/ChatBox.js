@@ -20,7 +20,7 @@ export default class Chat extends React.Component {
       <div id="live-chat" className="box_chat-body">
         <header onClick={()=>this.handleClick()}>
           <a href="#" className="box_chat-close">X</a>
-          <h3>John Doe</h3>
+          <h3>Pag$</h3>
         </header>
 
         <div className="chat"
