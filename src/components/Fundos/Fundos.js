@@ -197,7 +197,7 @@ export default class Fundos extends React.Component {
     </Box>);
   }
 
-  
+
 
   renderFundoRecomendado = (fundo) => {
     console.log(fundo.invest_min);
@@ -215,7 +215,7 @@ export default class Fundos extends React.Component {
         contentPad="small"
         heading={<Heading strong={true} tag="h3">{fundo.nome}</Heading>}
         description={mes}
-        link={<Anchor primary icon={<FormNextLink />} onClick={() => this.props.seeMoreInvestimento(fundo.id)} label="Aplicar"/>}
+        link={<Anchor primary icon={<FormNextLink />} onClick={() => this.props.seeMoreInvestimento(fundo.id, this.state.inputsRecomendados)} label="Aplicar"/>}
       />
     </Box>
     );
@@ -367,6 +367,8 @@ export default class Fundos extends React.Component {
 
     return (
       <Section align="center" style={{backgroundColor: '#f5f5f5', flexShrink: '0'}}>
+        <Heading align="center" tag="h3">Investimentos Recomendados</Heading>
+        <Heading align="center" tag="h4">Modifique os parametros para encontrar um investimento</Heading>
         {this.getContent()}
         {
           this.state.showEntenda ?

@@ -174,9 +174,10 @@ export function clearCarteiraRecomendada() {
   }
 }
 
-export function seeMoreInvestimento(id) {
+export function seeMoreInvestimento(id, inputs) {
+  const {prazo,quantia} = inputs;
   return (dispatch) => {
-    dispatch(push(`/app/investimentos/${id}`));
+    dispatch(push(`/app/investimentos/${id}?quantia=${quantia}&prazo=${prazo}`));
   }
 }
 

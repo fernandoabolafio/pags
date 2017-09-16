@@ -42,10 +42,18 @@ export default class FundoDetalhes extends React.Component {
     const investimento = recomendados.filter(rec => rec.id === parseInt(investId))[0];
     console.log(investimento);
 
+    function getQueryStringValue (key) {
+      return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+    }
+
+// Would write the value of the QueryString-variable called name to the console
+    const quantia = getQueryStringValue("quantia");
+
     this.state = {
       investInfo: false,
       wizar: false,
-      investimento
+      investimento,
+      quantia
     }
   }
 
@@ -137,23 +145,21 @@ export default class FundoDetalhes extends React.Component {
               null
             }
           {this.renderInfo(
-              'Quando Recebe',
+              'Possibilidade de resgate',
               <Label margin="none">
-                {`${this.getDias(investimento.quando_recebe)} `}
-                <span style={{fontSize:'11px'}}>dias uteis</span>
+                {investimento.liquidez === 'diario' ? 'Diária' : 'No vencimento'}
               </Label>,
               false
             )
           }
           {this.renderInfo(
-              'Resgate',
+              'Quando cai o resgate',
               <Label margin="none">
                 {`${this.getDias(investimento.quando_recebe)} `}
                 <span style={{fontSize:'11px'}}>dias uteis</span>
               </Label>
             )
-          },
-
+          }
           {
             this.renderInfo(
               'Taxas',
@@ -165,6 +171,7 @@ export default class FundoDetalhes extends React.Component {
           }
           {this.renderInfo('Risco', <Label margin="none">{investimento.risco}</Label>, false)}
             <Box align="center">
+              <Heading tag="h4">Rendimento esperado para os proximos 12 meses:</Heading>
               <ProjectionChart investimento={this.state.investimento} meses={12} valor={1500} />
             </Box>
             <Box pad="medium" align="center">
