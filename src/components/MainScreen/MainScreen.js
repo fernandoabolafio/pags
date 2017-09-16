@@ -38,6 +38,7 @@ import acessorio10 from '../../assets/acessorio10.png';
 import AulasList from './AulasList';
 import Dica from './Dica';
 import ProjectionChart from '../ProjectionChart';
+import {getPosts} from '../../communication/pagsApi';
 import {recomendados, generateRendBruto, generateRendLiq, generateFormatedData, generateFormatedDataWithPoupanca} from '../../test/mockedRecomendados';
 
 
@@ -71,6 +72,7 @@ export default class MainScreen extends React.Component {
   }
 
   componentDidMount() {
+    getPosts();
     if (!this.props.pagsAcessorios[0].isConquered) {
       this.props.conquerAcessorio(0, 'completou o cadastro');
     }
