@@ -12,11 +12,11 @@ export default class ProjectionChart extends React.Component {
     return formatedData;
   }
   render() {
-    const {investimento, meses, valor} = this.props;
+    const {investimento, meses, valor, small} = this.props;
     const data = this.generateData();
     return (
       <Box style={{margin:"20px 0"}}>
-        <LineChart width={400} height={300} data={data}
+        <LineChart width={small ? 300 : 400} height={300} data={data}
           margin={{top: 5, right: 30, left: 20, bottom: 5}}>
            <XAxis dataKey="mes"/>
            <YAxis domain={['dataMin - 100', 'dataMax']} />

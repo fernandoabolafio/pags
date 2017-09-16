@@ -169,7 +169,7 @@ export default class FundoDetalhes extends React.Component {
           {this.renderInfo('Risco', <Label margin="none">{investimento.risco}</Label>, false)}
             <Box align="center">
               <Heading tag="h4">Rendimento esperado para os proximos 12 meses:</Heading>
-              <ProjectionChart investimento={this.state.investimento} meses={12} valor={1500} />
+              <ProjectionChart small={small} investimento={this.state.investimento} meses={12} valor={1500} />
             </Box>
             <Box pad="medium" align="center">
               <Button label="Investir" onClick={() => this.toggleInvestir(true)}></Button>
