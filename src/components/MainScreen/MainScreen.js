@@ -112,23 +112,18 @@ export default class MainScreen extends React.Component {
     })
   }
 
-  renderTabs = (InvestimentosBox, ObjetivosBox, DicasPagsBox, AgendaBox, SaldoBox, InvestirBox, ProjectionBox) => {
+  renderTabs = (InvestimentosBox, ObjetivosBox, AgendaBox, SaldoBox, InvestirBox, ProjectionBox) => {
     return (
       <Tabs responsive={false}>
         <Tab title='Investimentos'>
-          {DicasPagsBox}
-          {InvestimentosBox}
           {SaldoBox}
-          {InvestirBox}
-        </Tab>
-        <Tab title='Projeções'>
+          {InvestimentosBox}
           {ProjectionBox}
+          {InvestirBox}
+          {AgendaBox}
         </Tab>
         <Tab title='Metas'>
           {ObjetivosBox}
-        </Tab>
-        <Tab title='Agenda'>
-          {AgendaBox}
         </Tab>
       </Tabs>
     )
@@ -271,16 +266,13 @@ export default class MainScreen extends React.Component {
     </Box>;
 
     const InvestimentosBox =
-    <Box direction='row'  style={{backgroundColor: 'white', width: small ? '' : '65%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small'}}>
-      <Card
-        style={{width:'100%'}}
-        heading={
-            <Heading tag='h2'>
-              Seus Investimentos
-            </Heading>
-          }
-      >
-        <Box align='center'>
+    <Box direction='row'  style={{backgroundColor: 'white', width: small ? '' : '33%'}} pad='medium' margin={small ? 'medium' : {bottom: 'medium', top: 'medium', left: 'small', right: 'small'}}>
+      <Box
+        style={{width:'100%'}} >
+        <Heading tag='h2'>
+          Seus Investimentos
+        </Heading>
+        <Box align='center' >
           <AnnotatedMeter type="circle" legend={true} units="R$"
             size={small ? 'medium' : 'medium'}  series={investimentosData} />
           <Box pad={{vertical: 'large', horizontal: 'medium', between: 'medium'}}>
@@ -290,11 +282,11 @@ export default class MainScreen extends React.Component {
             <Button label='Resgatar' primary onClick={() => console.log('RESGATE FEITO')}/>
           </Box>
         </Box>
-      </Card>
+      </Box>
     </Box>;
 
     const AgendaBox =
-    <Box direction='column' pad='medium' style={{backgroundColor: 'white', width: small ? '' : '35%'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'medium'}}>
+    <Box direction='column' pad='medium' style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'small', left: 'medium', right: 'small'}}>
         <Heading tag='h2'>
           Agenda
         </Heading>
@@ -321,7 +313,7 @@ export default class MainScreen extends React.Component {
     </Box>;
 
     const SaldoBox =
-    <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
+    <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small', bottom:"small"}} pad='medium'>
       <Heading tag='h2'>
         Saldo da Conta Corrente
       </Heading>
@@ -331,7 +323,7 @@ export default class MainScreen extends React.Component {
     </Box>
 
     const InvestirBox =
-    <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
+    <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small', bottom: 'small'}} pad='medium'>
       <Heading tag='h2'>
         Investir
       </Heading>
@@ -369,7 +361,7 @@ export default class MainScreen extends React.Component {
       </Box>
     </Box>
 
-    const ProjectionBox = <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
+    const ProjectionBox = <Box style={{backgroundColor: 'white', width: small ? '' : '33%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
       <Heading tag='h2'>
         Seu investimento nos próximos 12 meses
       </Heading>
@@ -378,29 +370,23 @@ export default class MainScreen extends React.Component {
 
     const desktopView = [
       <Box direction='row'>
-        {DicasPagsBox}
-        {ObjetivosBox}
-      </Box>,
-      <Box direction='row'>
-        {InvestimentosBox}
-        {ProjectionBox}
-        <Box direction='column' style={{width: small ? '' : '35%'}}>
+        <Box direction='column' style={{width: small ? '' : '33%'}}>
           {SaldoBox}
+          {AgendaBox}
           {InvestirBox}
         </Box>
-      </Box>,
-      <Box direction='row'>
-        {AgendaBox}
+        {InvestimentosBox}
+        {ProjectionBox}
       </Box>
     ];
 
-    const mobileView = this.renderTabs(InvestimentosBox, ObjetivosBox, DicasPagsBox, AgendaBox, SaldoBox, InvestirBox, ProjectionBox);
+    const mobileView = this.renderTabs(InvestimentosBox, ObjetivosBox, AgendaBox, SaldoBox, InvestirBox, ProjectionBox);
 
 
     return hasInvestidorInfo ?
     (
       <div>
-        <Section>
+        <Section style={{paddingTop: '0'}}>
           {
             this.state.dica && this.props.activeUser.dica ?
             <Dica seeMoreInvestimento={this.props.seeMoreInvestimento} onClose={() => this.toggleDica(false)} dica={this.props.activeUser.dica}  />

@@ -48,7 +48,14 @@ export default class Menu extends React.Component {
       alignItems: 'center',
       cursor: 'pointer'
     }
-    const source = `img/menu-icons/${item.value}${pressed ? '_pressed' : ''}.svg`;
+    const mapValueToIconName = {
+      ['inicio']: 'casa',
+      ['investimentos']: 'investimentos',
+      ['chat']: 'chat',
+      ['conquistas']: 'pags'
+    };
+    const iconName = mapValueToIconName[item.value];
+    const source = `img/menu-icons/${iconName}${pressed ? '_pressed' : ''}.svg`;
     return (
       <Box onClick={() => this.handleMenuSelection(item.value)} style={menuItemStyle}>
         <img style={iconStyle} role="presentation" src={source} />
