@@ -13,11 +13,13 @@ import NumberInput from 'grommet/components/NumberInput';
 import FormField from 'grommet/components/FormField';
 import BadgeLayer from '../BadgeLayer';
 import {recomendados, generateRendBruto, generateRendLiq, generateFormatedData, generateFormatedDataWithPoupanca} from '../../test/mockedRecomendados';
-import {numberWithCommas} from '../../support/objectUtils';
+import {numberWithCommas, getParameterByName} from '../../support/objectUtils';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import ProjectionChart from '../ProjectionChart';
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
+
+
 
 export default class FundoDetalhes extends React.Component {
 
@@ -26,25 +28,23 @@ export default class FundoDetalhes extends React.Component {
     const investId = window.location.hash.split("/")[3];
     const investimento = recomendados.filter(rec => rec.id === parseInt(investId))[0];
 
-    function getQueryStringValue (key) {
-      return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
-    }
-
-// Would write the value of the QueryString-variable called name to the console
-    const quantia = getQueryStringValue("quantia");
+    let meses = 6;
+    let valor = 1000;
+    var urlParams = new URLSearchParams(window.location.search);
+    if(getParameterByName('quantia')) valor = parseFloat(getParameterByName('quantia'));
+    if(getParameterByName('prazo')) meses = parseInt(getParameterByName('prazo'));
 
     this.state = {
       investInfo: false,
       wizar: false,
       investimento,
-      quantia,
       meses: {
         min: 0,
         max: 48
       },
       inputs: {
-        meses: 4,
-        valor: 100
+        meses,
+        valor
       }
     }
   }
@@ -58,7 +58,8 @@ export default class FundoDetalhes extends React.Component {
   }
 
   renderAplicarWizard = () => {
-    return <Box pad="small" style={{backgroundColor: 'white', width: "100%"}}>
+    const {small} = this.props;
+    return <Box pad="small" style={{backgroundColor: 'white', width: small ? "100%" : "60%"}}>
       <AplicarWizard onApply={this.onApply} investInfo={this.state.investimento} onCancel={() => this.toggleInvestir(false)} />
     </Box>;
   }
@@ -147,8 +148,10 @@ export default class FundoDetalhes extends React.Component {
     renderContent = () => {
     const {investimento} = this.state;
     const {small} = this.props;
+    const rend = generateRendBruto(investimento, this.state.inputs.meses, this.state.inputs.valor);
+    const rendaEsperada = rend[rend.length-1]-rend[0];
     return (
-          <Box pad="medium" style={{backgroundColor: 'white', width: small ? "100%" : "80%"}} direction="row" >
+          <Box pad="medium" style={{backgroundColor: 'white', width: small ? "100%" : "90%"}} direction="row" >
             <Box style={{width: small ? '100%' : '50%'}}>
               {this.renderInfo('Valor mínimo', <Label margin="none">{`R$${investimento.invest_min}`}</Label> )}
               {
@@ -184,12 +187,13 @@ export default class FundoDetalhes extends React.Component {
             }
             {this.renderInfo('Risco', <Label margin="none">{investimento.risco}</Label>, false)}
           </Box>
-            <Box align="center" style={{width: small ? '100%' : '50%'}}>
+            <Box align="center" style={{width: small ? '100%' : '50%', marginTop: small ? '20px' : ''}}>
+              <Heading  tag="h2">Simule</Heading>
               <Box direction="row" align="center" responsive={false}>
                 <Label style={{marginRight: "10px"}}>R$</Label>
                 <NumberInput value={this.state.inputs.valor} onChange={(e) => this.setValue(e.target.value, 'valor')} style={{width: '100px'}} min={1} step={100} />
               </Box>
-              <Box pad="medium" style={{width: '80%'}} pad="medium">
+              <Box pad="medium" style={{width: '300px'}} pad="medium">
                 <Box direction="row" responsive={false} style={{width:'100%', justifyContent:'space-between'}}>
                   <span>{this.state.meses.min} meses</span>
                   <span>{this.state.meses.max} meses</span>
@@ -202,6 +206,7 @@ export default class FundoDetalhes extends React.Component {
                 />
               </Box>
               <Heading tag="h4">{`Rendimento esperado para os proximos ${this.state.inputs.meses} meses:`}</Heading>
+              <Heading tag="h3">{`R$${numberWithCommas(parseInt(rendaEsperada*100)/100)}`}</Heading>
               <ProjectionChart small={small} investimento={this.state.investimento} meses={this.state.inputs.meses} valor={this.state.inputs.valor} />
               <Box pad="medium" align="center">
                 <Button label="Investir" onClick={() => this.toggleInvestir(true)}></Button>
