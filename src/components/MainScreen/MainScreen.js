@@ -363,11 +363,11 @@ export default class MainScreen extends React.Component {
       </Box>
     </Box>
 
-    const ProjectionBox = <Box style={{backgroundColor: 'white', width: small ? '' : '33%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
+    const ProjectionBox = <Box align="center" style={{backgroundColor: 'white', width: small ? '' : '33%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
       <Heading tag='h2'>
         Seu investimento nos próximos 12 meses
       </Heading>
-      <ProjectionChart small={small} investimento={recomendados[0]} meses={12} valor={33252.53} />
+      <ProjectionChart width={300} small={small} investimento={recomendados[0]} meses={12} valor={32252.53} />
     </Box>
 
     const desktopView = [
