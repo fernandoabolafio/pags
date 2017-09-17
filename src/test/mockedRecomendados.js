@@ -97,6 +97,7 @@ export const recomendados = [
   }
 ]
 
+
 const getValorIR = (meses) => {
   if(meses < 6) return 22.5;
   if(meses > 6 && meses < 12) return 20;
@@ -114,7 +115,8 @@ export const generateRendBruto = (investimento, prazo, valorInicial) => {
     } else {
       valor = data[i-1] + (data[i-1]*rentMes)
     }
-    data.push(parseFloat(valor.toFixed(2)));
+    const makeiTTwoDecimal = (value) => parseInt(value*100)/100;
+    data.push(makeiTTwoDecimal(valor));
   }
 
   return data;
