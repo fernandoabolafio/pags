@@ -9,28 +9,15 @@ import Button from 'grommet/components/Button';
 import FormPreviousLink from 'grommet/components/icons/base/FormPreviousLink';
 import AplicarWizard from './AplicarWizard';
 import Status from 'grommet/components/icons/Status';
+import NumberInput from 'grommet/components/NumberInput';
+import FormField from 'grommet/components/FormField';
 import BadgeLayer from '../BadgeLayer';
 import {recomendados, generateRendBruto, generateRendLiq, generateFormatedData, generateFormatedDataWithPoupanca} from '../../test/mockedRecomendados';
 import {numberWithCommas} from '../../support/objectUtils';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import ProjectionChart from '../ProjectionChart';
-
-
-/*renderSuccessStep = () => {
-  const {tipo_movimentacao, valor, data} = this.state.inputs;
-  const {investInfo} = this.props;
-  const {formatValue} = this;
-  const mapTipoToMessage = {
-    H:(<Box align="center">
-        <Heading align="center" tag="h3">{`Parabens!`}</Heading>
-        <Heading align="center" tag="h4">{`Você investiu ${formatValue(valor)} em ${investInfo.nome_comercial}`}</Heading>
-      </Box>),
-    M: <Heading align="center" tag="h4">{`Parabens! Seu investimento mensal de ${formatValue(valor)} foi cadastrado.`}</Heading>,
-    G: <Heading align="center" tag="h4">{`Parabens! Seu investimento de ${formatValue(valor)} será efetuado em ${data}`}</Heading>
-  };
-  const message = mapTipoToMessage[tipo_movimentacao];
-  return <Box align="center">{message}</Box>
-}*/
+import Slider, { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 export default class FundoDetalhes extends React.Component {
 
@@ -50,7 +37,15 @@ export default class FundoDetalhes extends React.Component {
       investInfo: false,
       wizar: false,
       investimento,
-      quantia
+      quantia,
+      meses: {
+        min: 0,
+        max: 48
+      },
+      inputs: {
+        meses: 4,
+        valor: 100
+      }
     }
   }
 
@@ -110,6 +105,18 @@ export default class FundoDetalhes extends React.Component {
     })
   }
 
+  setValue = (value, key, deepKey) => {
+  		let {inputs} = this.state;
+
+  		if(deepKey) {
+  			inputs[key][deepKey] = value;
+  		}else{
+  			inputs[key] = value;
+  		}
+
+  		this.setState({inputs})
+  }
+
 
   renderInfo = (label, value, divider=true) => {
     return <Box separator={divider ? "bottom" : "none"} pad={{vertical:"small"}} direction="row" align="start" responsive={false}>
@@ -122,57 +129,83 @@ export default class FundoDetalhes extends React.Component {
     </Box>;
   }
 
-  onApply = (data) => {
-    this.setState({
-      applied: true,
-      wizardData: data
-    });
-  }
+    onApply = (data) => {
+      this.setState({
+        applied: true,
+        wizardData: data
+      });
+    }
+
+    handleWageRangeChange = (value) => {
+      console.log('value');
+      console.log(value);
+      this.setState({
+        meses: value
+      });
+    }
 
     renderContent = () => {
     const {investimento} = this.state;
     const {small} = this.props;
     return (
-          <Box pad="medium" style={{backgroundColor: 'white', width: small ?"100%" : ""}} >
-            {this.renderInfo('Valor mínimo', <Label margin="none">{`R$${investimento.invest_min}`}</Label> )}
-            {
-              investimento.rentabilidades ?
-              this.renderInfo('Rentabilidade', this.renderRentabilidades(investimento.rentabilidades))
-              :
-              null
+          <Box pad="medium" style={{backgroundColor: 'white', width: small ? "100%" : "80%"}} direction="row" >
+            <Box style={{width: small ? '100%' : '50%'}}>
+              {this.renderInfo('Valor mínimo', <Label margin="none">{`R$${investimento.invest_min}`}</Label> )}
+              {
+                investimento.rentabilidades ?
+                this.renderInfo('Rentabilidade', this.renderRentabilidades(investimento.rentabilidades))
+                :
+                null
+              }
+            {this.renderInfo(
+                'Possibilidade de resgate',
+                <Label margin="none">
+                  {investimento.liquidez === 'diario' ? 'Diária' : 'No vencimento'}
+                </Label>,
+                false
+              )
             }
-          {this.renderInfo(
-              'Possibilidade de resgate',
-              <Label margin="none">
-                {investimento.liquidez === 'diario' ? 'Diária' : 'No vencimento'}
-              </Label>,
-              false
-            )
-          }
-          {this.renderInfo(
-              'Quando cai o resgate',
-              <Label margin="none">
-                {`${this.getDias(investimento.quando_recebe)} `}
-                <span style={{fontSize:'11px'}}>dias uteis</span>
-              </Label>
-            )
-          }
-          {
-            this.renderInfo(
-              'Taxas',
-              <Label margin="none">
-                {`${2}% `}
-                <span style={{fontSize:'11px'}}>ano sobre o total</span>
-              </Label>
-            )
-          }
-          {this.renderInfo('Risco', <Label margin="none">{investimento.risco}</Label>, false)}
-            <Box align="center">
-              <Heading tag="h4">Rendimento esperado para os proximos 12 meses:</Heading>
-              <ProjectionChart small={small} investimento={this.state.investimento} meses={12} valor={1500} />
-            </Box>
-            <Box pad="medium" align="center">
-              <Button label="Investir" onClick={() => this.toggleInvestir(true)}></Button>
+            {this.renderInfo(
+                'Quando cai o resgate',
+                <Label margin="none">
+                  {`${this.getDias(investimento.quando_recebe)} `}
+                  <span style={{fontSize:'11px'}}>dias uteis</span>
+                </Label>
+              )
+            }
+            {
+              this.renderInfo(
+                'Taxas',
+                <Label margin="none">
+                  {`${2}% `}
+                  <span style={{fontSize:'11px'}}>ano sobre o total</span>
+                </Label>
+              )
+            }
+            {this.renderInfo('Risco', <Label margin="none">{investimento.risco}</Label>, false)}
+          </Box>
+            <Box align="center" style={{width: small ? '100%' : '50%'}}>
+              <Box direction="row" align="center" responsive={false}>
+                <Label style={{marginRight: "10px"}}>R$</Label>
+                <NumberInput value={this.state.inputs.valor} onChange={(e) => this.setValue(e.target.value, 'valor')} style={{width: '100px'}} min={1} step={100} />
+              </Box>
+              <Box pad="medium" style={{width: '80%'}} pad="medium">
+                <Box direction="row" responsive={false} style={{width:'100%', justifyContent:'space-between'}}>
+                  <span>{this.state.meses.min} meses</span>
+                  <span>{this.state.meses.max} meses</span>
+                </Box>
+                <Slider
+                  value={this.state.inputs.meses}
+                  min={this.state.meses.min}
+                  max={this.state.meses.max}
+                  onChange={(value) => this.setValue(value, 'meses')}
+                />
+              </Box>
+              <Heading tag="h4">{`Rendimento esperado para os proximos ${this.state.inputs.meses} meses:`}</Heading>
+              <ProjectionChart small={small} investimento={this.state.investimento} meses={this.state.inputs.meses} valor={this.state.inputs.valor} />
+              <Box pad="medium" align="center">
+                <Button label="Investir" onClick={() => this.toggleInvestir(true)}></Button>
+              </Box>
             </Box>
           </Box>
     );

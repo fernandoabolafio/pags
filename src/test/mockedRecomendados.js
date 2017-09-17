@@ -115,7 +115,8 @@ export const generateRendBruto = (investimento, prazo, valorInicial) => {
     } else {
       valor = data[i-1] + (data[i-1]*rentMes)
     }
-    data.push(parseFloat(valor.toFixed(2)));
+    const makeiTTwoDecimal = (value) => parseInt(value*100)/100;
+    data.push(makeiTTwoDecimal(valor));
   }
 
   return data;
