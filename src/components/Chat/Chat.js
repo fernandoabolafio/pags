@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import './Chat.css';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
@@ -40,6 +41,19 @@ export default class Chat extends React.Component {
     }
   }
 
+  scrollToBottom = () => {
+    const node = ReactDOM.findDOMNode(this.messagesEnd);
+    node.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   handleClick(){
     this.setState({
       visible: !this.state.visible
@@ -68,9 +82,12 @@ export default class Chat extends React.Component {
             <Message name='Pag$'>
               <Content msg='Hoje, a rentabilidade do Tesouro SELIC está em 9.31% ao ano.' />
             </Message>
+            {!small &&
+              <div style={{ float:"left", clear: "both" }}
+                 ref={(el) => { this.messagesEnd = el; }}>
+              </div>}
           </div>
-
-          <div className='box_chat-input-place'>
+          <div className='box_chat-input-place' style={small ? {bottom: '78px'} : {bottom: '0'}}>
             <FormField
               className='box_chat-form-field'
               >
@@ -81,7 +98,10 @@ export default class Chat extends React.Component {
               />
             </FormField>
           </div>
-
+          {small &&
+            <div style={{ float:"left", clear: "both" }}
+               ref={(el) => { this.messagesEnd = el; }}>
+            </div>}
         </div>
       </Box>
     );
