@@ -15,7 +15,7 @@ export const Message = ({name, msg, children, img}) => {
   return (
     <div className='box_chat-message'>
       <div style={pags ? {justifyContent: 'flex-start', display: 'flex', marginTop: '24px'} : {justifyContent: 'flex-end', display: 'flex', marginTop: '24px'}}>
-        <img className='photo' src={pags ? 'img/logo.png' : 'img/persons/julia.jpg'} alt='pags' width='32px' height='32px' />
+        <img className='photo' src={pags ? 'img/logo.png' : 'img/persons/julia.jpg'} alt='thumb' width='32px' height='32px' style={pags ? {borderRadius: '0'} : {}} />
         <h3 style={{marginBottom: '0px'}}>{name}</h3>
       </div>
       <div className='box_chat-message-content' style={pags ? {justifyContent: 'flex-start', display: 'flex', flexDirection: 'column'} : {justifyContent: 'flex-end', display: 'flex', flexDirection: 'column'}}>
