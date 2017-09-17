@@ -26,12 +26,12 @@ export default class FormRecomendador extends React.Component {
   render() {
     const {inputs, small} = this.props;
     return (
-      <Box align="center" >
+      <Box align="center" margin={small ? {} : {top: 'small'}} >
         <Form compact={true} style={{flexDirection:"row"}}>
-          <FormField label="Quantia">
+          <FormField label="Quantia (em reais)">
             <NumberInput value={inputs.quantia} onChange={(e) => this.setValue(e.target.value, 'quantia')} style={{width: '100px'}} min={0} step={100} />
           </FormField>
-          <FormField label="Tempo que o dinheiro pode ficar investido">
+          <FormField label="Tempo que o dinheiro pode ficar investido (em meses)">
             <NumberInput value={inputs.prazo} onChange={(e) => this.setValue(e.target.value, 'prazo')} style={{width: '100px'}} min={0} step={1} />
           </FormField>
           <FormField label="Possibilidade de resgate do dinheiro">

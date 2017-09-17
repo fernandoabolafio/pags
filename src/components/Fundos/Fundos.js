@@ -154,6 +154,7 @@ export default class Fundos extends React.Component {
 
 
   renderFundoRecomendado = (fundo) => {
+    const {small} = this.props;
     const description = `Valor mínimo R$${numberWithCommas(fundo.invest_min)}`;
     const rend = generateRendBruto(fundo, this.state.inputsRecomendados.prazo, parseFloat(this.state.inputsRecomendados.quantia));
     const rendaEsperada = rend[rend.length-1]-rend[0];
@@ -161,13 +162,13 @@ export default class Fundos extends React.Component {
     return (
     <Box margin="small" >
       <Card
-        style={{backgroundColor: 'white'}}
-        label={fundo.risco}
+        style={{backgroundColor: 'white', width: small ? '' : '240px'}}
+        label={<Heading strong={true} tag="h3">{fundo.nome}</Heading>}
         textSize="small"
         contentPad="small"
-        heading={<Heading strong={true} tag="h3">{fundo.nome}</Heading>}
+        heading={<Heading  tag="h4">{`risco ${fundo.risco}`}</Heading>}
         description={mes}
-        link={<Anchor primary icon={<FormNextLink />} onClick={() => this.props.seeMoreInvestimento(fundo.id, this.state.inputsRecomendados)} label="Aplicar"/>}
+        link={<Anchor disabled={!fundo.canApply} primary icon={<FormNextLink />} onClick={() => this.props.seeMoreInvestimento(fundo.id, this.state.inputsRecomendados)} label="Aplicar"/>}
       />
     </Box>
     );
@@ -176,19 +177,23 @@ export default class Fundos extends React.Component {
   renderFundos = (fundos) => {
     const {small} = this.props;
     const {inputsRecomendados} = this.state;
-    const fundosFiltered= fundos.filter( fundo => {
+    const recomendadosFormated = fundos.map( fundo => {
+      let canApply = false;
       const matchLiq = fundo.liquidez === inputsRecomendados.liquidez;
       const matchRend = fundo.rendimento === inputsRecomendados.rendimento;
       const matchRisco = fundo.risco === inputsRecomendados.risco;
       const matchVal = fundo.invest_min <= inputsRecomendados.quantia;
       const matchPrazo = fundo.tempo_min <= inputsRecomendados.prazo;
       if( matchVal && matchLiq && matchRend && matchRisco && matchPrazo) {
-        return true;
-      }else {
-        return false;
+        canApply = true;
       }
-    });
-    const fundosComponents = fundosFiltered.map( fundo => this.renderFundoRecomendado(fundo));
+      return {
+        ...fundo,
+        canApply
+      }
+    })
+
+    const fundosComponents = recomendadosFormated.map( fundo => this.renderFundoRecomendado(fundo));
     return <Columns size="small" style={{width: small ? '' : '50%'}} justify="center">
             {fundosComponents}
           </Columns>;
@@ -232,7 +237,7 @@ export default class Fundos extends React.Component {
       <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
         <Heading align="center" tag="h3">Investimentos Recomendados</Heading>
         <Heading align="center" tag="h4">Modifique os parametros para encontrar um investimento</Heading>
-        <Box direction="row"  pad="medium" style={{width: '100%', paddingRight: small ? '' : '0px', justifyContent:'space-around'}}>
+        <Box direction="row"  pad="medium" style={{width: '100%', paddingRight: small ? '' : '0px', justifyContent:'center'}}>
           {this.getContent()}
         </Box>
 
