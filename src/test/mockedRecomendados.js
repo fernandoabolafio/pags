@@ -99,6 +99,7 @@ export const recomendados = [
 
 
 const getValorIR = (meses) => {
+  if(meses === 0) return 0;
   if(meses < 6) return 22.5;
   if(meses > 6 && meses < 12) return 20;
   if(meses > 12 && meses < 24) return 17.5;
@@ -122,15 +123,25 @@ export const generateRendBruto = (investimento, prazo, valorInicial) => {
   return data;
 }
 
-export const generateRendLiq = (investimento, rendBruto) => {
-  const rendLiq = rendBruto.map( (valor, i) => {
-    const ir = investimento.taxa_ir ? getValorIR(i) : 0;
-    const adm = investimento.taxa_adm;
-    const cust = investimento.taxa_cust;
-    const total_taxa = (ir + adm + cust)/100;
-    console.log(total_taxa);
-    return valor - (valor  * total_taxa);
+export const generateTaxasIR = (investimento, rendBruto) => {
+  const taxasIR = rendBruto.map( (valor, i) => {
+    if(i === 0) {
+      return 0;
+    }
+    let ir = 0;
+    if(investimento.taxa_ir) ir = getValorIR(i)/100;
+    return (valor - rendBruto[0]) * ir;
   })
+  return taxasIR;
+}
+
+export const generateRendLiq = (investimento, prazo, valorInicial) => {
+  const rendBruto = generateRendBruto(investimento, prazo, valorInicial);
+  let rendLiq = rendBruto;
+  if(investimento.taxa_ir) {
+    const taxasIR = generateTaxasIR(investimento, rendBruto);
+    rendLiq = rendLiq.map( (valor,i) => valor - taxasIR[i]);
+  }
   return rendLiq;
 }
 

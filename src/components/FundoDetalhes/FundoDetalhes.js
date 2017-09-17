@@ -12,7 +12,7 @@ import Status from 'grommet/components/icons/Status';
 import NumberInput from 'grommet/components/NumberInput';
 import FormField from 'grommet/components/FormField';
 import BadgeLayer from '../BadgeLayer';
-import {recomendados, generateRendBruto, generateRendLiq, generateFormatedData, generateFormatedDataWithPoupanca} from '../../test/mockedRecomendados';
+import {recomendados, generateRendBruto, generateRendLiq, generateTaxasIR, generateFormatedData, generateFormatedDataWithPoupanca} from '../../test/mockedRecomendados';
 import {numberWithCommas, getParameterByName} from '../../support/objectUtils';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from 'recharts';
 import ProjectionChart from '../ProjectionChart';
@@ -149,6 +149,13 @@ export default class FundoDetalhes extends React.Component {
     const {investimento} = this.state;
     const {small} = this.props;
     const rend = generateRendBruto(investimento, this.state.inputs.meses, this.state.inputs.valor);
+    const taxasIR = generateTaxasIR(investimento, rend);
+    const rendLiq = generateRendLiq(investimento, this.state.inputs.meses, this.state.inputs.valor);
+    console.log('rendliq');
+    console.log(rendLiq);
+    console.log('taxas ir');
+    console.log(taxasIR);
+    const descontoIR = taxasIR[taxasIR.length-1];
     const rendaEsperada = rend[rend.length-1]-rend[0];
     return (
           <Box pad="medium" style={{backgroundColor: 'white', width: small ? "100%" : "90%"}} direction="row" >
@@ -178,10 +185,10 @@ export default class FundoDetalhes extends React.Component {
             }
             {
               this.renderInfo(
-                'Taxas',
+                'Desconto IR',
                 <Label margin="none">
-                  {`${2}% `}
-                  <span style={{fontSize:'11px'}}>ano sobre o total</span>
+                  {`R$${numberWithCommas(parseInt(descontoIR*100)/100)}`}
+                  <span style={{fontSize:'11px'}}></span>
                 </Label>
               )
             }
@@ -207,7 +214,7 @@ export default class FundoDetalhes extends React.Component {
               </Box>
               <Heading tag="h4">{`Rendimento esperado para os proximos ${this.state.inputs.meses} meses:`}</Heading>
               <Heading tag="h3">{`R$${numberWithCommas(parseInt(rendaEsperada*100)/100)}`}</Heading>
-              <ProjectionChart small={small} investimento={this.state.investimento} meses={this.state.inputs.meses} valor={this.state.inputs.valor} />
+              <ProjectionChart width={300} small={small} investimento={this.state.investimento} meses={this.state.inputs.meses} valor={this.state.inputs.valor} />
               <Box pad="medium" align="center">
                 <Button label="Investir" onClick={() => this.toggleInvestir(true)}></Button>
               </Box>
