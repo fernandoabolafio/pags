@@ -25,6 +25,44 @@ const get = (endpoint) => {
   });
 }
 
+const post = (endpoint, data) => {
+  const { base_path, header } = API_CONFIG;
+  return new Promise((resolve, reject) => {
+    request.post(base_path + endpoint)
+    .send(data)
+    .set(header)
+    .end((err, res) => {
+      if (res) {
+        console.log(res);
+        resolve(res.body.data);
+      }
+      if (err) {
+        reject(err);
+      }
+    });
+  });
+}
+
 export const getPosts = () => {
   return get('posts');
+}
+
+export const getUser = (id) => {
+  return get(`users/${id}`);
+}
+
+export const getInvestimentoRecomendado = (id) => {
+  return get(`investimentos/${id}`);
+}
+
+export const getInvestimentosRecomendados = (recomendados) => {
+  return recomendados.map(investimento => getInvestimentoRecomendado(investimento))
+}
+
+export const getObjetivos = (id) => {
+  return get(`users/${id}/objetivos`);
+}
+
+export const postObjetivos = (id, data) => {
+  return post(`objetivos`, {id,data})
 }
