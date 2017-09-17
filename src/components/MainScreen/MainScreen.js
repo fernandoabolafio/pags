@@ -60,7 +60,11 @@ export default class MainScreen extends React.Component {
   state = {
     hasInvestidorInfo: false,
     agenda: '',
-    editAgenda: false
+    editAgenda: false,
+    investir: {
+      de: '',
+      para: ''
+    }
   };
 
   componentWillReceiveProps(nextProps) {
@@ -88,6 +92,18 @@ export default class MainScreen extends React.Component {
   handleDataChange = (value) => {
     this.setState({
       agenda: value
+    });
+  }
+
+  handleDeChange = (value) => {
+    this.setState({
+      investir: { ...this.state.investir, de: value }
+    });
+  }
+
+  handleParaChange = (value) => {
+    this.setState({
+      investir: { ...this.state.investir, para: value }
     });
   }
 
@@ -340,8 +356,9 @@ export default class MainScreen extends React.Component {
                 De
               </Label>
               <Select
-                onChange={() => console.log('oi')}
-                options={['Poupança']}
+                value={this.state.investir.de}
+                onChange={(value) => this.handleDeChange(value)}
+                options={['Poupança', 'Conta Corrente']}
                 placeHolder='Escolher'
               />
             </Box>
@@ -350,7 +367,8 @@ export default class MainScreen extends React.Component {
                 Para
               </Label>
               <Select
-                onChange={() => console.log('oi')}
+                value={this.state.investir.para}
+                onChange={(value) => this.handleParaChange(value)}
                 options={['Poupança']}
                 placeHolder='Escolher'
               />

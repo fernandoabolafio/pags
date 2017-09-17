@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import './Chat.css';
 import FormField from 'grommet/components/FormField';
 import TextInput from 'grommet/components/TextInput';
@@ -14,7 +15,7 @@ export const Message = ({name, msg, children, img}) => {
   return (
     <div className='box_chat-message'>
       <div style={pags ? {justifyContent: 'flex-start', display: 'flex', marginTop: '24px'} : {justifyContent: 'flex-end', display: 'flex', marginTop: '24px'}}>
-        <img className='photo' src={pags ? 'img/logo.png' : 'img/persons/julia.jpg'} alt='pags' width='32px' height='32px' />
+        <img className='photo' src={pags ? 'img/logo.png' : 'img/persons/julia.jpg'} alt='thumb' width='32px' height='32px' style={pags ? {borderRadius: '0'} : {}} />
         <h3 style={{marginBottom: '0px'}}>{name}</h3>
       </div>
       <div className='box_chat-message-content' style={pags ? {justifyContent: 'flex-start', display: 'flex', flexDirection: 'column'} : {justifyContent: 'flex-end', display: 'flex', flexDirection: 'column'}}>
@@ -38,6 +39,19 @@ export default class Chat extends React.Component {
     this.state = {
       visible: props.small
     }
+  }
+
+  scrollToBottom = () => {
+    const node = ReactDOM.findDOMNode(this.messagesEnd);
+    node.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
   }
 
   handleClick(){
@@ -68,9 +82,12 @@ export default class Chat extends React.Component {
             <Message name='Pag$'>
               <Content msg='Hoje, a rentabilidade do Tesouro SELIC está em 9.31% ao ano.' />
             </Message>
+            {!small &&
+              <div style={{ float:"left", clear: "both" }}
+                 ref={(el) => { this.messagesEnd = el; }}>
+              </div>}
           </div>
-
-          <div className='box_chat-input-place'>
+          <div className='box_chat-input-place' style={small ? {bottom: '78px'} : {bottom: '0'}}>
             <FormField
               className='box_chat-form-field'
               >
@@ -81,7 +98,10 @@ export default class Chat extends React.Component {
               />
             </FormField>
           </div>
-
+          {small &&
+            <div style={{ float:"left", clear: "both" }}
+               ref={(el) => { this.messagesEnd = el; }}>
+            </div>}
         </div>
       </Box>
     );
