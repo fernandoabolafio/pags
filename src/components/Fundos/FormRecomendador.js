@@ -26,8 +26,8 @@ export default class FormRecomendador extends React.Component {
   render() {
     const {inputs, small} = this.props;
     return (
-      <Box >
-        <Form compact={true}>
+      <Box align="center" >
+        <Form compact={true} style={{flexDirection:"row"}}>
           <FormField label="Quantia">
             <NumberInput value={inputs.quantia} onChange={(e) => this.setValue(e.target.value, 'quantia')} style={{width: '100px'}} min={0} step={100} />
           </FormField>

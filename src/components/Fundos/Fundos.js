@@ -56,21 +56,7 @@ export default class Fundos extends React.Component {
 
   constructor(props) {
     super(props);
-    const mapTabToInvestimento = {
-      [0]: 'cdbs',
-      [1]: 'coes',
-      [2]: 'fundos',
-      [3]: 'previdencias',
-      [4]: 'poupancas'
-    }
 
-    const mapTypeToIdKey = {
-      cdbs: 'id_cdb',
-      coes: 'id_coe',
-      fundos: 'id_fundo',
-      previdencias: 'id_previdencia',
-      poupancas: 'id_poupanca'
-    };
     const inputsRecomendados = {
       quantia: 100,
       prazo: 6,
@@ -78,9 +64,8 @@ export default class Fundos extends React.Component {
       rendimento: 'pre_fixado',
       risco: 'baixo'
     };
+
     this.state = {
-      mapTabToInvestimento,
-      mapTypeToIdKey,
       section: sections.RECOMENDADOS,
       tab: 0,
       loadingCarteira: false,
@@ -95,13 +80,9 @@ export default class Fundos extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.fetchFundosRecomendados();
-    // this.props.fetchInvestimentos('cdbs');
-    // this.props.fetchInvestimentos('coes');
-    // this.props.fetchInvestimentos('fundos');
-    // this.props.fetchInvestimentos('previdencias');
-    // this.props.fetchInvestimentos('poupancas');
+    //TODO: FETCH INVESTIMENTOS FROM PAGS-DB
   }
+
   onChangeForm = (inputsRecomendados) => {
     this.setState({
       inputsRecomendados
@@ -134,11 +115,6 @@ export default class Fundos extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(!this.props.carteiraRecomendada && nextProps.carteiraRecomendada ) {
-      this.setState({
-        loadingCarteira: false
-      })
-    }
   }
 
   setValue = (value, key, deepKey) => {
@@ -151,28 +127,6 @@ export default class Fundos extends React.Component {
   		}
 
   		this.setState({inputs})
-  }
-
-  handleToggleSearchMode = () => {
-    const {searching} = this.state;
-    this.setState({
-      searching: !searching
-    })
-  }
-
-  handleTabChange = (tab) => {
-
-    const {mapTabToInvestimento}  = this.state;
-
-    this.setState({
-      tab: tab
-    })
-
-    const type = mapTabToInvestimento[tab];
-
-    if(!this.props.opcoesDeInvestimento[type]) {
-      this.props.fetchInvestimentos(type);
-    }
   }
 
   handleSetSection = (section) => {
@@ -220,6 +174,7 @@ export default class Fundos extends React.Component {
   }
 
   renderFundos = (fundos) => {
+    const {small} = this.props;
     const {inputsRecomendados} = this.state;
     const fundosFiltered= fundos.filter( fundo => {
       const matchLiq = fundo.liquidez === inputsRecomendados.liquidez;
@@ -234,7 +189,7 @@ export default class Fundos extends React.Component {
       }
     });
     const fundosComponents = fundosFiltered.map( fundo => this.renderFundoRecomendado(fundo));
-    return <Columns size="small" justify="center" style={{flexShrink: '0'}}>
+    return <Columns size="small" style={{width: small ? '' : '50%'}} justify="center">
             {fundosComponents}
           </Columns>;
   }
@@ -249,104 +204,14 @@ export default class Fundos extends React.Component {
     return <Heading align="center" tag="h2">{text}</Heading>;
   }
 
-  handleSearchCarteira = () => {
-    const {valor, prazo} = this.state.inputs.carteira;
-    this.setState({
-      loadingCarteira: true
-    })
-    this.props.clearCarteiraRecomendada();
-    this.props.fetchCarteiraRecomendada(valor, prazo);
-  }
-
-  renderChartLabel = () => {
-    const {highLightedProduct} = this.state;
-    return <Label>{highLightedProduct.nome_comercial}</Label>;
-  }
-
-  renderCarteiraRecomendada = () => {
-    const {carteiraRecomendada} = this.props;
-    const {
-            produtos_recomendados:produtosRecomendados,
-            perfil_investidor: perfil_investidor
-          } = carteiraRecomendada;
-    const items = produtosRecomendados.map( produto =>
-      (<ListItem justify="between">
-        <Box style={{maxWidth: '100px'}}>
-          <Label>{produto.nome_comercial}</Label>
-        </Box>
-        <Box>
-        <Value value={produto.percentual_investimento_sugerido}
-          units='%'
-          align='start' />
-        <Meter value={produto.percentual_investimento_sugerido}/>
-        </Box>
-        <Box>
-          <Anchor primary icon={<FormNextLink />} onClick={() => this.props.seeMoreInvestimento(produto.codigo_produto)} label="Aplicar"/>
-        </Box>
-      </ListItem>)
-    );
-    // return <Distribution series={series} size="large" units={'%'} />
-    // return <SunBurst size="large" onActive={this.handleHoverPiece}  data={series}/>
-    return <Box size="large"><List style={{backgroundColor: 'white', marginTop: '20px', width:'100%'}}>{items}</List></Box>
-  }
-
-  getSearchResults = () => {
-    const {opcoesDeInvestimento} = this.props;
-    const {mapTabToInvestimento, tab, mapTypeToIdKey} = this.state;
-    const type = mapTabToInvestimento[tab];
-    const fundos = this.props.opcoesDeInvestimento[type];
-    const idKey = mapTypeToIdKey[type];
-    return (
-      fundos ?
-      this.renderFundos(fundos, idKey)
-      :
-      <Spinning size="large" />
-    )
-
-  }
-
   getContent = () => {
     const {small} = this.props;
     const {section, inputsRecomendados} = this.state;
-    const mapSectionToContent = {
-      [sections.RECOMENDADOS]: [
-        <FormRecomendador small={small} inputs={inputsRecomendados} onChangeInputs={this.onChangeForm}/>,
-        this.renderFundos(recomendados)
-      ],
-      [sections.SEARCH]: [
-        this.renderAnchorBackToRecomendations(),
-        this.renderHeading('Buscar Investimentos'),
-        <Tabs onActive={this.handleTabChange} responsive={false} activeIndex={this.state.tab}>
-          <Tab title="CDB" />
-          <Tab title="COE" />
-          <Tab title="Fundos" />
-          <Tab title="Previdência" />
-          <Tab title="Poupança" />
-        </Tabs>,
-        <Anchor  onClick={this.handleOpenEntenda} icon={<CircleQuestion />} label={this.mapTabToInfo(this.state.tab).what} />,
-        this.getSearchResults()
-      ],
-      [sections.CARTEIRA]: [
-        this.renderAnchorBackToRecomendations(),
-        this.renderHeading('Carteira de Investimentos'),
-        <Box align="center" style={{backgroundColor:"white"}} pad="medium">
-          <Label>Valor da aplicação (em reais)</Label>
-          <NumberInput  min={10}  onChange={(e) => this.setValue(e.target.value, 'carteira', 'valor')} step={100} defaultValue={100} />
-          <Label>Prazo de Investimento (em meses)</Label>
-          <NumberInput min={1} onChange={(e) => this.setValue(e.target.value, 'carteira', 'prazo')} step={1} defaultValue={12} />
-          <Button onClick={this.handleSearchCarteira} style={{marginTop: '10px'}} label="Buscar" />
-        </Box>,
-        (
-          this.state.loadingCarteira ? <Spinning size="large" style={{marginTop: '20px'}} /> : null
-        ),
-        (
-          this.props.carteiraRecomendada && !this.state.loadingCarteira ? this.renderCarteiraRecomendada() : null
-        )
-      ]
-    }
-    const content = mapSectionToContent[section];
-    return content;
 
+    return [
+      <FormRecomendador small={small} inputs={inputsRecomendados} onChangeInputs={this.onChangeForm}/>,
+      this.renderFundos(recomendados)
+    ];
   }
 
   handleCloseEntenda = () => {
@@ -362,12 +227,15 @@ export default class Fundos extends React.Component {
   }
 
   render() {
-
+    const {small} = this.props;
     return (
-      <Section align="center" style={{backgroundColor: '#f5f5f5', flexShrink: '0'}}>
+      <Section align="center" style={{backgroundColor: '#f5f5f5'}}>
         <Heading align="center" tag="h3">Investimentos Recomendados</Heading>
         <Heading align="center" tag="h4">Modifique os parametros para encontrar um investimento</Heading>
-        {this.getContent()}
+        <Box direction="row"  pad="medium" style={{width: '100%', paddingRight: small ? '' : '0px', justifyContent:'space-around'}}>
+          {this.getContent()}
+        </Box>
+
         {
           this.state.showEntenda ?
           <Entenda title={this.mapTabToInfo(this.state.tab).what} text={this.mapTabToInfo(this.state.tab).text} onClose={this.handleCloseEntenda}/>

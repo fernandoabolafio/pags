@@ -97,6 +97,7 @@ export const recomendados = [
   }
 ]
 
+
 const getValorIR = (meses) => {
   if(meses < 6) return 22.5;
   if(meses > 6 && meses < 12) return 20;
