@@ -4,7 +4,8 @@ import PanelLayout from '../layouts/PanelLayout';
 import {logout} from '../actions/actions';
 
 const mapStateToProps = state => ({
-  activeUser: state.app.activeUser
+  activeUser: state.app.activeUser,
+  pathname: state.routing.locationBeforeTransitions.pathname
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

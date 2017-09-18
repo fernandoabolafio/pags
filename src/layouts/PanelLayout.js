@@ -26,6 +26,7 @@ export default class PanelLayout extends React.Component {
   }
   render() {
     const {small} = this.state;
+    const {activeUser, logout, pathname} = this.props;
     const childrenWithProps = React.Children.map(this.props.children,
      (child) => React.cloneElement(child, {
        small
@@ -33,7 +34,7 @@ export default class PanelLayout extends React.Component {
     );
     return (
       <Box>
-        { small ? null : <Header activeUser={this.props.activeUser} logout={this.props.logout}/> }
+        { small ? null : <Header activeUser={activeUser} logout={logout} pathname={pathname}/> }
         <Box style={{minHeight: '100vh', height: '100%', width: '100%', backgroundColor: '#f5f5f5', paddingBottom: small ? "68px" : ''}}>
           {childrenWithProps}
         </Box>

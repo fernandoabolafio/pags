@@ -1,3 +1,3 @@
-import { MyHeader as Header } from './Header';
+import PanelHeader from './Header';
 
-export default Header;
+export default PanelHeader;
