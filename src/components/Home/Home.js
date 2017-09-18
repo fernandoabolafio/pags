@@ -63,7 +63,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <Article scrollStep selected={this.state.chapter} onSelect={(chapter) => this.setChapter(chapter)}>
+      <Article selected={this.state.chapter} onSelect={(chapter) => this.setChapter(chapter)}>
           <Header colorIndex="brand"  style={{backgroundColor: '#102027', paddingLeft: "40px", paddingRight: "40px"}}>
             <Image style={{width:'45.8px', height: '42.1px'}} src="img/logo.png" />
             <Menu
