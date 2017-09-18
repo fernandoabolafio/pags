@@ -151,10 +151,6 @@ export default class FundoDetalhes extends React.Component {
     const rend = generateRendBruto(investimento, this.state.inputs.meses, this.state.inputs.valor);
     const taxasIR = generateTaxasIR(investimento, rend);
     const rendLiq = generateRendLiq(investimento, this.state.inputs.meses, this.state.inputs.valor);
-    console.log('rendliq');
-    console.log(rendLiq);
-    console.log('taxas ir');
-    console.log(taxasIR);
     const descontoIR = taxasIR[taxasIR.length-1];
     const rendaEsperada = rend[rend.length-1]-rend[0];
     return (
