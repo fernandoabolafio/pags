@@ -40,7 +40,8 @@ export const actions = {
   CONQUER_ACESSORIO: 'CONQUER_ACESSORIO',
   ORDER_OBJETIVO: 'ORDER_OBJETIVO',
   SET_ACTION_COMPLETE: 'SET_ACTION_COMPLETE',
-  ERASE_NOVA_RECOMPENSA: 'ERASE_NOVA_RECOMPENSA'
+  ERASE_NOVA_RECOMPENSA: 'ERASE_NOVA_RECOMPENSA',
+  TOGGLE_TUTORIAL: 'TOGGLE_TUTORIAL'
 };
 
 const getDate = () => {
@@ -69,6 +70,14 @@ export function goToMenuItem(item) {
 export function seeMoreMeuInvestimento(investimento_id) {
   return (dispatch) => {
     dispatch(push(`/app/meusinvestimentos/${investimento_id}`))
+  }
+}
+
+export function toggleTutorial(bool, step) {
+  return {
+    type: actions.TOGGLE_TUTORIAL,
+    bool,
+    step
   }
 }
 

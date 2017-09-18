@@ -13,7 +13,11 @@ const initialState = {
       acessorioId: 0
     }
   },
-  opcoesDeInvestimento: {}
+  opcoesDeInvestimento: {},
+  tutorial: {
+    show: false,
+    currentStep: ''
+  }
 };
 
 const ACTION_HANDLER = {
@@ -221,7 +225,16 @@ const ACTION_HANDLER = {
         )
       }
     )
-  }
+  },
+  [actions.TOGGLE_TUTORIAL]: (state, action) => updateObject(
+    state,
+    {
+      tutorial: {
+        show: action.bool,
+        currentStep: action.step
+      }
+    }
+  )
 };
 
 

@@ -139,12 +139,12 @@ export default class Inventario extends React.Component {
               Meu Pag$
             </Heading>
             <Box
-              direction={small ? 'row' : 'column'}
+              direction={'column'}
               align='center'
               justify='center'
               pad={{vertical: 'medium', between: 'small'}}
               responsive={false} >
-              {!small &&
+
                 <TipBubble
                   style={{maxWidth: '292px', minHeight: '200px'}}
                   small={small}
@@ -166,30 +166,9 @@ export default class Inventario extends React.Component {
                       </Paragraph>
                     </Box>
                 </TipBubble>
-              }
+
               <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
-              {small &&
-                <TipBubble
-                  style={{maxWidth: '292px', minHeight: '200px'}}
-                  small={small} >
-                    <Box pad={small ? {between: 'large'} : {between: 'medium'}}>
-                      <Paragraph size='large' margin='none'>
-                        Eaí, beleza? Você
-                        já ganhou R$5,00
-                      </Paragraph>
-                      <Paragraph size='large' margin='none'>
-                        Não é ótimo
-                        ganhar um
-                        dinheirinho só
-                        investindo?
-                      </Paragraph>
-                      <Button primary label='Faça Missões' onClick={this.handleClick}/>
-                      <Paragraph size='large' margin='none'>
-                        Para aumentar sua rentabilidade
-                      </Paragraph>
-                    </Box>
-                </TipBubble>
-              }
+
             </Box>
           </Box>
         <Box direction='column'
