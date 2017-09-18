@@ -7,6 +7,7 @@ import Box from 'grommet/components/Box';
 import DownIcon from 'grommet/components/icons/base/Down';
 import Image from 'grommet/components/Image';
 import {colors} from '../../constants/styles';
+import TutorialHoc, {tutorialSteps} from '../../hocs/TutorialHoc';
 
 export const MyHeader = ({logout, activeUser, tab}) =>
 <Header justify="center" colorIndex="brand" style={{backgroundColor: '#102027'}}>
@@ -20,7 +21,7 @@ export const MyHeader = ({logout, activeUser, tab}) =>
        label={
        <Image
          style={{width:'45.8px', height: '42.1px'}}
-         src={  `img/menu-icons/pags${tab === 'inicio' ? '_pressed' : ''}.svg`} 
+         src={  `img/menu-icons/pags${tab === 'inicio' ? '_pressed' : ''}.svg`}
         />
      }
      />
@@ -65,7 +66,7 @@ export const MyHeader = ({logout, activeUser, tab}) =>
 
 
 
-export default class PanelHeader extends React.Component {
+class PanelHeader extends React.Component {
   constructor(props) {
     super(props);
 
@@ -98,3 +99,4 @@ export default class PanelHeader extends React.Component {
     return <MyHeader logout={logout}  activeUser={activeUser} tab={tab}/>
   }
 }
+ export default TutorialHoc(tutorialSteps.HEADER, PanelHeader);
