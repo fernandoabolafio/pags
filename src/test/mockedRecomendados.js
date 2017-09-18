@@ -82,7 +82,7 @@ export const recomendados = [
     invest_min: 5000,
     tempo_min: 0.1,
     rendimento: 'pre_fixado',
-    risco: 'baixo',
+    risco: 'medio',
     liquidez: 'diario',
     quando_recebe: 'D+1',
     rentabilidades: {
