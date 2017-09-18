@@ -385,7 +385,7 @@ export default class MainScreen extends React.Component {
       <Heading tag='h2'>
         Seu investimento nos próximos 12 meses
       </Heading>
-      <ProjectionChart width={300} small={small} investimento={recomendados[0]} meses={12} valor={32252.53} />
+      <ProjectionChart width={300} small={small} investimento={recomendados[0]} meses={12} valor={35252.43} />
     </Box>
 
     const desktopView = [

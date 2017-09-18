@@ -81,8 +81,8 @@ export const recomendados = [
     nome: 'Fundo Itaú',
     invest_min: 5000,
     tempo_min: 0.1,
-    rendimento: 'pre_fixado',
-    risco: 'baixo',
+    rendimento: 'pos_fixado',
+    risco: 'medio',
     liquidez: 'diario',
     quando_recebe: 'D+1',
     rentabilidades: {

@@ -73,11 +73,11 @@ export default class Menu extends React.Component {
         value: 'inicio'
       },
       {
-        text: 'Conquistas',
+        text: 'Pag$',
         value: 'conquistas'
       },
       {
-        text: 'Pag$',
+        text: 'Chat',
         value: 'chat'
       },
       {

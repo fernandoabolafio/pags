@@ -126,7 +126,7 @@ export default class Inventario extends React.Component {
       <Box style={{flexShrink: '0'}} direction='row'>
         <Box style={{backgroundColor: 'white', width: small ? '' : '30%', flexShrink: '0', minHeight: '360px'}} pad='medium' margin={{top: 'medium', left: 'medium', right: 'small', bottom: 'medium'}}>
             <Heading tag='h2'>
-              Seu Pag$
+              Meu Pag$
             </Heading>
             <Box
               direction={small ? 'row' : 'column'}
