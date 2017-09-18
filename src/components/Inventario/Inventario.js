@@ -3,9 +3,12 @@ import Section from 'grommet/components/Section';
 import Box from 'grommet/components/Box';
 import Card from 'grommet/components/Card';
 import Heading from 'grommet/components/Heading';
-import Value from 'grommet/components/Value';
+import Tabs from 'grommet/components/Tabs';
+import List from 'grommet/components/List';
+import ListItem from 'grommet/components/ListItem';
+import Tab from 'grommet/components/Tab';
 import Label from 'grommet/components/Label';
-import Meter from 'grommet/components/Meter';
+import Button from 'grommet/components/Button';
 import Image from 'grommet/components/Image';
 import Paragraph from 'grommet/components/Paragraph';
 import Pags from '../Pags';
@@ -53,13 +56,13 @@ export default class Inventario extends React.Component {
         }
       },
       'selected': {
-        border: '2px solid #865cd6',
+        border: '2px solid #C67C00',
         borderRadius: '5px',
         width: '250px'
       }
     }
     return (
-      <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+      <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginTop: '24px'}}>
         {acessorios.map((acessorio, index) => {
           return (
             <Box
@@ -72,65 +75,11 @@ export default class Inventario extends React.Component {
             >
               <Image id={`acessorio-${index}`} size='small' src={acessoriosSrc[acessorio.id]} style={{maxWidth: '165px', maxHeight: '240px'}}
               />
-              <Label align='center' margin={{bottom: '0'}} style={acessorio.selected ? {color: '#865cd6'} : {}}>{acessorio.text}</Label>
             </Box>
           )
         })}
       </div>
   )}
-
-  rightContent = (small, nivel, title, exp) => {
-    const completo = exp === 100 ? '1' : '2'
-    const text = {
-      '1': {
-        '1': 'Parabéns, você é um Investidor Junior! Continue com o bom trabalho.',
-        '2': 'Ao completar esse nível você saberá o básico sobre investimentos e como aplicar.'
-      },
-      '2': {
-        '1': 'Parabéns, você é um Especialista em investimentos!',
-        '2': 'Ao completar esse nível você entenderá o bastante para gerenciar seus investimentos.'
-      },
-      '3': {
-        '1': 'Parabéns, você é um Mestre em investimentos!',
-        '2': 'Ao completar esse nível você terá uma boa noção de como fazer o seu dinheiro render.'
-      },
-      '4': {
-        '1': 'Parabéns, você é um verdadeiro Money Maker! Não é tão difícil assim investir, né?',
-        '2': 'Ao completar esse nível você entenderá tudo sobre investimentos.'
-      }
-    }
-    return (
-      <div style={ small ? {} : {height: '300px'}}>
-        <div>
-          <Label
-            size='small'>
-            Nivel {nivel}
-          </Label>
-          <Heading
-            tag='h3'
-            style={{color: '#ffd602'}}
-          >
-            {title}
-          </Heading>
-        </div>
-        <Meter size='small'
-          colorIndex='warning'
-          type='bar'
-          label={
-            <Value colorIndex='warning' value={exp}
-            units='%'
-            size='small' />
-          }
-          value={exp}
-        />
-        <Box wrap pad={{vertical: 'small'}}>
-          <Paragraph margin='none'>
-            {text[nivel][completo]}
-          </Paragraph>
-        </Box>
-      </div>
-    )
-}
 
   render() {
     const {small, pagsAcessorios, changeAcessorio} = this.props;
@@ -139,21 +88,39 @@ export default class Inventario extends React.Component {
     if (active && active[0] !== undefined) {
       activeAcessorio = active[0].id;
     }
-    const title = {
-      '1': 'Junior',
-      '2': 'Entusiasta',
-      '3': 'Master',
-      '4': 'Money Maker'
-    }
+    const missoes = [
+      {
+        acessorio: 0,
+        nome: 'Tutorial'
+      },
+      {
+        acessorio: 1,
+        nome: 'Liquidez'
+      },
+      {
+        acessorio: 2,
+        nome: 'Inflação'
+      },
+      {
+        acessorio: 3,
+        nome: 'Risco'
+      },
+      {
+        acessorio: 4,
+        nome: 'Tesouro Direto'
+      },
+      {
+        acessorio: 5,
+        nome: 'CDB'
+      }
+    ];
     return (
-      <Section style={{flexShrink: '0'}}>
-        <Box direction='row' style={{flexShrink:'0'}}>
-          <Box style={{backgroundColor: 'white', width: small ? '' : '30%', flexShrink: '0', minHeight: '360px'}} margin={small ? 'medium' : {left: 'medium', right: 'small'}} pad='medium'>
+      <Box style={{flexShrink: '0'}} direction='row'>
+        <Box style={{backgroundColor: 'white', width: small ? '' : '30%', flexShrink: '0', minHeight: '360px'}} pad='medium' margin={{top: 'medium', left: 'medium', right: 'small', bottom: 'medium'}}>
             <Heading tag='h2'>
               Seu Pag$
             </Heading>
             <Box
-              margin={small ? 'medium' : {left: 'medium', right: 'small'}}
               direction={small ? 'row' : 'column'}
               align='center'
               justify='center'
@@ -165,7 +132,20 @@ export default class Inventario extends React.Component {
                   small={small}
                   caret >
                     <Box pad={{between: 'medium'}}>
-                      <Paragraph size='large' margin='none'>Eaí, beleza? Qual a boa de hoje?</Paragraph>
+                      <Paragraph size='large' margin='none'>
+                        Eaí, beleza? Você
+                        já ganhou R$5,00
+                      </Paragraph>
+                      <Paragraph size='large' margin='none'>
+                        Não é ótimo
+                        ganhar um
+                        dinheirinho só
+                        investindo?
+                      </Paragraph>
+                      <Button primary label='Faça Missões' onClick={() => console.log('oi')}/>
+                      <Paragraph size='large' margin='none'>
+                        Para aumentar sua rentabilidade
+                      </Paragraph>
                     </Box>
                 </TipBubble>
               }
@@ -175,60 +155,55 @@ export default class Inventario extends React.Component {
                   style={{maxWidth: '292px', minHeight: '200px'}}
                   small={small} >
                     <Box pad={small ? {between: 'large'} : {between: 'medium'}}>
-                      <Paragraph size='large' margin='none'>Eaí, beleza? Qual a boa de hoje?</Paragraph>
+                      <Paragraph size='large' margin='none'>
+                        Eaí, beleza? Você
+                        já ganhou R$5,00
+                      </Paragraph>
+                      <Paragraph size='large' margin='none'>
+                        Não é ótimo
+                        ganhar um
+                        dinheirinho só
+                        investindo?
+                      </Paragraph>
+                      <Button primary label='Faça Missões' onClick={() => console.log('oi')}/>
+                      <Paragraph size='large' margin='none'>
+                        Para aumentar sua rentabilidade
+                      </Paragraph>
                     </Box>
                 </TipBubble>
               }
             </Box>
           </Box>
-          <Box style={{backgroundColor: 'white', width: small ? '' : '70%'}} margin={small ? 'medium' : {left: 'small', right: 'medium'}} pad='medium'>
-              <Heading tag='h2'>
-                Suas Conquistas
-              </Heading>
-              <Box>
-                <Box direction='row' pad={{vertical: 'small', horizontal: 'small', between: 'small'}} justify='center'>
-                  <TipBubble
-                    noPropagate
-                    style={small ? {} : {width: '50%'}}
-                    small={small} >
-                      {this.rightContent(small, 1, title['1'], 100)}
-                    </TipBubble>
-                   <TipBubble
-                     noPropagate
-                     style={small ? {} : {width: '50%'}}
-                     small={small} >
-                       {this.rightContent(small, 2, title['2'], 35)}
-                     </TipBubble>
-                </Box>
-                <Box direction='row' pad={{vertical: 'none', horizontal: 'small', between: 'small'}} justify='center'>
-                  <TipBubble
-                    noPropagate
-                    style={small ? {} : {width: '50%'}}
-                    small={small} >
-                      {this.rightContent(small, 3, title['3'], 0)}
-                    </TipBubble>
-                   <TipBubble
-                     noPropagate
-                     style={small ? {} : {width: '50%'}}
-                     small={small}>
-                       {this.rightContent(small, 4, title['4'], 0)}
-                     </TipBubble>
-                 </Box>
-              </Box>
-          </Box>
+        <Box direction='column'
+          style={{backgroundColor: 'white', width: small ? '' : '70%'}}
+          pad='medium'
+          margin={small ?
+            'medium' :
+            {top: 'medium', left: 'small', right: 'medium', bottom: 'medium'}}>
+            <Tabs responsive={false} style={{marginBottom: '0'}}>
+              <Tab title='Conquistas'>
+                  {this.acessoriosContent(pagsAcessorios, small, changeAcessorio)}
+              </Tab>
+              <Tab title='Missões'>
+                <List style={{marginTop: '24px'}}>
+                  {
+                    missoes.map(
+                      (missao, index) =>
+                        <ListItem
+                          responsive={false}
+                          pad={{between: 'medium', vertical: 'small', horizontal: 'large'}}
+                          style={{cursor: 'pointer'}}
+                          >
+                          <Image id={`missao-${index}`} style={{width: '64px', height: '96px'}} src={acessoriosSrc[missao.acessorio]} />
+                          <Heading tag='h3' margin='none'>{missao.nome}</Heading>
+                        </ListItem>
+                    )
+                  }
+                </List>
+              </Tab>
+            </Tabs>
         </Box>
-        <Box direction='row' style={{backgroundColor: 'white'}} margin='medium'>
-          <Card justify='center'
-            full='horizontal'
-            heading={
-              <Heading tag='h2' margin='none'>
-                Acessórios
-              </Heading>
-            }>
-            {this.acessoriosContent(pagsAcessorios, small, changeAcessorio)}
-          </Card>
-        </Box>
-      </Section>
+      </Box>
     )
   }
 }
