@@ -7,12 +7,12 @@ import Tabs from 'grommet/components/Tabs';
 import List from 'grommet/components/List';
 import ListItem from 'grommet/components/ListItem';
 import Tab from 'grommet/components/Tab';
-import Label from 'grommet/components/Label';
 import Button from 'grommet/components/Button';
 import Image from 'grommet/components/Image';
 import Paragraph from 'grommet/components/Paragraph';
 import Pags from '../Pags';
 import TipBubble from '../TipBubble';
+import Layer from '../Layer';
 import acessorio00 from '../../assets/acessorio00.png';
 import acessorio01 from '../../assets/acessorio01.png';
 import acessorio02 from '../../assets/acessorio02.png';
@@ -41,12 +41,16 @@ const acessoriosSrc = {
 
 export default class Inventario extends React.Component {
   state = {
-    tabActiveIndex: 0
+    tabActiveIndex: 0,
   }
 
   handleTabChange = (index) => this.setState({ tabActiveIndex: index });
 
   handleClick = () => this.setState({ tabActiveIndex:1 });
+
+  selectMissao = (id) => this.setState({ missao: id });
+
+  closeMissao = () => this.setState({ missao: undefined });
 
   acessoriosContent = (acessorios, small, changeAcessorio) => {
     const style = {
@@ -98,28 +102,34 @@ export default class Inventario extends React.Component {
     }
     const missoes = [
       {
-        acessorio: 0,
-        nome: 'Tutorial'
+        id: 0,
+        nome: 'Tutorial',
+        active: true
       },
       {
-        acessorio: 1,
-        nome: 'Liquidez'
+        id: 1,
+        nome: 'Inflação',
+        active: true
       },
       {
-        acessorio: 2,
-        nome: 'Inflação'
+        id: 2,
+        nome: 'Liquidez',
+        active: false
       },
       {
-        acessorio: 3,
-        nome: 'Risco'
+        id: 3,
+        nome: 'Risco',
+        active: false
       },
       {
-        acessorio: 4,
-        nome: 'Tesouro Direto'
+        id: 4,
+        nome: 'Tesouro Direto',
+        active: false
       },
       {
-        acessorio: 5,
-        nome: 'CDB'
+        id: 5,
+        nome: 'CDB',
+        active: false
       }
     ];
     return (
@@ -150,7 +160,7 @@ export default class Inventario extends React.Component {
                         dinheirinho só
                         investindo?
                       </Paragraph>
-                      <Button primary label='Faça Missões' onClick={() => {this.handleClick(); console.log('oi')}}/>
+                      <Button primary label='Faça Missões' onClick={this.handleClick} />
                       <Paragraph size='large' margin='none'>
                         Para aumentar sua rentabilidade
                       </Paragraph>
@@ -198,11 +208,13 @@ export default class Inventario extends React.Component {
                     missoes.map(
                       (missao, index) =>
                         <ListItem
+                          className='missao-item'
                           responsive={false}
+                          onClick={() => this.selectMissao(missao.id)}
                           pad={{between: 'medium', vertical: 'small', horizontal: 'large'}}
-                          style={{cursor: 'pointer'}}
+                          style={missao.active ? {cursor: 'pointer'} : {backgroundColor: '#CBCBCB', opacity: '0.6'}}
                           >
-                          <Image id={`missao-${index}`} style={{width: '64px', height: '96px'}} src={acessoriosSrc[missao.acessorio]} />
+                          <Image id={`missao-${index}`} style={{width: '64px', height: '96px'}} src={acessoriosSrc[missao.id]} />
                           <Heading tag='h3' margin='none'>{missao.nome}</Heading>
                         </ListItem>
                     )
@@ -211,6 +223,16 @@ export default class Inventario extends React.Component {
               </Tab>
             </Tabs>
         </Box>
+        {this.state.missao &&
+          <Layer
+            onClose={this.closeMissao}
+            a11yTitle='Adicionar objetivo'>
+            <Box>
+              <Button label='Voltar'/>
+              <Heading>Missao Layer</Heading>
+            </Box>
+          </Layer>
+        }
       </Box>
     )
   }
