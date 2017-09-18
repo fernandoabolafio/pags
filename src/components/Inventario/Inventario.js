@@ -40,6 +40,14 @@ const acessoriosSrc = {
 }
 
 export default class Inventario extends React.Component {
+  state = {
+    tabActiveIndex: 0
+  }
+
+  handleTabChange = (index) => this.setState({ tabActiveIndex: index });
+
+  handleClick = () => this.setState({ tabActiveIndex:1 });
+
   acessoriosContent = (acessorios, small, changeAcessorio) => {
     const style = {
       notSelected: {
@@ -142,7 +150,7 @@ export default class Inventario extends React.Component {
                         dinheirinho só
                         investindo?
                       </Paragraph>
-                      <Button primary label='Faça Missões' onClick={() => console.log('oi')}/>
+                      <Button primary label='Faça Missões' onClick={() => {this.handleClick(); console.log('oi')}}/>
                       <Paragraph size='large' margin='none'>
                         Para aumentar sua rentabilidade
                       </Paragraph>
@@ -165,7 +173,7 @@ export default class Inventario extends React.Component {
                         dinheirinho só
                         investindo?
                       </Paragraph>
-                      <Button primary label='Faça Missões' onClick={() => console.log('oi')}/>
+                      <Button primary label='Faça Missões' onClick={this.handleClick}/>
                       <Paragraph size='large' margin='none'>
                         Para aumentar sua rentabilidade
                       </Paragraph>
@@ -180,7 +188,7 @@ export default class Inventario extends React.Component {
           margin={small ?
             'medium' :
             {top: 'medium', left: 'small', right: 'medium', bottom: 'medium'}}>
-            <Tabs responsive={false} style={{marginBottom: '0'}}>
+            <Tabs responsive={false} style={{marginBottom: '0'}} onActive={this.handleTabChange} activeIndex={this.state.tabActiveIndex}>
               <Tab title='Conquistas'>
                   {this.acessoriosContent(pagsAcessorios, small, changeAcessorio)}
               </Tab>
