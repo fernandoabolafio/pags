@@ -1,0 +1,11 @@
+/*.missao-item {
+  background-color: lightyellow !important;
+}*/
+
+.missao-item:hover {
+  background-color: rgba(251, 170, 25, 0.3) !important;
+}
+
+.missao-item:focus {
+  outline: 1px solid transparent !important;
+}

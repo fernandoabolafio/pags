@@ -1,7 +1,5 @@
 import React from 'react';
-import Section from 'grommet/components/Section';
 import Box from 'grommet/components/Box';
-import Card from 'grommet/components/Card';
 import Heading from 'grommet/components/Heading';
 import Tabs from 'grommet/components/Tabs';
 import List from 'grommet/components/List';
@@ -13,6 +11,8 @@ import Paragraph from 'grommet/components/Paragraph';
 import Pags from '../Pags';
 import TipBubble from '../TipBubble';
 import Layer from '../Layer';
+import Missao from '../Missoes';
+import './Inventario.css'
 import acessorio00 from '../../assets/acessorio00.png';
 import acessorio01 from '../../assets/acessorio01.png';
 import acessorio02 from '../../assets/acessorio02.png';
@@ -102,32 +102,32 @@ export default class Inventario extends React.Component {
     }
     const missoes = [
       {
-        id: 0,
+        id: 1,
         nome: 'Tutorial',
         active: true
       },
       {
-        id: 1,
+        id: 2,
         nome: 'Inflação',
         active: true
       },
       {
-        id: 2,
+        id: 3,
         nome: 'Liquidez',
         active: false
       },
       {
-        id: 3,
+        id: 4,
         nome: 'Risco',
         active: false
       },
       {
-        id: 4,
+        id: 5,
         nome: 'Tesouro Direto',
         active: false
       },
       {
-        id: 5,
+        id: 6,
         nome: 'CDB',
         active: false
       }
@@ -187,9 +187,9 @@ export default class Inventario extends React.Component {
                     missoes.map(
                       (missao, index) =>
                         <ListItem
-                          className='missao-item'
+                          className={missao.active ? 'missao-item' : ''}
                           responsive={false}
-                          onClick={() => this.selectMissao(missao.id)}
+                          onClick={missao.active ? () => this.selectMissao(missao.id) : null}
                           pad={{between: 'medium', vertical: 'small', horizontal: 'large'}}
                           style={missao.active ? {cursor: 'pointer'} : {backgroundColor: '#CBCBCB', opacity: '0.6'}}
                           >
@@ -206,10 +206,7 @@ export default class Inventario extends React.Component {
           <Layer
             onClose={this.closeMissao}
             a11yTitle='Adicionar objetivo'>
-            <Box>
-              <Button label='Voltar'/>
-              <Heading>Missao Layer</Heading>
-            </Box>
+            <Missao missao={this.state.missao} small={small} />
           </Layer>
         }
       </Box>

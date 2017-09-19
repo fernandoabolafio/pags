@@ -13,7 +13,7 @@ export default class MyLayer extends React.Component {
     return (
       <div>
         <Layer
-          styles={{zIndex: '9999999'}}
+          style={{zIndex: '10'}}
           align='center'
           closer
           onClose={onClose}
