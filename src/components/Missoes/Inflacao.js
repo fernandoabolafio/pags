@@ -15,10 +15,11 @@ export default class Inflacao extends React.Component {
   }
 
   prevStep = () => this.setState({step: this.state.step-1});
+  goToStep1 = () => this.setState({step: 1});
   nextStep = () => this.setState({step: this.state.step+1});
   nextNextStep = () => this.setState({step: this.state.step+2});
   selectMoedas = (value) => this.setState({moedasGastas: value});
-  resposta = (value) => this.setState({resposta: value});
+  resposta = (value) => this.setState({resposta: value, step: this.state.step+1});
 
   render() {
     const {small} = this.props;
@@ -151,8 +152,6 @@ export default class Inflacao extends React.Component {
       :
       <Image src={steps[this.state.step].pags} size='medium' />
 
-    console.log(this.state.step);
-    console.log(steps[this.state.step]);
     return(
       <Article pad={small ? {vertical: 'large', between: 'medium'} : {vertical: 'medium', between: 'medium'}} >
         <Box align='center' pad={small ? {between: 'small', vertical: 'medium'} : {between: 'small', vertical: 'medium'}}>
@@ -174,15 +173,17 @@ export default class Inflacao extends React.Component {
             :
             renderMiddle
           }
-          {!(this.state.step === 7) ?
-            <Box pad={{vertical: 'medium', between: 'medium'}} align='center' direction='row' responsive={false}>
-              {!(this.state.step === 1) && <Button primary style={{}} label='Voltar' onClick={this.prevStep}/>}
-              <Button label={'Próximo'} primary onClick={(this.state.moedasGastas === 'Três' && this.state.step === 11) ? this.nextNextStep : this.nextStep} />
-            </Box>
-            :
-            <Button label={'Veja a mesma história se o PAG$ tivesse investido'} primary onClick={this.nextStep} />
+          {(this.state.step === 14) ?
+            null
+          :
+            !(this.state.step === 7) ?
+              <Box pad={{vertical: 'medium', between: 'medium'}} align='center' direction='row' responsive={false}>
+                {!(this.state.step === 1) && <Button primary label={(this.state.step === 15) ? 'Refazer Missão' : 'Voltar'} onClick={(this.state.step === 15) ? this.goToStep1 : this.prevStep}/>}
+                <Button label={(this.state.step === 15) ? 'Concluir' : 'Próximo'} primary onClick={(this.state.step === 15) ? this.props.onClose : (this.state.moedasGastas === 'Três' && this.state.step === 11) ? this.nextNextStep : this.nextStep} />
+              </Box>
+              :
+              <Button label={'Veja a mesma história se o PAG$ tivesse investido'} primary onClick={this.nextStep} />
           }
-
         </Box>
       </Article>
   )}

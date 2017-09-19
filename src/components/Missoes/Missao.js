@@ -13,7 +13,7 @@ export default class Missao extends React.Component {
   render() {
     const missoes = {
       [1]: <Tutorial />,
-      [2]: <Inflacao small={this.props.small} />
+      [2]: <Inflacao small={this.props.small} onClose={this.props.onClose}/>
     }
     return(
       <Box>
