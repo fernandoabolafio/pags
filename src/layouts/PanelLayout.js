@@ -34,7 +34,7 @@ export default class PanelLayout extends React.Component {
     );
     return (
       <Box>
-        { small && <Header activeUser={activeUser} logout={logout} pathname={pathname}/> }
+        { !small && <Header activeUser={activeUser} logout={logout} pathname={pathname}/> }
         <Box style={{minHeight: '100vh', height: '100%', width: '100%', backgroundColor: '#f5f5f5', paddingBottom: small ? "68px" : ''}}>
           {childrenWithProps}
         </Box>
