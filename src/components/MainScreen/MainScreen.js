@@ -38,8 +38,8 @@ import acessorio10 from '../../assets/acessorio10.png';
 import AulasList from './AulasList';
 import Dica from './Dica';
 import ProjectionChart from '../ProjectionChart';
-import {getPosts} from '../../communication/pagsApi';
-import {recomendados, generateRendBruto, generateRendLiq, generateFormatedData, generateFormatedDataWithPoupanca} from '../../test/mockedRecomendados';
+import { getPosts } from '../../communication/pagsApi';
+import { recomendados, generateRendBruto, generateRendLiq, generateFormatedData, generateFormatedDataWithPoupanca } from '../../test/mockedRecomendados';
 
 
 const acessoriosSrc = {
@@ -68,7 +68,7 @@ export default class MainScreen extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.investidorInfo || this.props.investidorInfo) {
+    if (nextProps.investidorInfo || this.props.investidorInfo) {
       this.setState({
         hasInvestidorInfo: true
       })
@@ -76,11 +76,11 @@ export default class MainScreen extends React.Component {
   }
 
   componentDidMount() {
-    getPosts();
+    // getPosts();
     if (!this.props.pagsAcessorios[0].isConquered) {
       this.props.conquerAcessorio(0, 'completou o cadastro');
     }
-    if(!this.props.investidorInfo) {
+    if (!this.props.investidorInfo) {
       this.props.fetchInvestidorInfo();
     } else {
       this.setState({
@@ -108,13 +108,13 @@ export default class MainScreen extends React.Component {
   }
 
   onSelectObjetivo = (selection) => {
-    this.setState({selection});
+    this.setState({ selection });
   }
   onDeselectObjetivo = () => {
-    this.setState({selection: undefined, addObj: undefined});
+    this.setState({ selection: undefined, addObj: undefined });
   }
   onClickAddObjetivo = () => {
-    this.setState({addObj: true});
+    this.setState({ addObj: true });
     this.props.setActionComplete('addObjetivo');
   }
 
@@ -148,8 +148,8 @@ export default class MainScreen extends React.Component {
   }
 
   render() {
-    const {small, addObjetivo, editObjetivo, removeObjetivo, pagsAcessorios, rawObjetivos, orderObjetivos, novaRecompensa, conquerAcessorio, eraseNovaRecompensa} = this.props;
-    const {selection, addObj, hasInvestidorInfo} = this.state;
+    const { small, addObjetivo, editObjetivo, removeObjetivo, pagsAcessorios, rawObjetivos, orderObjetivos, novaRecompensa, conquerAcessorio, eraseNovaRecompensa } = this.props;
+    const { selection, addObj, hasInvestidorInfo } = this.state;
 
     const active = pagsAcessorios ? pagsAcessorios.filter(acessorio => acessorio.selected) : null;
     let activeAcessorio;
@@ -170,7 +170,7 @@ export default class MainScreen extends React.Component {
           {
             label: investimento.nome,
             value: investimento.saldo,
-            colorIndex: `graph-${index+1}`,
+            colorIndex: `graph-${index + 1}`,
             onClick: () => this.props.seeMoreMeuInvestimento(investimento.codigo)
           }
         );
@@ -178,13 +178,13 @@ export default class MainScreen extends React.Component {
     }
 
     const objetivos = rawObjetivos.map(objetivo => {
-      if(total >= objetivo.valor) {
-        total-= objetivo.valor;
+      if (total >= objetivo.valor) {
+        total -= objetivo.valor;
         objetivo.acumulado = 1;
       }
       else {
-        objetivo.acumulado = total/objetivo.valor;
-        total=0;
+        objetivo.acumulado = total / objetivo.valor;
+        total = 0;
       }
       return objetivo;
     })
@@ -206,7 +206,7 @@ export default class MainScreen extends React.Component {
           onClose={this.onDeselectObjetivo}
           a11yTitle='Adicionar objetivo'
         >
-          <AddObjetivoLayerContent small={small} addObjetivo={addObjetivo} conquerAcessorio={conquerAcessorio} pagsAcessorios={pagsAcessorios}/>
+          <AddObjetivoLayerContent small={small} addObjetivo={addObjetivo} conquerAcessorio={conquerAcessorio} pagsAcessorios={pagsAcessorios} />
         </Layer>
       )
     } else if (novaRecompensa.active) {
@@ -219,53 +219,53 @@ export default class MainScreen extends React.Component {
       )
     }
     const DicasPagsBox =
-      <Box style={{backgroundColor: 'white', width: small ? '' : '35%'}}
-        margin={small ? 'medium' : {left: 'medium', right: 'small'}}
+      <Box style={{ backgroundColor: 'white', width: small ? '' : '35%' }}
+        margin={small ? 'medium' : { left: 'medium', right: 'small' }}
         direction={small ? 'row' : 'column'}
         align='center'
         justify='center'
-        pad={{vertical: 'medium', between: 'small'}}
+        pad={{ vertical: 'medium', between: 'small' }}
         responsive={false} >
         {!small &&
           <TipBubble
-            style={{maxWidth: '292px'}}
+            style={{ maxWidth: '292px' }}
             small={small}
             caret >
-              <Box pad={{between: 'medium'}}>
-                <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
-                <Paragraph size='large' margin='none'>
-                  Não é ótimo
-                  ganhar um
-                  dinheirinho só
-                  investindo?
+            <Box pad={{ between: 'medium' }}>
+              <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
+              <Paragraph size='large' margin='none'>
+                Não é ótimo
+                ganhar um
+                dinheirinho só
+                investindo?
                 </Paragraph>
-              </Box>
+            </Box>
           </TipBubble>
         }
         <Pags size={small ? 'small' : 'medium'} src={acessoriosSrc[activeAcessorio]} />
         {small &&
           <TipBubble
-            style={{maxWidth: '292px'}}
+            style={{ maxWidth: '292px' }}
             small={small} >
-              <Box pad={small ? {between: 'large'} : {between: 'medium'}}>
-                <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
-                <Paragraph size='large' margin='none'>
-                  Não é ótimo
-                  ganhar um
-                  dinheirinho só
-                  investindo?
+            <Box pad={small ? { between: 'large' } : { between: 'medium' }}>
+              <Paragraph size='large' margin='none'>Eaí, beleza? Você já ganhou R$5,00</Paragraph>
+              <Paragraph size='large' margin='none'>
+                Não é ótimo
+                ganhar um
+                dinheirinho só
+                investindo?
                 </Paragraph>
-              </Box>
+            </Box>
           </TipBubble>
         }
-        </Box>;
+      </Box>;
 
-    const ObjetivosBox = <Box style={{backgroundColor: 'white', width: small ? '' : '65%'}}  margin={small ? 'medium' : {left: 'small', right: 'medium'}}>
+    const ObjetivosBox = <Box style={{ backgroundColor: 'white', width: small ? '' : '65%' }} margin={small ? 'medium' : { left: 'small', right: 'medium' }}>
       <Card
-        style={{width:'100%'}}
+        style={{ width: '100%' }}
         heading={
-          <div style={{display: 'flex'}}>
-            <Box margin={{bottom: 'small'}}>
+          <div style={{ display: 'flex' }}>
+            <Box margin={{ bottom: 'small' }}>
               <Heading tag='h2' margin='none'>
                 Seus Objetivos
               </Heading>
@@ -273,115 +273,115 @@ export default class MainScreen extends React.Component {
             </Box>
 
             <Box flex="grow" align="end">
-              <Button onClick={this.onClickAddObjetivo}  icon={<AddIcon />} />
+              <Button onClick={this.onClickAddObjetivo} icon={<AddIcon />} />
             </Box>
 
           </div>
-          }
+        }
       >
         <Objetivos onSelectObjetivo={this.onSelectObjetivo} small={small} onSortEnd={orderObjetivos} objetivos={objetivos} />
       </Card>
     </Box>;
 
     const InvestimentosBox =
-    <Box direction='row'  style={{backgroundColor: 'white', width: small ? '' : '33%'}} pad='medium' margin={small ? 'medium' : {bottom: 'medium', top: 'medium', left: 'small', right: 'small'}}>
-      <Box
-        style={{width:'100%'}} >
-        <Heading tag='h2'>
-          Seus Investimentos
+      <Box direction='row' style={{ backgroundColor: 'white', width: small ? '' : '33%' }} pad='medium' margin={small ? 'medium' : { bottom: 'medium', top: 'medium', left: 'small', right: 'small' }}>
+        <Box
+          style={{ width: '100%' }} >
+          <Heading tag='h2'>
+            Seus Investimentos
         </Heading>
-        <Box align='center' >
-          <AnnotatedMeter type="circle" legend={true} units="R$"
-            size={small ? 'medium' : 'medium'}  series={investimentosData} />
-          <Box pad={{vertical: 'large', horizontal: 'medium', between: 'medium'}}>
-            <FormField size='medium'>
-              <TextInput placeHolder="Valor do resgate" />
-            </FormField>
-            <Button label='Resgatar' primary onClick={() => console.log('RESGATE FEITO')}/>
+          <Box align='center' >
+            <AnnotatedMeter type="circle" legend={true} units="R$"
+              size={small ? 'medium' : 'medium'} series={investimentosData} />
+            <Box pad={{ vertical: 'large', horizontal: 'medium', between: 'medium' }}>
+              <FormField size='medium'>
+                <TextInput placeHolder="Valor do resgate" />
+              </FormField>
+              <Button label='Resgatar' primary onClick={() => console.log('RESGATE FEITO')} />
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </Box>;
+      </Box>;
 
     const AgendaBox =
-    <Box direction='column' pad='medium' style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'small', left: 'medium', right: 'small'}}>
+      <Box direction='column' pad='medium' style={{ backgroundColor: 'white' }} margin={small ? 'medium' : { top: 'small', left: 'medium', right: 'small' }}>
         <Heading tag='h2'>
           Agenda
         </Heading>
         <Paragraph>
           Você tem um investimento de R$50,00 agendado para todo dia {this.state.agenda.substring(0, 2) || '05'} do mês
         </Paragraph>
-        <Box pad={{between: 'medium'}}>
-        <Button onClick={() => this.toggleEdit()} label='Editar' />
-        {this.state.editAgenda ?
-          <Box pad={{between: 'medium'}}>
-            <Form>
-              <FormField>
-                <DateTime id='agenda'
-                  name='conclusaoEstimada'
-                  format='D/M/YYYY'
-                  value={this.state.agenda}
-                  onChange={(value) => this.handleDataChange(value)} />
-              </FormField>
-            </Form>
-            <Button onClick={() => this.toggleEdit()} label='Salvar' />
-          </Box>
-          : null}
+        <Box pad={{ between: 'medium' }}>
+          <Button onClick={() => this.toggleEdit()} label='Editar' />
+          {this.state.editAgenda ?
+            <Box pad={{ between: 'medium' }}>
+              <Form>
+                <FormField>
+                  <DateTime id='agenda'
+                    name='conclusaoEstimada'
+                    format='D/M/YYYY'
+                    value={this.state.agenda}
+                    onChange={(value) => this.handleDataChange(value)} />
+                </FormField>
+              </Form>
+              <Button onClick={() => this.toggleEdit()} label='Salvar' />
+            </Box>
+            : null}
         </Box>
-    </Box>;
+      </Box>;
 
     const SaldoBox =
-    <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small', bottom:"small"}} pad='medium'>
-      <Heading tag='h2'>
-        Saldo da Conta Corrente
+      <Box style={{ backgroundColor: 'white' }} margin={small ? 'medium' : { top: 'medium', left: 'medium', right: 'small', bottom: "small" }} pad='medium'>
+        <Heading tag='h2'>
+          Saldo da Conta Corrente
       </Heading>
-      <Heading tag='h2'>
-        R$ 1.220,30
+        <Heading tag='h2'>
+          R$ 1.220,30
       </Heading>
-    </Box>
+      </Box>
 
     const InvestirBox =
-    <Box style={{backgroundColor: 'white'}} margin={small ? 'medium' : {top: 'medium', left: 'medium', right: 'small', bottom: 'small'}} pad='medium'>
-      <Heading tag='h2'>
-        Investir
+      <Box style={{ backgroundColor: 'white' }} margin={small ? 'medium' : { top: 'medium', left: 'medium', right: 'small', bottom: 'small' }} pad='medium'>
+        <Heading tag='h2'>
+          Investir
       </Heading>
-      <Box pad='small' align='center'>
-        <Box style={small ? {maxWidth: '300px'} : {}}>
-          <FormField size='medium' style={{width: '100%'}}>
-            <TextInput placeHolder="R$" />
-          </FormField>
-          <Box justify='center'>
-            <Box direction='row' responsive={false} pad={{between: 'medium'}} align='center'>
-              <Label style={{width: '40px'}}>
-                De
-              </Label>
-              <Select
-                value={this.state.investir.de}
-                onChange={(value) => this.handleDeChange(value)}
-                options={['Poupança', 'Conta Corrente']}
-                placeHolder='Escolher'
-              />
-            </Box>
-            <Box direction='row' responsive={false} pad={{between: 'medium'}} align='center'>
-              <Label style={{width: '40px'}}>
-                Para
-              </Label>
-              <Select
-                value={this.state.investir.para}
-                onChange={(value) => this.handleParaChange(value)}
-                options={['Poupança']}
-                placeHolder='Escolher'
-              />
-            </Box>
+        <Box pad='small' align='center'>
+          <Box style={small ? { maxWidth: '300px' } : {}}>
+            <FormField size='medium' style={{ width: '100%' }}>
+              <TextInput placeHolder="R$" />
+            </FormField>
             <Box justify='center'>
-              <Button label='Investir' primary onClick={() => console.log('INVESTIMENTO FEITO')}/>
+              <Box direction='row' responsive={false} pad={{ between: 'medium' }} align='center'>
+                <Label style={{ width: '40px' }}>
+                  De
+              </Label>
+                <Select
+                  value={this.state.investir.de}
+                  onChange={(value) => this.handleDeChange(value)}
+                  options={['Poupança', 'Conta Corrente']}
+                  placeHolder='Escolher'
+                />
+              </Box>
+              <Box direction='row' responsive={false} pad={{ between: 'medium' }} align='center'>
+                <Label style={{ width: '40px' }}>
+                  Para
+              </Label>
+                <Select
+                  value={this.state.investir.para}
+                  onChange={(value) => this.handleParaChange(value)}
+                  options={['Poupança']}
+                  placeHolder='Escolher'
+                />
+              </Box>
+              <Box justify='center'>
+                <Button label='Investir' primary onClick={() => console.log('INVESTIMENTO FEITO')} />
+              </Box>
             </Box>
           </Box>
         </Box>
       </Box>
-    </Box>
 
-    const ProjectionBox = <Box align="center" style={{backgroundColor: 'white', width: small ? '' : '33%'}} margin={small ? 'medium' : {top: 'medium', left: 'small', right: 'medium'}} pad='medium'>
+    const ProjectionBox = <Box align="center" style={{ backgroundColor: 'white', width: small ? '' : '33%' }} margin={small ? 'medium' : { top: 'medium', left: 'small', right: 'medium' }} pad='medium'>
       <Heading tag='h2'>
         Seu investimento nos próximos 12 meses
       </Heading>
@@ -390,7 +390,7 @@ export default class MainScreen extends React.Component {
 
     const desktopView = [
       <Box direction='row'>
-        <Box direction='column' style={{width: small ? '' : '33%'}}>
+        <Box direction='column' style={{ width: small ? '' : '33%' }}>
           {SaldoBox}
           {AgendaBox}
           {InvestirBox}
@@ -403,20 +403,19 @@ export default class MainScreen extends React.Component {
     const mobileView = this.renderTabs(InvestimentosBox, ObjetivosBox, AgendaBox, SaldoBox, InvestirBox, ProjectionBox);
 
 
-    return hasInvestidorInfo ?
-    (
+    return (
       <div>
-        <Section style={{paddingTop: '0'}}>
+        <Section style={{ paddingTop: '0' }}>
           {
             this.state.dica && this.props.activeUser.dica ?
-            <Dica seeMoreInvestimento={this.props.seeMoreInvestimento} onClose={() => this.toggleDica(false)} dica={this.props.activeUser.dica}  />
-            :
-            null
+              <Dica seeMoreInvestimento={this.props.seeMoreInvestimento} onClose={() => this.toggleDica(false)} dica={this.props.activeUser.dica} />
+              :
+              null
           }
           {small ? mobileView : desktopView}
         </Section>
         {layer}
       </div>
-    ) : <Spinning style={{position: 'absolute', top:'50%', left: '50%'}} size='large' />
+    )
   }
 }
